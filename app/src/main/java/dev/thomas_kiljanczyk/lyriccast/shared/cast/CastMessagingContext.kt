@@ -1,24 +1,28 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 04/01/2025, 15:35
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.cast
 
 import android.util.Log
 import com.google.android.gms.cast.framework.CastContext
+import dev.thomas_kiljanczyk.lyriccast.application.CastConfiguration
 import dev.thomas_kiljanczyk.lyriccast.shared.enums.ControlAction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.runBlocking
-import org.json.JSONObject
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-object CastMessageHelper {
-    private const val TAG = "MessageHelper"
-    private const val CONTENT_NAMESPACE: String = "urn:x-cast:lyric.cast.content"
-    private const val CONTROL_NAMESPACE: String = "urn:x-cast:lyric.cast.control"
+class CastMessagingContext {
+    companion object {
+        private const val TAG = "CastMessagingContext"
+        private const val CONTENT_NAMESPACE: String = "urn:x-cast:lyric.cast.content"
+        private const val CONTROL_NAMESPACE: String = "urn:x-cast:lyric.cast.control"
+    }
 
     private val _isBlanked: MutableStateFlow<Boolean> = MutableStateFlow(true)
     val isBlanked: StateFlow<Boolean> get() = _isBlanked
@@ -30,19 +34,18 @@ object CastMessageHelper {
         val formattedMessage = message.replace("\n", "<br>")
             .replace("\r", "")
 
-        val contentJson = JSONObject().put("text", formattedMessage)
-        val messageContent = contentJson.toString()
-
+        val messageContent = TextCastMessage(formattedMessage)
+        val messageContentJson = Json.encodeToString(messageContent)
 
         Log.d(TAG, "Sending content message")
         Log.d(TAG, "Namespace: $CONTENT_NAMESPACE")
-        Log.d(TAG, "Content: $messageContent")
+        Log.d(TAG, "Content: $messageContentJson")
         if (castSession == null) {
             Log.d(TAG, "Message not sent (no session)")
             return
         }
 
-        castSession.sendMessage(CONTENT_NAMESPACE, messageContent)
+        castSession.sendMessage(CONTENT_NAMESPACE, messageContentJson)
     }
 
     fun sendBlank(blanked: Boolean) {
@@ -54,10 +57,10 @@ object CastMessageHelper {
         sendControlMessage(ControlAction.BLANK, blanked)
     }
 
-    fun sendConfiguration(configurationJson: JSONObject) {
+    fun sendConfiguration(configuration: CastConfiguration) {
         sendControlMessage(
             ControlAction.CONFIGURE,
-            configurationJson
+            Json.encodeToString(configuration)
         )
     }
 
@@ -74,11 +77,10 @@ object CastMessageHelper {
         return castSession == null
     }
 
-    private fun sendControlMessage(action: ControlAction, value: Any) {
-        val messageJson = JSONObject().apply {
-            put("action", action.toString())
-            put("value", JSONObject.wrap(value))
-        }
+    private inline fun <reified T> sendControlMessage(action: ControlAction, value: T) {
+        val message = ControlCastMessage(action.toString(), value)
+
+        val messageJson = Json.encodeToString(message)
 
         Log.d(TAG, "Sending control message")
         Log.d(TAG, "Namespace: $CONTROL_NAMESPACE")
@@ -90,7 +92,7 @@ object CastMessageHelper {
 
         val context: CastContext = CastContext.getSharedInstance()!!
         val castSession = context.sessionManager.currentCastSession!!
-        castSession.sendMessage(CONTROL_NAMESPACE, messageJson.toString())
+        castSession.sendMessage(CONTROL_NAMESPACE, messageJson)
     }
 
 }

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 04/01/2025, 16:41
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.songs
@@ -28,7 +28,8 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.OutputStream
 import javax.inject.Inject
@@ -58,30 +59,21 @@ class SongsModel @Inject constructor(
     private val itemFilter = SongItemFilter()
 
     init {
-        songsRepository.getAllSongs()
-            .onEach {
+        songsRepository.getAllSongs().onEach {
                 val songItems = it.map { song -> SongItem(song) }.sorted()
 
                 allSongs = songItems
                 emitSongs()
-            }.flowOn(Dispatchers.Default)
-            .launchIn(viewModelScope)
+        }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
-        categoriesRepository.getAllCategories()
-            .onEach {
+        categoriesRepository.getAllCategories().onEach {
                 val categoryItems = it.map { category -> CategoryItem(category) }.sorted()
                 _categories.emit(categoryItems)
-            }.flowOn(Dispatchers.Default)
-            .launchIn(viewModelScope)
+        }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
-        searchValues.songTitleFlow
-            .debounce(500)
-            .onEach { emitSongs() }
-            .launchIn(viewModelScope)
+        searchValues.songTitleFlow.debounce(500).onEach { emitSongs() }.launchIn(viewModelScope)
 
-        searchValues.categoryIdFlow
-            .onEach { emitSongs() }
-            .launchIn(viewModelScope)
+        searchValues.categoryIdFlow.onEach { emitSongs() }.launchIn(viewModelScope)
     }
 
     fun getSelectedSong(): SongItem {
@@ -89,14 +81,11 @@ class SongsModel @Inject constructor(
     }
 
     fun getSelectedSongIds(): List<String> {
-        return allSongs
-            .filter { it.isSelected }
-            .map { it.song.id }
+        return allSongs.filter { it.isSelected }.map { it.song.id }
     }
 
     suspend fun deleteSelectedSongs() {
-        val selectedSongs = allSongs.filter { it.isSelected }
-            .map { item -> item.song.id }
+        val selectedSongs = allSongs.filter { it.isSelected }.map { item -> item.song.id }
 
         songsRepository.deleteSongs(selectedSongs)
     }
@@ -113,8 +102,7 @@ class SongsModel @Inject constructor(
     }
 
     fun exportSongs(
-        cacheDir: String,
-        outputStream: OutputStream
+        cacheDir: String, outputStream: OutputStream
     ): Flow<Int> = flow {
         val exportData: DatabaseTransferData = dataTransferRepository.getDatabaseTransferData()
 
@@ -125,22 +113,15 @@ class SongsModel @Inject constructor(
         val selectedSongs = allSongs.filter { it.isSelected }
 
         val songTitles: Set<String> = selectedSongs.map { it.song.title }.toSet()
-        val categoryNames: Set<String> =
-            selectedSongs.mapNotNull { it.song.category?.name }.toSet()
+        val categoryNames: Set<String> = selectedSongs.mapNotNull { it.song.category?.name }.toSet()
 
-
-        val songJsons = exportData.songDtos!!
-            .filter { it.title in songTitles }
-            .map { it.toJson() }
-
-        val categoryJsons = exportData.categoryDtos!!
-            .filter { it.name in categoryNames }
-            .map { it.toJson() }
+        val filteredSongDtos = exportData.songDtos!!.filter { it.title in songTitles }
+        val filteredCategoryDtos = exportData.categoryDtos!!.filter { it.name in categoryNames }
 
         emit(R.string.main_activity_export_saving_json)
 
-        val songsString = JSONArray(songJsons).toString()
-        val categoriesString = JSONArray(categoryJsons).toString()
+        val songsString = Json.encodeToString(filteredSongDtos)
+        val categoriesString = Json.encodeToString(filteredCategoryDtos)
         File(exportDir, "songs.json").writeText(songsString)
         File(exportDir, "categories.json").writeText(categoriesString)
 
@@ -152,8 +133,7 @@ class SongsModel @Inject constructor(
     }.flowOn(Dispatchers.Default)
 
     fun selectSong(songId: Long, selected: Boolean): Boolean {
-        val song = filteredSongs
-            .firstOrNull { it.song.idLong == songId } ?: return false
+        val song = filteredSongs.firstOrNull { it.song.idLong == songId } ?: return false
 
         song.isSelected = selected
         return true

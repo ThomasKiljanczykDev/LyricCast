@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 04/01/2025, 16:41
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_controls
@@ -27,9 +27,9 @@ import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.application.AppSettings
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySongControlsBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentSongControlsBinding
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessageHelper
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CustomMediaRouteActionProvider
+import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.ui.settings.SettingsActivity
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast.CustomMediaRouteActionProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -46,6 +46,9 @@ class SongControlsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var dataStore: DataStore<AppSettings>
+
+    @Inject
+    lateinit var castMessagingContext: CastMessagingContext
 
     private lateinit var binding: ContentSongControlsBinding
 
@@ -67,7 +70,7 @@ class SongControlsActivity : AppCompatActivity() {
         viewModel.loadSong(songId)
         binding.tvControlsSongTitle.text = viewModel.songTitle
 
-        CastMessageHelper.isBlanked
+        castMessagingContext.isBlanked
             .onEach { blanked ->
                 if (blanked) {
                     binding.btnSongBlank.setBackgroundColor(getColor(R.color.red))

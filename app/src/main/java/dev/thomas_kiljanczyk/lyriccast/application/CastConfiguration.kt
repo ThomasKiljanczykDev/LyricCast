@@ -6,10 +6,11 @@
 
 package dev.thomas_kiljanczyk.lyriccast.application
 
-fun AppSettings.getCastConfiguration(): CastConfiguration {
-    return CastConfiguration(
-        this.backgroundColor,
-        this.fontColor,
-        this.maxFontSize
-    )
-}
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class CastConfiguration(
+    val backgroundColor: String,
+    val fontColor: String,
+    val maxFontSize: Int
+)

@@ -10,8 +10,10 @@ googleServices = "4.4.2"
 firebaseCrashlytics = "3.0.2"
 firebaseCrashlyticsKtx = "19.3.0"
 firebaseAnalyticsKtx = "22.1.2"
+playServicesNearby = "19.3.0"
 
 coroutines = "1.10.1"
+kotlinx-serialization-json = "1.7.3"
 datastore = "1.1.1"
 protobuf-javaLite = "4.29.2"
 material = "1.12.0"
@@ -27,6 +29,7 @@ mediaRouter = "1.7.0"
 apacheCommonsLang = "3.17.0"
 zip4j = "2.11.5"
 
+kotlin-plugin-serialization = "2.1.0"
 androidXTestCore = "1.6.1"
 androidXTestExtKotlinRunner = "1.2.1"
 espresso = "3.6.1"
@@ -49,6 +52,7 @@ hiltCompiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt
 hiltTesting = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 mongoDbRealm-libraryBase = { module = "io.realm.kotlin:library-base", version.ref = "mongoDbRealm" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 protobuf-javaLite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobuf-javaLite" }
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -74,6 +78,7 @@ androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", vers
 androidx-test-espressoContrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
 squareup-leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf-javaLite" }
+play-services-nearby = { group = "com.google.android.gms", name = "play-services-nearby", version.ref = "playServicesNearby" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -87,3 +92,4 @@ androidx-navigationSafeArgs = { id = "androidx.navigation.safeargs.kotlin" }
 google-googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics" }
 android-library = { id = "com.android.library" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-plugin-serialization" }

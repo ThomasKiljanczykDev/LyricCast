@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.androidx.navigationSafeArgs)
     alias(libs.plugins.hilt)
@@ -87,6 +88,8 @@ dependencies {
 
     // App dependencies
     implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.play.services.nearby)
 
     // Architecture Components
     implementation(libs.androidx.datastore)

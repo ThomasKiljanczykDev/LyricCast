@@ -1,38 +1,20 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 02/01/2025, 00:00
  */
 
 package dev.thomas_kiljanczyk.lyriccast.datatransfer.models
 
-import dev.thomas_kiljanczyk.lyriccast.datatransfer.extensions.getStringList
-import dev.thomas_kiljanczyk.lyriccast.datatransfer.extensions.toStringMap
-import org.json.JSONObject
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class SongDto(
     val title: String,
     val lyrics: Map<String, String>,
     val presentation: List<String>,
     val category: String? = null
 ) {
-    constructor(json: JSONObject) : this(
-        json.getString("title"),
-        json.getJSONObject("lyrics").toStringMap(),
-        json.getStringList("presentation"),
-        json.optString("category")
-    )
-
-    fun toJson(): JSONObject {
-        return JSONObject().apply {
-            put("title", title)
-            put("lyrics", JSONObject.wrap(lyrics))
-            put("presentation", JSONObject.wrap(presentation))
-            put("category", JSONObject.wrap(category))
-        }
-    }
-
     override fun equals(other: Any?): Boolean {
         if (other == null || other !is SongDto) {
             return false

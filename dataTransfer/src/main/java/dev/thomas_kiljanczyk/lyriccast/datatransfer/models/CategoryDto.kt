@@ -1,20 +1,12 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:07
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 02/01/2025, 00:00
  */
 
 package dev.thomas_kiljanczyk.lyriccast.datatransfer.models
 
-import org.json.JSONObject
+import kotlinx.serialization.Serializable
 
-data class CategoryDto(val name: String, val color: Int?) {
-    constructor(json: JSONObject) : this(json.getString("name"), json.optInt("color"))
-
-    fun toJson(): JSONObject {
-        return JSONObject().apply {
-            put("name", name)
-            put("color", color ?: JSONObject.NULL)
-        }
-    }
-}
+@Serializable
+data class CategoryDto(val name: String, val color: Int?)

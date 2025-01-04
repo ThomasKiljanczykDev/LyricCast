@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 04/01/2025, 16:41
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_controls
@@ -13,13 +13,16 @@ import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.thomas_kiljanczyk.lyriccast.application.AppSettings
-import dev.thomas_kiljanczyk.lyriccast.application.getCastConfigurationJson
+import dev.thomas_kiljanczyk.lyriccast.application.CastConfiguration
+import dev.thomas_kiljanczyk.lyriccast.application.getCastConfiguration
 import dev.thomas_kiljanczyk.lyriccast.datamodel.models.Setlist
 import dev.thomas_kiljanczyk.lyriccast.datamodel.models.Song
 import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.SetlistsRepository
 import dev.thomas_kiljanczyk.lyriccast.domain.models.SongItem
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessageHelper
+import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastSessionListener
+import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ShowLyricsContent
+import dev.thomas_kiljanczyk.lyriccast.shared.misc.LyricCastMessagingContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -27,16 +30,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
 class SetlistControlsModel @Inject constructor(
     dataStore: DataStore<AppSettings>,
-    private val setlistsRepository: SetlistsRepository
+    private val setlistsRepository: SetlistsRepository,
+    private val castMessagingContext: CastMessagingContext,
+    private val lyricCastMessagingContext: LyricCastMessagingContext
 ) : ViewModel() {
 
-    private var castConfiguration: JSONObject? = null
+    private var castConfiguration: CastConfiguration? = null
 
     val songs: List<SongItem> get() = _songs
     private val _songs: MutableList<SongItem> = mutableListOf()
@@ -70,7 +74,7 @@ class SetlistControlsModel @Inject constructor(
     init {
         dataStore.data
             .onEach { settings ->
-                castConfiguration = settings.getCastConfigurationJson()
+                castConfiguration = settings.getCastConfiguration()
                 sendConfiguration()
             }.flowOn(Dispatchers.Default)
             .launchIn(viewModelScope)
@@ -121,11 +125,11 @@ class SetlistControlsModel @Inject constructor(
     }
 
     fun sendBlank() {
-        CastMessageHelper.sendBlank(!CastMessageHelper.isBlanked.value)
+        castMessagingContext.sendBlank(!castMessagingContext.isBlanked.value)
     }
 
     private fun sendConfiguration() {
-        CastMessageHelper.sendConfiguration(castConfiguration!!)
+        castMessagingContext.sendConfiguration(castConfiguration!!)
     }
 
     fun selectSong(position: Int, fromStart: Boolean = false) {
@@ -142,7 +146,14 @@ class SetlistControlsModel @Inject constructor(
 
     fun sendSlide() {
         val lyricsText = currentSong.lyricsList[currentLyricsPosition]
-        CastMessageHelper.sendContentMessage(lyricsText)
+        lyricCastMessagingContext.sendContentMessage(
+            ShowLyricsContent(
+                currentSong.title,
+                lyricsText,
+                currentLyricsPosition + 1,
+                currentSong.lyricsList.size,
+            )
+        )
         _currentSlideText.tryEmit(lyricsText)
         _currentSlideNumber.tryEmit("${currentLyricsPosition + 1}/${currentSong.lyricsList.size}")
 

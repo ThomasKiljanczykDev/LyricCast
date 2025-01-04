@@ -1,12 +1,13 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 04/01/2025, 16:41
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Build
@@ -19,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuItemCompat
@@ -33,21 +35,23 @@ import com.google.android.gms.cast.framework.CastContext
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
+import dev.thomas_kiljanczyk.lyriccast.application.LyricCastApplication
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivityMainBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentMainBinding
 import dev.thomas_kiljanczyk.lyriccast.datamodel.models.ImportOptions
 import dev.thomas_kiljanczyk.lyriccast.datatransfer.enums.ImportFormat
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CustomMediaRouteActionProvider
 import dev.thomas_kiljanczyk.lyriccast.shared.extensions.registerForActivityResult
 import dev.thomas_kiljanczyk.lyriccast.shared.utils.DialogFragmentUtils
 import dev.thomas_kiljanczyk.lyriccast.ui.category_manager.CategoryManagerActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog.ImportDialogFragment
 import dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog.ImportDialogModel
 import dev.thomas_kiljanczyk.lyriccast.ui.main.setlists.SetlistsFragment
+import dev.thomas_kiljanczyk.lyriccast.ui.session_client.SessionClientActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.SetlistEditorActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.settings.SettingsActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.fragments.ProgressDialogFragment
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.listeners.ItemSelectedTabListener
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast.CustomMediaRouteActionProvider
 import dev.thomas_kiljanczyk.lyriccast.ui.song_editor.SongEditorActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -76,6 +80,12 @@ class MainActivity : AppCompatActivity() {
 
     private val exportChooserResultLauncher = registerForActivityResult(this::exportAll)
     private val importChooserResultLauncher = registerForActivityResult(this::import)
+    private val permissionRequestLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { isGranted ->
+            if (isGranted.values.any { !it }) {
+                // TODO: Handle permission denied
+            }
+        }
 
     private val castExecutor = Executors.newSingleThreadExecutor()
 
@@ -100,10 +110,9 @@ class MainActivity : AppCompatActivity() {
 
         setupListeners()
 
-        if (!wifiStateChecked) {
-            checkWifiEnabled()
-            wifiStateChecked = true
-        }
+        checkPermissions()
+
+        // TODO: add permission check
 
         setOnApplyWindowInsetsListener(rootBinding.root) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -168,12 +177,27 @@ class MainActivity : AppCompatActivity() {
                 tab ?: return@ItemSelectedTabListener
 
                 val navController = findNavController(R.id.navh_main)
-                if (tab.text == getString(R.string.title_songs)) {
-                    Log.v(TAG, "Switching to song list")
-                    navController.navigate(R.id.action_Setlists_to_Songs)
-                } else if (tab.text == getString(R.string.title_setlists)) {
-                    Log.v(TAG, "Switching to setlists")
-                    navController.navigate(R.id.action_Songs_to_Setlists)
+                when (tab.position) {
+                    0 -> {
+                        Log.v(TAG, "Switching to song list")
+                        navController.navigate(R.id.action_Setlists_to_Songs)
+                    }
+
+                    1 -> {
+                        Log.v(TAG, "Switching to setlists")
+                        navController.navigate(R.id.action_Songs_to_Setlists)
+                    }
+
+                    // TODO: localise
+                    2 -> {
+                        Log.v(TAG, "Switching to join session")
+                        val intent = Intent(baseContext, SessionClientActivity::class.java)
+                        startActivity(intent)
+
+                        // TODO: find a better way to handle this
+                        // Prevents the tab from being selected
+                        recreate()
+                    }
                 }
             })
 
@@ -374,6 +398,28 @@ class MainActivity : AppCompatActivity() {
     private fun goToCategoryManager() {
         val intent = Intent(baseContext, CategoryManagerActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun checkPermissions() {
+        when {
+            LyricCastApplication.PERMISSIONS.all {
+                this.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
+            } -> {
+                if (!wifiStateChecked) {
+                    checkWifiEnabled()
+                    wifiStateChecked = true
+                }
+                return
+            }
+
+            LyricCastApplication.PERMISSIONS.any(::shouldShowRequestPermissionRationale) -> {
+                // TODO: handle permission rationale
+            }
+
+            else -> {
+                permissionRequestLauncher.launch(LyricCastApplication.PERMISSIONS)
+            }
+        }
     }
 
     private fun checkWifiEnabled() {
