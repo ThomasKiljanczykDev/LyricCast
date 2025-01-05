@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 20:02
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 21:30
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 20:00
+ * Last modified 05/01/2025, 21:26
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -117,21 +117,20 @@ class ChooseSessionDialogFragment(
         val hasDevices = deviceMap.isNotEmpty()
 
         binding.pbGmsNearbyServerDevices.visibility = if (hasDevices) View.GONE else View.VISIBLE
-
         binding.tvLookingForSession.visibility = if (hasDevices) View.GONE else View.VISIBLE
 
-        binding.rcvGmsNearbyServerDevices.visibility = if (hasDevices) View.VISIBLE else View.GONE
+        binding.rcvGmsNearbySessions.visibility = if (hasDevices) View.VISIBLE else View.GONE
     }
 
     private fun setupRecyclerView() {
         recyclerViewAdapter = GmsNearbySessionItemsAdapter(
-            binding.rcvGmsNearbyServerDevices.context
+            binding.rcvGmsNearbySessions.context
         ) { item: GmsNearbySessionItem ->
             viewModel.pickDevice(item)
             dismiss()
         }
 
-        binding.rcvGmsNearbyServerDevices.apply {
+        binding.rcvGmsNearbySessions.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = recyclerViewAdapter

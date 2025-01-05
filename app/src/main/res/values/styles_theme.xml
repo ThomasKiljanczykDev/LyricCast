@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 26/09/2021, 17:29
-  ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24/08/2021, 19:39
+  ~ Created by Tomasz Kiljanczyk on 05/01/2025, 21:30
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 05/01/2025, 20:59
   -->
 
 <resources>
@@ -61,5 +61,4 @@
     <style name="ThemeOverlay.LyricCast.MaterialAlertDialog.NoTitle" parent="@style/ThemeOverlay.LyricCast.MaterialAlertDialog">
         <item name="android:windowNoTitle">true</item>
     </style>
-
 </resources>
