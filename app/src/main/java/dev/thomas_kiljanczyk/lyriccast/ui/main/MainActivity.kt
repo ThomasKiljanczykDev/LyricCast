@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 05/01/2025, 17:39
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity() {
             MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_cast)) as CustomMediaRouteActionProvider
 
         // TODO: Apply this approach to every .getSharedInstance() usage
+        // TODO: try with application context
         castActionProvider.routeSelector =
             CastContext.getSharedInstance(this, castExecutor).result.mergedSelector!!
 

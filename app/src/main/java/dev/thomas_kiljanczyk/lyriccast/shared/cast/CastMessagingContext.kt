@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 15:35
+ * Last modified 05/01/2025, 18:52
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.cast
@@ -31,11 +31,9 @@ class CastMessagingContext {
         val context: CastContext = CastContext.getSharedInstance()!!
         val castSession = context.sessionManager.currentCastSession
 
-        val formattedMessage = message.replace("\n", "<br>")
-            .replace("\r", "")
+        val formattedMessage = message.replace("\n", "<br>").replace("\r", "")
 
-        val messageContent = TextCastMessage(formattedMessage)
-        val messageContentJson = Json.encodeToString(messageContent)
+        val messageContentJson = TextCastMessage(formattedMessage).toJson()
 
         Log.d(TAG, "Sending content message")
         Log.d(TAG, "Namespace: $CONTENT_NAMESPACE")
@@ -59,8 +57,7 @@ class CastMessagingContext {
 
     fun sendConfiguration(configuration: CastConfiguration) {
         sendControlMessage(
-            ControlAction.CONFIGURE,
-            Json.encodeToString(configuration)
+            ControlAction.CONFIGURE, configuration.toJson()
         )
     }
 
@@ -78,9 +75,7 @@ class CastMessagingContext {
     }
 
     private inline fun <reified T> sendControlMessage(action: ControlAction, value: T) {
-        val message = ControlCastMessage(action.toString(), value)
-
-        val messageJson = Json.encodeToString(message)
+        val messageJson = Json.encodeToString(ControlCastMessage(action.toString(), value))
 
         Log.d(TAG, "Sending control message")
         Log.d(TAG, "Namespace: $CONTROL_NAMESPACE")

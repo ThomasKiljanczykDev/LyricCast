@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 05/01/2025, 18:49
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -14,15 +14,17 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.nearby.connection.ConnectionInfo
 import com.google.android.gms.nearby.connection.ConnectionResolution
 import com.google.android.gms.nearby.connection.ConnectionsClient
+import com.google.android.gms.nearby.connection.Payload
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.NearbyConnectionLifecycleCallback
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ShowLyricsContent
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.SimpleNearbyPayloadCallback
-import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionCommand
+import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionClientCommand
+import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionClientMessage
+import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerCommand
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerMessage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,19 +46,12 @@ class SessionClientModel @Inject constructor(
     private val _currentSlideNumber = MutableStateFlow("")
 
     private fun handlePayload(payload: ByteArray?) {
-        // TODO: handle invalid payload
         val payloadString = payload?.decodeToString() ?: return
 
-        val message = try {
-            Json.decodeFromString<SessionServerMessage<ShowLyricsContent>>(payloadString)
-        } catch (e: Exception) {
-            // TODO: handle invalid payload
-            Log.e(TAG, "Failed to decode payload", e)
-            return
-        }
+        val message = SessionClientMessage.fromJson<ShowLyricsContent>(payloadString) ?: return
 
         when (message.command) {
-            SessionCommand.SHOW_LYRICS -> {
+            SessionClientCommand.SHOW_SLIDE -> {
                 val content = message.content
                 _songTitle.value = content.songTitle
                 _currentSlideText.value = content.slideText
@@ -71,8 +66,7 @@ class SessionClientModel @Inject constructor(
         ) {
             super.onConnectionInitiated(endpointId, connectionInfo)
             connectionsClient.acceptConnection(
-                endpointId,
-                SimpleNearbyPayloadCallback(this@SessionClientModel::handlePayload)
+                endpointId, SimpleNearbyPayloadCallback(this@SessionClientModel::handlePayload)
             )
         }
 
@@ -80,8 +74,15 @@ class SessionClientModel @Inject constructor(
             endpointId: String, connectionInfo: ConnectionInfo?, result: ConnectionResolution
         ) {
             if (result.status.isSuccess) {
-                // TODO: handle connection success - ask server for current slide
                 // TODO: show a success toast
+                connectionsClient.sendPayload(
+                    endpointId,
+                    Payload.fromBytes(
+                        SessionServerMessage(
+                            SessionServerCommand.SEND_LATEST_SLIDE
+                        ).toJson().toByteArray()
+                    )
+                )
             } else {
                 // TODO: handle connection failure
             }

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:37
+ * Last modified 05/01/2025, 18:56
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.misc
@@ -16,16 +16,33 @@ class LyricCastMessagingContext(
     private val castMessagingContext: CastMessagingContext,
     private val gmsNearbySessionServerContext: GmsNearbySessionServerContext
 ) {
-    fun sendContentMessage(content: ShowLyricsContent) {
+
+    val receivedPayload get() = gmsNearbySessionServerContext.receivedPayload
+
+    fun broadcastContentMessage(content: ShowLyricsContent) {
         castMessagingContext.sendContentMessage(content.slideText)
         if (gmsNearbySessionServerContext.serverIsRunning.value) {
-            val message = SessionServerMessage(
-                SessionCommand.SHOW_LYRICS,
-                content
+            val messageJson = Json.encodeToString(
+                SessionClientMessage(
+                    SessionClientCommand.SHOW_SLIDE, content
+                )
             )
-            val messageJson = Json.encodeToString(message)
 
             gmsNearbySessionServerContext.broadcastMessage(messageJson)
         }
+    }
+
+    fun sendContentMessage(endpointId: String, content: ShowLyricsContent) {
+        if (!gmsNearbySessionServerContext.serverIsRunning.value) {
+            return
+        }
+
+        val messageJson = Json.encodeToString(
+            SessionClientMessage(
+                SessionClientCommand.SHOW_SLIDE, content
+            )
+        )
+
+        gmsNearbySessionServerContext.sendMessage(endpointId, messageJson)
     }
 }

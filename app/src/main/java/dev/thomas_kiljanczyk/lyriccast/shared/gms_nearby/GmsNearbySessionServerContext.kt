@@ -1,13 +1,12 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 05/01/2025, 19:34
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.nearby.connection.AdvertisingOptions
@@ -17,10 +16,15 @@ import com.google.android.gms.nearby.connection.ConnectionsClient
 import com.google.android.gms.nearby.connection.Payload
 import com.google.android.gms.nearby.connection.Strategy
 import dev.thomas_kiljanczyk.lyriccast.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+
+data class ReceivedPayload(val endpointId: String, val payload: String)
 
 class GmsNearbySessionServerContext(
     private val connectionsClient: ConnectionsClient
@@ -32,19 +36,28 @@ class GmsNearbySessionServerContext(
     private val _serverIsRunning: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val serverIsRunning: StateFlow<Boolean> = _serverIsRunning
 
-    private val _messageFlow: MutableSharedFlow<Pair<Int, String?>> = MutableSharedFlow(replay = 1)
-    val messageFlow: Flow<Pair<Int, String?>> = _messageFlow
-    private val connectedEndpointIds = mutableSetOf<String>()
+    private val _connectionMessage: MutableSharedFlow<Pair<Int, String?>> =
+        MutableSharedFlow(replay = 1)
+    val connectionMessage: Flow<Pair<Int, String?>> = _connectionMessage
 
-    // TODO: verify if this shouldn't be moved elsewhere
-    private var lastMessage: String? = null
+    private val _receivedPayload: MutableSharedFlow<ReceivedPayload> = MutableSharedFlow()
+    val receivedPayload: Flow<ReceivedPayload> = _receivedPayload
+
+    private val connectedEndpointIds = mutableSetOf<String>()
 
     private inner class ServerConnectionLifecycleCallback : NearbyConnectionLifecycleCallback() {
         override fun onConnectionInitiated(
             endpointId: String, connectionInfo: ConnectionInfo
         ) {
             super.onConnectionInitiated(endpointId, connectionInfo)
-            connectionsClient.acceptConnection(endpointId, SimpleNearbyPayloadCallback {})
+            connectionsClient.acceptConnection(endpointId, SimpleNearbyPayloadCallback {
+                val payloadString = it?.decodeToString() ?: return@SimpleNearbyPayloadCallback
+                Log.i(TAG, "Received message : $payloadString")
+
+                CoroutineScope(Dispatchers.Default).launch {
+                    _receivedPayload.emit(ReceivedPayload(endpointId, payloadString))
+                }
+            })
         }
 
         override fun onConnectionResult(
@@ -54,14 +67,12 @@ class GmsNearbySessionServerContext(
                 val endpointName = connectionInfo?.endpointName
                 val messageResId =
                     if (endpointName != null) R.string.gms_nearby_server_connected else R.string.gms_nearby_server_connected_unknown
-                _messageFlow.tryEmit(Pair(messageResId, endpointName))
+
+                CoroutineScope(Dispatchers.Default).launch {
+                    _connectionMessage.emit(Pair(messageResId, endpointName))
+                }
 
                 connectedEndpointIds.add(endpointId)
-
-                // TODO: ask for latest content on client side, implement communication on server side
-                lastMessage?.let {
-                    sendMessage(endpointId, it)
-                }
             }
         }
 
@@ -70,12 +81,13 @@ class GmsNearbySessionServerContext(
             val messageResId =
                 if (endpointName != null) R.string.gms_nearby_server_disconnected else R.string.gms_nearby_server_disconnected_unknown
 
-            _messageFlow.tryEmit(Pair(messageResId, endpointName))
+            CoroutineScope(Dispatchers.Default).launch {
+                _connectionMessage.emit(Pair(messageResId, endpointName))
+            }
             connectedEndpointIds.remove(endpointId)
         }
     }
 
-    @SuppressLint("InlinedApi")
     @RequiresPermission(anyOf = [Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH])
     fun startServer(deviceName: String) {
         val advertisingOptions = AdvertisingOptions.Builder().setStrategy(Strategy.P2P_STAR).build()
@@ -85,7 +97,7 @@ class GmsNearbySessionServerContext(
             GmsNearbyConstants.SERVICE_UUID.toString(),
             ServerConnectionLifecycleCallback(),
             advertisingOptions
-        ).addOnSuccessListener { unused: Void? ->
+        ).addOnSuccessListener {
             _serverIsRunning.value = true
         }.addOnFailureListener { e: Exception? ->
             Log.e(TAG, "Failed to start server", e)
@@ -101,12 +113,15 @@ class GmsNearbySessionServerContext(
     }
 
     fun broadcastMessage(message: String) {
+        if (connectedEndpointIds.isEmpty()) {
+            return
+        }
+
         broadcastMessage(connectedEndpointIds.toList(), message)
     }
 
     private fun broadcastMessage(endpointIds: List<String>, message: String) {
         Log.i(TAG, "Sending message : $message")
-        lastMessage = message
 
         connectionsClient.sendPayload(
             endpointIds, Payload.fromBytes(message.toByteArray())
@@ -117,7 +132,7 @@ class GmsNearbySessionServerContext(
         }
     }
 
-    private fun sendMessage(endpointId: String, message: String) {
+    fun sendMessage(endpointId: String, message: String) {
         broadcastMessage(listOf(endpointId), message)
     }
 }

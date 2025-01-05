@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 05/01/2025, 19:35
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_controls
@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -72,12 +73,10 @@ class SetlistControlsModel @Inject constructor(
     })
 
     init {
-        dataStore.data
-            .onEach { settings ->
+        dataStore.data.onEach { settings ->
                 castConfiguration = settings.getCastConfiguration()
                 sendConfiguration()
-            }.flowOn(Dispatchers.Default)
-            .launchIn(viewModelScope)
+        }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
     }
 
     fun initialize(sessionManager: SessionManager) {
@@ -85,8 +84,9 @@ class SetlistControlsModel @Inject constructor(
     }
 
     override fun onCleared() {
-        CastContext.getSharedInstance()!!.sessionManager
-            .removeSessionManagerListener(castSessionListener)
+        CastContext.getSharedInstance()!!.sessionManager.removeSessionManagerListener(
+            castSessionListener
+        )
 
         super.onCleared()
     }
@@ -132,21 +132,21 @@ class SetlistControlsModel @Inject constructor(
         castMessagingContext.sendConfiguration(castConfiguration!!)
     }
 
-    fun selectSong(position: Int, fromStart: Boolean = false) {
-        previousSongItem = currentSongItem
-        currentSongItem = _songs[position]
-        currentLyricsPosition =
-            if (fromStart) 0
+    fun selectSong(position: Int, fromStart: Boolean = false) =
+        viewModelScope.launch(Dispatchers.Default) {
+            previousSongItem = currentSongItem
+            currentSongItem = _songs[position]
+            currentLyricsPosition = if (fromStart) 0
             else if (position >= _songs.indexOf(previousSongItem)) 0
             else currentSongItem.song.lyricsList.size - 1
-        _currentSongPosition.tryEmit(position)
+            _currentSongPosition.emit(position)
 
-        sendSlide()
-    }
+            sendSlide()
+        }
 
-    fun sendSlide() {
+    fun sendSlide() = viewModelScope.launch(Dispatchers.Default) {
         val lyricsText = currentSong.lyricsList[currentLyricsPosition]
-        lyricCastMessagingContext.sendContentMessage(
+        lyricCastMessagingContext.broadcastContentMessage(
             ShowLyricsContent(
                 currentSong.title,
                 lyricsText,
@@ -154,8 +154,8 @@ class SetlistControlsModel @Inject constructor(
                 currentSong.lyricsList.size,
             )
         )
-        _currentSlideText.tryEmit(lyricsText)
-        _currentSlideNumber.tryEmit("${currentLyricsPosition + 1}/${currentSong.lyricsList.size}")
+        _currentSlideText.emit(lyricsText)
+        _currentSlideNumber.emit("${currentLyricsPosition + 1}/${currentSong.lyricsList.size}")
 
         // Uses reference equality to make it work for songs with same title
         val isNewSong = previousSongItem !== currentSongItem
@@ -168,7 +168,7 @@ class SetlistControlsModel @Inject constructor(
             val currentSongPosition = _songs.indexOfFirst { it === currentSongItem }
 
             _changedSongItems.value = listOf(previousSongPosition, currentSongPosition)
-            _currentSongTitle.tryEmit(currentSong.title)
+            _currentSongTitle.emit(currentSong.title)
         }
     }
 

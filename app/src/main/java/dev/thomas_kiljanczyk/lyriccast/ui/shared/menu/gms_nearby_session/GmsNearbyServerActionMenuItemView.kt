@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:37
+ * Last modified 05/01/2025, 19:04
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session
@@ -33,7 +33,7 @@ class GmsNearbyServerActionMenuItemView(context: Context?) : ActionMenuItemView(
     @Inject
     lateinit var gmsNearbySessionServerContext: GmsNearbySessionServerContext
 
-    var serverIsRunningJob: Job? = null
+    private var serverIsRunningJob: Job? = null
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
