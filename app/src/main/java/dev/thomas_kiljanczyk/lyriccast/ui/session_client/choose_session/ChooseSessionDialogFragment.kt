@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 05/01/2025, 20:02
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:11
+ * Last modified 05/01/2025, 20:00
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -51,22 +51,16 @@ class ChooseSessionDialogFragment(
     private val deviceMap = mutableMapOf<String, GmsNearbySessionItem>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        viewModel =
-            ViewModelProvider(requireActivity())[ChooseSessionDialogViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[ChooseSessionDialogViewModel::class.java]
 
         binding = DialogFragmentChooseSessionBinding.inflate(layoutInflater)
 
         val dialog = MaterialAlertDialogBuilder(
-            requireActivity(),
-            R.style.ThemeOverlay_LyricCast_MaterialAlertDialog
-        )
-            .setTitle(R.string.dialog_fragment_choose_session_title)
-            .setCancelable(false)
+            requireActivity(), R.style.ThemeOverlay_LyricCast_MaterialAlertDialog
+        ).setTitle(R.string.dialog_fragment_choose_session_title).setCancelable(false)
             .setNegativeButton(R.string.dialog_fragment_close) { _, _ ->
                 onClose()
-            }
-            .setView(binding.root)
-            .create()
+            }.setView(binding.root).create()
 
         dialog.setCanceledOnTouchOutside(false)
 
@@ -74,50 +68,42 @@ class ChooseSessionDialogFragment(
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         setupRecyclerView()
 
         val discoveryOptions = DiscoveryOptions.Builder().setStrategy(Strategy.P2P_STAR).build()
-        connectionsClient
-            .startDiscovery(
-                GmsNearbyConstants.SERVICE_UUID.toString(),
-                object : EndpointDiscoveryCallback() {
-                    override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
-                        val deviceItem = GmsNearbySessionItem(info.endpointName, endpointId)
-                        deviceMap[endpointId] = deviceItem
+        connectionsClient.startDiscovery(
+            GmsNearbyConstants.SERVICE_UUID.toString(), object : EndpointDiscoveryCallback() {
+                override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
+                    val deviceItem = GmsNearbySessionItem(info.endpointName, endpointId)
+                    deviceMap[endpointId] = deviceItem
 
-                        val devices = deviceMap.values.toList()
-                        recyclerViewAdapter.submitList(devices)
+                    val devices = deviceMap.values.toList()
+                    recyclerViewAdapter.submitList(devices)
 
-                        CoroutineScope(Dispatchers.Main).launch {
-                            binding.pbGmsNearbyServerDevices.visibility =
-                                if (devices.isNotEmpty()) View.GONE else View.VISIBLE
-                        }
+                    CoroutineScope(Dispatchers.Main).launch {
+                        setSubViewVisibility()
                     }
+                }
 
-                    override fun onEndpointLost(endpointId: String) {
-                        deviceMap.remove(endpointId)
+                override fun onEndpointLost(endpointId: String) {
+                    deviceMap.remove(endpointId)
 
-                        val devices = deviceMap.values.toList()
-                        recyclerViewAdapter.submitList(devices)
+                    val devices = deviceMap.values.toList()
+                    recyclerViewAdapter.submitList(devices)
 
-                        CoroutineScope(Dispatchers.Main).launch {
-                            binding.pbGmsNearbyServerDevices.visibility =
-                                if (devices.isNotEmpty()) View.GONE else View.VISIBLE
-                        }
+                    CoroutineScope(Dispatchers.Main).launch {
+                        setSubViewVisibility()
                     }
+                }
 
-                },
-                discoveryOptions
-            )
-            .addOnFailureListener { e ->
-                // We're unable to start discovering.
-                Log.e(TAG, "Failed to start discovering", e)
-                // TODO: show a explanatory message to the user
-            }
+            }, discoveryOptions
+        ).addOnFailureListener { e ->
+            // We're unable to start discovering.
+            Log.e(TAG, "Failed to start discovering", e)
+            // TODO: show a explanatory message to the user
+        }
 
         return binding.root
     }
@@ -125,6 +111,16 @@ class ChooseSessionDialogFragment(
     override fun onDestroy() {
         connectionsClient.stopDiscovery()
         super.onDestroy()
+    }
+
+    private fun setSubViewVisibility() {
+        val hasDevices = deviceMap.isNotEmpty()
+
+        binding.pbGmsNearbyServerDevices.visibility = if (hasDevices) View.GONE else View.VISIBLE
+
+        binding.tvLookingForSession.visibility = if (hasDevices) View.GONE else View.VISIBLE
+
+        binding.rcvGmsNearbyServerDevices.visibility = if (hasDevices) View.VISIBLE else View.GONE
     }
 
     private fun setupRecyclerView() {
