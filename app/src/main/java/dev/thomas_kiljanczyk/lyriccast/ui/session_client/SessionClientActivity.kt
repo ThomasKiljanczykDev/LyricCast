@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:03
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 12:34
+ * Last modified 06/01/2025, 18:35
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentSessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogFragment
-import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogViewModel
+import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -40,7 +40,7 @@ class SessionClientActivity : AppCompatActivity() {
 
     private lateinit var binding: ContentSessionClientBinding
 
-    private lateinit var pickDeviceDialogViewModel: ChooseSessionDialogViewModel
+    private lateinit var pickDeviceDialogViewModel: ChooseSessionDialogModel
 
     private var chooseSessionDialog: ChooseSessionDialogFragment? = null
 
@@ -54,7 +54,7 @@ class SessionClientActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         pickDeviceDialogViewModel =
-            ViewModelProvider(this)[ChooseSessionDialogViewModel::class.java]
+            ViewModelProvider(this)[ChooseSessionDialogModel::class.java]
 
         binding = ContentSessionClientBinding.bind(rootBinding.contentSessionClient.root)
 
