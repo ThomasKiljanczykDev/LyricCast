@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:07
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 16:06
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 16:06
  */
 
 package dev.thomas_kiljanczyk.lyriccast
@@ -9,9 +9,7 @@ package dev.thomas_kiljanczyk.lyriccast
 import android.app.Application
 import android.content.Context
 import androidx.test.runner.AndroidJUnitRunner
-import com.google.android.gms.cast.framework.CastContext
 import dagger.hilt.android.testing.HiltTestApplication
-import java.util.concurrent.Executors
 
 @Suppress("unused")
 class HiltTestRunner : AndroidJUnitRunner() {
@@ -24,8 +22,6 @@ class HiltTestRunner : AndroidJUnitRunner() {
     }
 
     override fun callApplicationOnCreate(app: Application) {
-        CastContext.getSharedInstance(app.applicationContext, Executors.newSingleThreadExecutor())
-
         super.callApplicationOnCreate(app)
     }
 }

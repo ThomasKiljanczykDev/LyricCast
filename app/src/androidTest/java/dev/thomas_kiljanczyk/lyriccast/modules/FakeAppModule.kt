@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 16:06
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 00:50
+ * Last modified 06/01/2025, 16:06
  */
 
 package dev.thomas_kiljanczyk.lyriccast.modules
@@ -32,12 +32,8 @@ import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ConnectionsClientFakeImpl
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbySessionServerContext
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.LyricCastMessagingContext
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.util.UUID
-import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 @Module
@@ -75,14 +71,9 @@ class FakeAppModule {
         }
     }
 
-    private val castExecutor = Executors.newSingleThreadExecutor()
-
     @Provides
     fun provideCastContext(@ApplicationContext context: Context): CastContext {
-        val task = CastContext.getSharedInstance(context, castExecutor)
-        return runBlocking(Dispatchers.Default) {
-            task.await()
-        }
+        return CastContext.getSharedInstance(context)
     }
 
     @Provides
