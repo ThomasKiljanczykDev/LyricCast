@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 06/01/2025, 00:24
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.setlists
@@ -53,10 +53,10 @@ class SetlistsModel @Inject constructor(
 
     init {
         setlistsRepository.getAllSetlists().onEach { setlists ->
-                val setlistItems = setlists.map { SetlistItem(it) }.sorted()
+            val setlistItems = setlists.map { SetlistItem(it) }.sorted()
 
-                allSetlists = setlistItems
-                emitSetlists()
+            allSetlists = setlistItems
+            emitSetlists()
         }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
         searchValues.setlistNameFlow.debounce(500).onEach { emitSetlists() }
@@ -83,7 +83,8 @@ class SetlistsModel @Inject constructor(
     fun exportSelectedSetlists(
         cacheDir: String, outputStream: OutputStream
     ): Flow<Int> = flow {
-        val exportData: DatabaseTransferData = dataTransferRepository.getDatabaseTransferData()
+        val exportData: DatabaseTransferData =
+            dataTransferRepository.getDatabaseTransferData()
 
         val exportDir = File(cacheDir, ".export")
         exportDir.deleteRecursively()

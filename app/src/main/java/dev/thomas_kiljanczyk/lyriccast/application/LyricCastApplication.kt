@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 03/01/2025, 00:53
+ * Last modified 06/01/2025, 00:39
  */
 
 package dev.thomas_kiljanczyk.lyriccast.application
@@ -17,6 +17,7 @@ import androidx.datastore.core.DataStore
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
+import dev.thomas_kiljanczyk.lyriccast.datamodel.RepositoryFactory
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastSessionListener
 import kotlinx.coroutines.CoroutineScope
@@ -25,7 +26,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.util.concurrent.Executors
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -70,30 +71,29 @@ class LyricCastApplication : Application() {
     @Inject
     lateinit var castMessagingContext: CastMessagingContext
 
+    @Inject
+    lateinit var castContext: CastContext
+
     @SuppressLint("WrongConstant")
     override fun onCreate() {
         super.onCreate()
 
         // Initializes CastContext
-        CastContext.getSharedInstance(applicationContext, Executors.newSingleThreadExecutor())
-            .addOnCompleteListener { task ->
-                val listener = CastSessionListener(
-                    onStarted = {
-                        CoroutineScope(Dispatchers.Default).launch {
-                            val blankOnStart = dataStore.data.first().blankOnStart
-                            castMessagingContext.sendBlank(blankOnStart)
-                        }
-                    },
-                    onEnded = { castMessagingContext.onSessionEnded() }
-                )
-
-                CoroutineScope(Dispatchers.Main).launch {
-                    task.result.sessionManager.addSessionManagerListener(listener)
+        castContext.sessionManager.addSessionManagerListener(CastSessionListener(
+            onStarted = {
+                CoroutineScope(Dispatchers.Default).launch {
+                    val blankOnStart = dataStore.data.first().blankOnStart
+                    castMessagingContext.sendBlank(blankOnStart)
                 }
-            }
-
+            },
+            onEnded = { castMessagingContext.onSessionEnded() }
+        ))
 
         DynamicColors.applyToActivitiesIfAvailable(this)
+
+        runBlocking(Dispatchers.IO) {
+            RepositoryFactory.initializeMongoDbRealm()
+        }
 
         // TODO: Add color harmonization
 

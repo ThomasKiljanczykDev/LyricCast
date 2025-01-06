@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 21:30
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 21:26
+ * Last modified 06/01/2025, 00:50
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.nearby.connection.ConnectionsClient
 import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo
@@ -25,7 +26,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.databinding.DialogFragmentChooseSessionBinding
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbyConstants
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -82,7 +82,7 @@ class ChooseSessionDialogFragment(
                     val devices = deviceMap.values.toList()
                     recyclerViewAdapter.submitList(devices)
 
-                    CoroutineScope(Dispatchers.Main).launch {
+                    lifecycleScope.launch(Dispatchers.Main) {
                         setSubViewVisibility()
                     }
                 }
@@ -93,7 +93,7 @@ class ChooseSessionDialogFragment(
                     val devices = deviceMap.values.toList()
                     recyclerViewAdapter.submitList(devices)
 
-                    CoroutineScope(Dispatchers.Main).launch {
+                    lifecycleScope.launch(Dispatchers.Main) {
                         setSubViewVisibility()
                     }
                 }

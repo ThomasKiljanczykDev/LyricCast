@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 18:56
+ * Last modified 05/01/2025, 22:22
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.misc
@@ -19,7 +19,7 @@ class LyricCastMessagingContext(
 
     val receivedPayload get() = gmsNearbySessionServerContext.receivedPayload
 
-    fun broadcastContentMessage(content: ShowLyricsContent) {
+    suspend fun broadcastContentMessage(content: ShowLyricsContent) {
         castMessagingContext.sendContentMessage(content.slideText)
         if (gmsNearbySessionServerContext.serverIsRunning.value) {
             val messageJson = Json.encodeToString(

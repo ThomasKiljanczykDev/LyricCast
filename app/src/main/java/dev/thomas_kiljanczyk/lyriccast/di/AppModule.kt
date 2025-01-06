@@ -1,13 +1,14 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 06/01/2025, 00:34
  */
 
 package dev.thomas_kiljanczyk.lyriccast.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.nearby.Nearby
 import com.google.android.gms.nearby.connection.ConnectionsClient
 import dagger.Module
@@ -30,6 +31,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    fun provideCastContext(@ApplicationContext context: Context): CastContext {
+        return CastContext.getSharedInstance(context)
+    }
 
     @Provides
     fun provideConnectionsClient(@ApplicationContext context: Context): ConnectionsClient {
@@ -76,8 +82,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCastMessagingContext(): CastMessagingContext {
-        return CastMessagingContext()
+    fun provideCastMessagingContext(castContext: CastContext): CastMessagingContext {
+        return CastMessagingContext(castContext)
     }
 
     @Provides

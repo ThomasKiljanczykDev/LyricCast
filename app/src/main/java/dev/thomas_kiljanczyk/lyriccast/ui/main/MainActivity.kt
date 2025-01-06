@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 17:39
+ * Last modified 05/01/2025, 23:01
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -63,7 +63,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.Closeable
-import java.util.concurrent.Executors
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    private val castExecutor = Executors.newSingleThreadExecutor()
+    @Inject
+    lateinit var castContext: CastContext
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -111,8 +112,6 @@ class MainActivity : AppCompatActivity() {
         setupListeners()
 
         checkPermissions()
-
-        // TODO: add permission check
 
         setOnApplyWindowInsetsListener(rootBinding.root) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -138,10 +137,7 @@ class MainActivity : AppCompatActivity() {
         val castActionProvider =
             MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_cast)) as CustomMediaRouteActionProvider
 
-        // TODO: Apply this approach to every .getSharedInstance() usage
-        // TODO: try with application context
-        castActionProvider.routeSelector =
-            CastContext.getSharedInstance(this, castExecutor).result.mergedSelector!!
+        castActionProvider.routeSelector = castContext.mergedSelector!!
 
         return true
     }
@@ -282,9 +278,7 @@ class MainActivity : AppCompatActivity() {
                 outputStream
             )
 
-            withContext(Dispatchers.Main) {
-                handleDialogMessages(dialogFragment, exportMessageFlow, outputStream)
-            }
+            handleDialogMessages(dialogFragment, exportMessageFlow, outputStream)
         }
     }
 
@@ -296,12 +290,10 @@ class MainActivity : AppCompatActivity() {
             delay(10)
         }
 
-        withContext(Dispatchers.Main) {
-            importDialog.isAccepted
-                .onEach { if (it) startImport() }
-                .flowOn(Dispatchers.Default)
-                .launchIn(importDialog.lifecycleScope)
-        }
+        importDialog.isAccepted
+            .onEach { if (it) startImport() }
+            .flowOn(Dispatchers.Default)
+            .launchIn(importDialog.lifecycleScope)
     }
 
     private fun importLyricCast(uri: Uri) =
@@ -326,9 +318,7 @@ class MainActivity : AppCompatActivity() {
                     importOptions
                 )
 
-            withContext(Dispatchers.Main) {
-                handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
-            }
+            handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
         }
 
     private fun importOpenSong(uri: Uri) =
@@ -355,16 +345,14 @@ class MainActivity : AppCompatActivity() {
                     importOptions
                 )
 
-            withContext(Dispatchers.Main) {
-                handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
-            }
+            handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
         }
 
-    private fun handleDialogMessages(
+    private suspend fun handleDialogMessages(
         dialogFragment: ProgressDialogFragment,
         messageFlow: Flow<Int>?,
         stream: Closeable
-    ) {
+    ) = withContext(Dispatchers.Main) {
         if (messageFlow != null) {
             messageFlow.onEach { dialogFragment.setMessage(it) }
                 .onCompletion {
@@ -375,7 +363,7 @@ class MainActivity : AppCompatActivity() {
                 }.flowOn(Dispatchers.Main)
                 .launchIn(dialogFragment.lifecycleScope)
         } else {
-            stream.close()
+            withContext(Dispatchers.IO) { stream.close() }
             dialogFragment.setErrorState(true)
             dialogFragment.setMessage(R.string.main_activity_import_incorrect_file_format)
         }

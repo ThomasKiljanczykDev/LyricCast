@@ -129,7 +129,7 @@ dependencies {
         // Source: https://stackoverflow.com/questions/66154727/java-lang-nosuchmethoderror-no-static-method-registerdefaultinstance-with-fireb
         exclude(module = "protobuf-lite")
     }
-
+    androidTestImplementation(libs.androidx.rules)
 
     // AndroidX Test - Hilt testing
     androidTestImplementation(libs.hiltTesting)

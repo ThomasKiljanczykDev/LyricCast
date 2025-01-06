@@ -38,6 +38,7 @@ junit = "4.13.2"
 truth = "1.4.4"
 
 leakCanary = "2.10"
+rules = "1.6.1"
 
 [libraries]
 gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -79,6 +80,7 @@ androidx-test-espressoContrib = { module = "androidx.test.espresso:espresso-cont
 squareup-leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf-javaLite" }
 play-services-nearby = { group = "com.google.android.gms", name = "play-services-nearby", version.ref = "playServicesNearby" }
+androidx-rules = { group = "androidx.test", name = "rules", version.ref = "rules" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

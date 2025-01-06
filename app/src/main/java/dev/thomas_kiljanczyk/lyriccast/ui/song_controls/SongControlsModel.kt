@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 19:35
+ * Last modified 05/01/2025, 22:43
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_controls
@@ -11,7 +11,6 @@ import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.thomas_kiljanczyk.lyriccast.application.AppSettings
 import dev.thomas_kiljanczyk.lyriccast.application.CastConfiguration
@@ -25,6 +24,7 @@ import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ShowLyricsContent
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.LyricCastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerCommand
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerMessage
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,9 +37,10 @@ import javax.inject.Inject
 @HiltViewModel
 class SongControlsModel @Inject constructor(
     dataStore: DataStore<AppSettings>,
-    val songsRepository: SongsRepository,
+    private val songsRepository: SongsRepository,
     private val castMessagingContext: CastMessagingContext,
-    private val lyricCastMessagingContext: LyricCastMessagingContext
+    private val lyricCastMessagingContext: LyricCastMessagingContext,
+    private val castContext: CastContext
 ) : ViewModel() {
     var songTitle: String = ""
 
@@ -55,8 +56,10 @@ class SongControlsModel @Inject constructor(
     private lateinit var lyrics: List<String>
 
     private val castSessionListener: CastSessionListener = CastSessionListener(onStarted = {
-        if (castConfiguration != null) sendConfiguration()
-        sendSlide()
+        viewModelScope.launch {
+            if (castConfiguration != null) sendConfiguration()
+            sendSlide()
+        }
     })
 
     init {
@@ -65,22 +68,20 @@ class SongControlsModel @Inject constructor(
             sendConfiguration()
         }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
-        lyricCastMessagingContext.receivedPayload
-            .onEach {
-                Log.i("SongControlsModel", "Received payload: $it")
-            }
-            .onEach(::handlePayload)
-            .flowOn(Dispatchers.Default).launchIn(viewModelScope)
-    }
+        lyricCastMessagingContext.receivedPayload.onEach {
+            Log.i("SongControlsModel", "Received payload: $it")
+        }.onEach(::handlePayload).flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
-    fun initialize(sessionManager: SessionManager) {
-        sessionManager.addSessionManagerListener(castSessionListener)
+        viewModelScope.launch(Dispatchers.Main) {
+            castContext.sessionManager.addSessionManagerListener(castSessionListener)
+        }
     }
 
     override fun onCleared() {
-        CastContext.getSharedInstance()!!.sessionManager.removeSessionManagerListener(
-            castSessionListener
-        )
+        // Must happen outside of the ViewModel scope
+        CoroutineScope(Dispatchers.Main).launch {
+            castContext.sessionManager.removeSessionManagerListener(castSessionListener)
+        }
 
         super.onCleared()
     }
@@ -106,7 +107,7 @@ class SongControlsModel @Inject constructor(
         postSlide()
     }
 
-    fun previousSlide() {
+    suspend fun previousSlide() {
         if (currentSlide <= 0) {
             return
         }
@@ -115,7 +116,7 @@ class SongControlsModel @Inject constructor(
         sendSlide()
     }
 
-    fun nextSlide() {
+    suspend fun nextSlide() {
         if (currentSlide >= lyrics.size - 1) {
             return
         }
@@ -124,15 +125,15 @@ class SongControlsModel @Inject constructor(
         sendSlide()
     }
 
-    fun sendBlank() {
+    suspend fun sendBlank() {
         castMessagingContext.sendBlank(!castMessagingContext.isBlanked.value)
     }
 
-    private fun sendConfiguration() {
+    private suspend fun sendConfiguration() {
         castMessagingContext.sendConfiguration(castConfiguration!!)
     }
 
-    fun sendSlide() {
+    suspend fun sendSlide() {
         lyricCastMessagingContext.broadcastContentMessage(
             getCurrentShowLyricsContent()
         )

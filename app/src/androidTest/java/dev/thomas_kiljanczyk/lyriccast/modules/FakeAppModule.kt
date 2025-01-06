@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 06/01/2025, 00:50
  */
 
 package dev.thomas_kiljanczyk.lyriccast.modules
@@ -10,6 +10,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
+import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.nearby.connection.ConnectionsClient
 import dagger.Module
 import dagger.Provides
@@ -31,8 +32,12 @@ import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ConnectionsClientFakeImpl
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbySessionServerContext
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.LyricCastMessagingContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.util.UUID
+import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 @Module
@@ -70,6 +75,15 @@ class FakeAppModule {
         }
     }
 
+    private val castExecutor = Executors.newSingleThreadExecutor()
+
+    @Provides
+    fun provideCastContext(@ApplicationContext context: Context): CastContext {
+        val task = CastContext.getSharedInstance(context, castExecutor)
+        return runBlocking(Dispatchers.Default) {
+            task.await()
+        }
+    }
 
     @Provides
     fun provideConnectionsClient(): ConnectionsClient {
@@ -109,8 +123,8 @@ class FakeAppModule {
 
     @Provides
     @Singleton
-    fun provideCastMessagingContext(): CastMessagingContext {
-        return CastMessagingContext()
+    fun provideCastMessagingContext(castContext: CastContext): CastMessagingContext {
+        return CastMessagingContext(castContext)
     }
 
     @Provides

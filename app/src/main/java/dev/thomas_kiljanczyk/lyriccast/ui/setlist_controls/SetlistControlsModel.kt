@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 19:35
+ * Last modified 06/01/2025, 00:54
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_controls
@@ -10,7 +10,6 @@ import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.thomas_kiljanczyk.lyriccast.application.AppSettings
 import dev.thomas_kiljanczyk.lyriccast.application.CastConfiguration
@@ -23,6 +22,7 @@ import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastSessionListener
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ShowLyricsContent
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.LyricCastMessagingContext
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -36,6 +36,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SetlistControlsModel @Inject constructor(
     dataStore: DataStore<AppSettings>,
+    private val castContext: CastContext,
     private val setlistsRepository: SetlistsRepository,
     private val castMessagingContext: CastMessagingContext,
     private val lyricCastMessagingContext: LyricCastMessagingContext
@@ -68,25 +69,31 @@ class SetlistControlsModel @Inject constructor(
     private val currentSong: Song get() = currentSongItem.song
 
     private val castSessionListener: CastSessionListener = CastSessionListener(onStarted = {
-        if (castConfiguration != null) sendConfiguration()
-        sendSlide()
+        viewModelScope.launch {
+            if (castConfiguration != null) {
+                sendConfiguration()
+            }
+            sendSlide()
+        }
     })
 
     init {
         dataStore.data.onEach { settings ->
-                castConfiguration = settings.getCastConfiguration()
-                sendConfiguration()
+            castConfiguration = settings.getCastConfiguration()
+            sendConfiguration()
         }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
-    }
 
-    fun initialize(sessionManager: SessionManager) {
-        sessionManager.addSessionManagerListener(castSessionListener)
+
+        viewModelScope.launch(Dispatchers.Main) {
+            castContext.sessionManager.addSessionManagerListener(castSessionListener)
+        }
     }
 
     override fun onCleared() {
-        CastContext.getSharedInstance()!!.sessionManager.removeSessionManagerListener(
-            castSessionListener
-        )
+        // Must happen outside of the ViewModel scope
+        CoroutineScope(Dispatchers.Main).launch {
+            castContext.sessionManager.removeSessionManagerListener(castSessionListener)
+        }
 
         super.onCleared()
     }
@@ -124,11 +131,11 @@ class SetlistControlsModel @Inject constructor(
         }
     }
 
-    fun sendBlank() {
+    suspend fun sendBlank() {
         castMessagingContext.sendBlank(!castMessagingContext.isBlanked.value)
     }
 
-    private fun sendConfiguration() {
+    private suspend fun sendConfiguration() {
         castMessagingContext.sendConfiguration(castConfiguration!!)
     }
 
