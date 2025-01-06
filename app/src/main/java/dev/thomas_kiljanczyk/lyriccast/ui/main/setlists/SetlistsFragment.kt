@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:43
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 22:34
+ * Last modified 06/01/2025, 01:41
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.setlists
@@ -281,29 +281,25 @@ class SetlistsFragment : Fragment() {
         }
 
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            val result = when (item.itemId) {
+            when (item.itemId) {
                 R.id.action_menu_delete -> {
                     lifecycleScope.launch(Dispatchers.Default) {
                         viewModel.deleteSelectedSetlists()
+                        withContext(Dispatchers.Main) { mode.finish() }
                     }
-                    true
                 }
 
                 R.id.action_menu_export_selected -> {
                     startExport()
-                    true
+                    mode.finish()
                 }
 
                 R.id.action_menu_edit -> {
                     editSelectedSetlist()
-                    true
+                    mode.finish()
                 }
 
-                else -> false
-            }
-
-            if (result) {
-                mode.finish()
+                else -> {}
             }
 
             return true

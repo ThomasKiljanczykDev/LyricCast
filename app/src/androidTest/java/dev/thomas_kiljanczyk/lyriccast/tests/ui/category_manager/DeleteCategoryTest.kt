@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:43
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 01:26
  */
 
 package dev.thomas_kiljanczyk.lyriccast.tests.ui.category_manager
@@ -72,6 +72,7 @@ class DeleteCategoryTest : BaseHiltTest() {
         onView(
             allOf(withId(R.id.item_category), hasDescendant(withText(category2.name)))
         ).perform(touchscreenLongClick())
+
         onView(withId(R.id.action_menu_delete)).perform(click())
 
 

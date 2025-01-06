@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:43
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 01:11
+ * Last modified 06/01/2025, 01:41
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.category_manager
@@ -35,6 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class CategoryManagerActivity : AppCompatActivity() {
@@ -195,24 +196,20 @@ class CategoryManagerActivity : AppCompatActivity() {
         }
 
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            val result = when (item.itemId) {
+            when (item.itemId) {
                 R.id.action_menu_delete -> {
                     lifecycleScope.launch(Dispatchers.Default) {
                         viewModel.deleteSelectedCategories()
+                        withContext(Dispatchers.Main) { mode.finish() }
                     }
-                    true
                 }
 
                 R.id.action_menu_edit -> {
                     editSelectedCategory()
-                    true
+                    mode.finish()
                 }
 
-                else -> false
-            }
-
-            if (result) {
-                mode.finish()
+                else -> {}
             }
 
             return true

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:43
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 23:01
+ * Last modified 06/01/2025, 01:13
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -187,6 +187,7 @@ class MainActivity : AppCompatActivity() {
 
                     // TODO: localise
                     2 -> {
+                        // TODO: disable
                         Log.v(TAG, "Switching to join session")
                         val intent = Intent(baseContext, SessionClientActivity::class.java)
                         startActivity(intent)
