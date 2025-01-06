@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 17:33
+ * Last modified 06/01/2025, 19:18
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby
@@ -63,7 +63,7 @@ class GmsNearbySessionServerContext(
             super.onConnectionInitiated(endpointId, connectionInfo)
             connectionsClient.acceptConnection(endpointId, SimpleNearbyPayloadCallback {
                 val payloadString = it?.decodeToString() ?: return@SimpleNearbyPayloadCallback
-                Log.i(TAG, "Received message : $payloadString")
+                Log.d(TAG, "Received message : $payloadString")
 
                 CoroutineScope(Dispatchers.Default).launch {
                     _receivedPayload.emit(ReceivedPayload(endpointId, payloadString))
@@ -158,12 +158,12 @@ class GmsNearbySessionServerContext(
     }
 
     private fun broadcastMessage(endpointIds: List<String>, message: String) {
-        Log.i(TAG, "Sending message : $message")
+        Log.d(TAG, "Sending message : $message")
 
         connectionsClient.sendPayload(
             endpointIds, Payload.fromBytes(message.toByteArray())
         ).addOnSuccessListener {
-            Log.i(TAG, "Message sent")
+            Log.d(TAG, "Message sent")
         }.addOnFailureListener { e: Exception? ->
             Log.e(TAG, "Failed to send message", e)
         }

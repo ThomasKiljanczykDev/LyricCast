@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 19:03
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 18:52
+ * Last modified 06/01/2025, 19:11
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -41,6 +41,7 @@ class ChooseSessionDialogFragment(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         viewModel = ViewModelProvider(requireActivity())[ChooseSessionDialogModel::class.java]
+        viewModel.reset()
 
         binding = DialogFragmentChooseSessionBinding.inflate(layoutInflater)
 

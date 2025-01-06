@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 19:03
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 19:03
+ * Last modified 06/01/2025, 19:18
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -28,7 +28,7 @@ class ChooseSessionDialogModel @Inject constructor(
     private val connectionsClient: ConnectionsClient
 ) : ViewModel() {
     companion object {
-        const val TAG: String = "PickDeviceDialogViewModel"
+        const val TAG: String = "ChooseSessionDialogModel"
     }
 
     private val _serverEndpointId = MutableSharedFlow<String>()
@@ -41,13 +41,17 @@ class ChooseSessionDialogModel @Inject constructor(
     val devices: StateFlow<List<GmsNearbySessionItem>>
         get() = _devices
 
+    fun reset() {
+        deviceMap.clear()
+        _devices.value = emptyList()
+    }
 
     fun pickDevice(item: GmsNearbySessionItem) {
         viewModelScope.launch {
             _serverEndpointId.emit(item.endpointId)
         }
 
-        Log.i(TAG, "Picked : ${item.deviceName}")
+        Log.d(TAG, "Picked : ${item.deviceName}")
     }
 
     fun startDiscovery() {

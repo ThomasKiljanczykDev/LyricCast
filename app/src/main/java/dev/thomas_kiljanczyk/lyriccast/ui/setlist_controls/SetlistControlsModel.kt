@@ -1,11 +1,12 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 00:54
+ * Last modified 06/01/2025, 19:18
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_controls
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,8 +21,11 @@ import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.SetlistsRepositor
 import dev.thomas_kiljanczyk.lyriccast.domain.models.SongItem
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastSessionListener
+import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ReceivedPayload
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ShowLyricsContent
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.LyricCastMessagingContext
+import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerCommand
+import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -41,6 +45,10 @@ class SetlistControlsModel @Inject constructor(
     private val castMessagingContext: CastMessagingContext,
     private val lyricCastMessagingContext: LyricCastMessagingContext
 ) : ViewModel() {
+    companion object {
+        private const val TAG = "SetlistControlsModel"
+    }
+
 
     private var castConfiguration: CastConfiguration? = null
 
@@ -83,6 +91,9 @@ class SetlistControlsModel @Inject constructor(
             sendConfiguration()
         }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
+        lyricCastMessagingContext.receivedPayload.onEach {
+            Log.d(TAG, "Received payload: $it")
+        }.onEach(::handlePayload).flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
         viewModelScope.launch(Dispatchers.Main) {
             castContext.sessionManager.addSessionManagerListener(castSessionListener)
@@ -139,6 +150,18 @@ class SetlistControlsModel @Inject constructor(
         castMessagingContext.sendConfiguration(castConfiguration!!)
     }
 
+    private fun handlePayload(receivedPayload: ReceivedPayload) {
+        val content = SessionServerMessage.fromJson(receivedPayload.payload) ?: return
+
+        when (content.command) {
+            SessionServerCommand.SEND_LATEST_SLIDE -> {
+                lyricCastMessagingContext.sendContentMessage(
+                    receivedPayload.endpointId, getCurrentShowLyricsContent()
+                )
+            }
+        }
+    }
+
     fun selectSong(position: Int, fromStart: Boolean = false) =
         viewModelScope.launch(Dispatchers.Default) {
             previousSongItem = currentSongItem
@@ -152,16 +175,11 @@ class SetlistControlsModel @Inject constructor(
         }
 
     fun sendSlide() = viewModelScope.launch(Dispatchers.Default) {
-        val lyricsText = currentSong.lyricsList[currentLyricsPosition]
+        val showLyricsContent = getCurrentShowLyricsContent()
         lyricCastMessagingContext.broadcastContentMessage(
-            ShowLyricsContent(
-                currentSong.title,
-                lyricsText,
-                currentLyricsPosition + 1,
-                currentSong.lyricsList.size,
-            )
+            showLyricsContent
         )
-        _currentSlideText.emit(lyricsText)
+        _currentSlideText.emit(showLyricsContent.slideText)
         _currentSlideNumber.emit("${currentLyricsPosition + 1}/${currentSong.lyricsList.size}")
 
         // Uses reference equality to make it work for songs with same title
@@ -177,6 +195,15 @@ class SetlistControlsModel @Inject constructor(
             _changedSongItems.value = listOf(previousSongPosition, currentSongPosition)
             _currentSongTitle.emit(currentSong.title)
         }
+    }
+
+    private fun getCurrentShowLyricsContent(): ShowLyricsContent {
+        return ShowLyricsContent(
+            currentSong.title,
+            currentSong.lyricsList[currentLyricsPosition],
+            currentLyricsPosition + 1,
+            currentSong.lyricsList.size
+        )
     }
 
 }

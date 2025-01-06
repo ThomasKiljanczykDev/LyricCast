@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 22:43
+ * Last modified 06/01/2025, 19:18
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_controls
@@ -42,6 +42,10 @@ class SongControlsModel @Inject constructor(
     private val lyricCastMessagingContext: LyricCastMessagingContext,
     private val castContext: CastContext
 ) : ViewModel() {
+    companion object {
+        private const val TAG = "SongControlsModel"
+    }
+
     var songTitle: String = ""
 
     private var castConfiguration: CastConfiguration? = null
@@ -69,7 +73,7 @@ class SongControlsModel @Inject constructor(
         }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
         lyricCastMessagingContext.receivedPayload.onEach {
-            Log.i("SongControlsModel", "Received payload: $it")
+            Log.d(TAG, "Received payload: $it")
         }.onEach(::handlePayload).flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
         viewModelScope.launch(Dispatchers.Main) {
@@ -96,7 +100,6 @@ class SongControlsModel @Inject constructor(
                 )
             }
         }
-
     }
 
     fun loadSong(songId: String) {

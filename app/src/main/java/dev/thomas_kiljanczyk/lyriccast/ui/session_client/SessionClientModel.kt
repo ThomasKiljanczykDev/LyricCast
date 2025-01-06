@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 12:20
+ * Last modified 06/01/2025, 19:18
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -140,6 +140,6 @@ class SessionClientModel @Inject constructor(
 
     fun stopClient() {
         connectionsClient.stopAllEndpoints()
-        Log.i(TAG, "Client disconnected")
+        Log.d(TAG, "Client disconnected")
     }
 }

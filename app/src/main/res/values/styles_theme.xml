@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 05/01/2025, 21:30
+  ~ Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 05/01/2025, 20:59
+  ~ Last modified 06/01/2025, 19:27
   -->
 
 <resources>
@@ -52,6 +52,7 @@
 
 
     <style name="ThemeOverlay.LyricCast.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:backgroundTint">@macro/m3_comp_dialog_container_color</item>
         <!-- TODO: set to false when title padding issue is fixed by google -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">true</item>
