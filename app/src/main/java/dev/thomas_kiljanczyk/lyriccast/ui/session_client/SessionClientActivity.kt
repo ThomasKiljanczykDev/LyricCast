@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:11
+ * Last modified 06/01/2025, 12:34
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -9,6 +9,7 @@ package dev.thomas_kiljanczyk.lyriccast.ui.session_client
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -41,6 +42,8 @@ class SessionClientActivity : AppCompatActivity() {
 
     private lateinit var pickDeviceDialogViewModel: ChooseSessionDialogViewModel
 
+    private var chooseSessionDialog: ChooseSessionDialogFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -55,20 +58,38 @@ class SessionClientActivity : AppCompatActivity() {
 
         binding = ContentSessionClientBinding.bind(rootBinding.contentSessionClient.root)
 
-        viewModel.songTitle
-            .onEach { binding.tvControlsSongTitle.text = it }
-            .flowOn(Dispatchers.Main)
-            .launchIn(lifecycleScope)
+        viewModel.currentSlide.onEach {
+            binding.tvControlsSongTitle.text = it.songTitle
+            binding.tvSongSlideNumber.text = it.slideNumber
+            binding.tvSlidePreview.text = it.slideText
 
-        viewModel.currentSlideText
-            .onEach { binding.tvSlidePreview.text = it }
-            .flowOn(Dispatchers.Main)
-            .launchIn(lifecycleScope)
+            val showSlideInformation = it.songTitle.isNotBlank() || it.slideNumber.isNotBlank()
+            binding.cstlSlideInformation.visibility =
+                if (showSlideInformation) View.VISIBLE else View.GONE
 
-        viewModel.currentSlideNumber
-            .onEach { binding.tvSongSlideNumber.text = it }
-            .flowOn(Dispatchers.Main)
-            .launchIn(lifecycleScope)
+        }.flowOn(Dispatchers.Main).launchIn(lifecycleScope)
+
+        viewModel.connectionState.onEach { connectionState ->
+            when (connectionState) {
+                SessionClientModel.ConnectionState.CONNECTED -> {
+                    // TODO: localize
+                    Toast.makeText(baseContext, "Connected to server", Toast.LENGTH_SHORT).show()
+                }
+
+                SessionClientModel.ConnectionState.DISCONNECTED -> {
+                    // TODO: localize
+                    Toast.makeText(baseContext, "Disconnected from server", Toast.LENGTH_SHORT)
+                        .show()
+                    showChooseSessionDialog()
+                }
+
+                SessionClientModel.ConnectionState.FAILED -> {
+                    // TODO: localize
+                    Toast.makeText(baseContext, "Failed to connect to server", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }.flowOn(Dispatchers.Main).launchIn(lifecycleScope)
 
         setupObservers()
 
@@ -86,29 +107,18 @@ class SessionClientActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-        ChooseSessionDialogFragment(
-            onClose = { finish() }
-        ).show(supportFragmentManager, ChooseSessionDialogFragment.TAG)
+        showChooseSessionDialog()
     }
 
     private fun setupObservers() {
-        pickDeviceDialogViewModel.serverEndpointId
-            .onEach(this::observeDialogBluetoothDevice)
+        pickDeviceDialogViewModel.serverEndpointId.onEach(this::observeDialogBluetoothDevice)
             .launchIn(lifecycleScope)
-
-        pickDeviceDialogViewModel.message
-            .onEach {
-                if (it.isNotBlank()) {
-                    Toast.makeText(baseContext, it, Toast.LENGTH_SHORT).show()
-                }
-            }.launchIn(lifecycleScope)
     }
 
     override fun onResume() {
         super.onResume()
 
-        // TODO: poll server for slide updates
-        // TODO: exit activity if server disconnected
+        viewModel.requestLatestSlide()
     }
 
     override fun onDestroy() {
@@ -116,7 +126,22 @@ class SessionClientActivity : AppCompatActivity() {
         viewModel.stopClient()
     }
 
+    private fun showChooseSessionDialog() {
+        if (chooseSessionDialog != null && chooseSessionDialog?.isVisible == true) {
+            return
+        }
+
+        val dialog = ChooseSessionDialogFragment(onClose = { finish() })
+        chooseSessionDialog = dialog
+
+        dialog
+            .show(
+                supportFragmentManager, ChooseSessionDialogFragment.TAG
+            )
+    }
+
     private fun observeDialogBluetoothDevice(endpointId: String?) {
+        chooseSessionDialog = null
         try {
             if (endpointId != null) {
                 val deviceName =

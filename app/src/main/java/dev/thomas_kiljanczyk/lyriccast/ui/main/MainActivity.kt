@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:43
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 01:13
+ * Last modified 06/01/2025, 11:54
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -185,7 +185,7 @@ class MainActivity : AppCompatActivity() {
                         navController.navigate(R.id.action_Songs_to_Setlists)
                     }
 
-                    // TODO: localise
+                    // TODO: localize
                     2 -> {
                         // TODO: disable
                         Log.v(TAG, "Switching to join session")

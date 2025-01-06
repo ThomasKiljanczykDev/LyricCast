@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 22:22
+ * Last modified 06/01/2025, 12:55
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.misc
@@ -9,6 +9,12 @@ package dev.thomas_kiljanczyk.lyriccast.shared.misc
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbySessionServerContext
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ShowLyricsContent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -16,8 +22,20 @@ class LyricCastMessagingContext(
     private val castMessagingContext: CastMessagingContext,
     private val gmsNearbySessionServerContext: GmsNearbySessionServerContext
 ) {
-
     val receivedPayload get() = gmsNearbySessionServerContext.receivedPayload
+
+    private val googleCastContentMessage = MutableSharedFlow<String>()
+    private val gmsNearbyBroadcastMessage = MutableSharedFlow<String>()
+
+    init {
+        googleCastContentMessage.debounce(500).onEach { message ->
+            castMessagingContext.sendContentMessage(message)
+        }.launchIn(CoroutineScope(Dispatchers.IO))
+
+        gmsNearbyBroadcastMessage.debounce(500).onEach { message ->
+            gmsNearbySessionServerContext.broadcastMessage(message)
+        }.launchIn(CoroutineScope(Dispatchers.IO))
+    }
 
     suspend fun broadcastContentMessage(content: ShowLyricsContent) {
         castMessagingContext.sendContentMessage(content.slideText)
@@ -28,7 +46,7 @@ class LyricCastMessagingContext(
                 )
             )
 
-            gmsNearbySessionServerContext.broadcastMessage(messageJson)
+            gmsNearbyBroadcastMessage.emit(messageJson)
         }
     }
 
