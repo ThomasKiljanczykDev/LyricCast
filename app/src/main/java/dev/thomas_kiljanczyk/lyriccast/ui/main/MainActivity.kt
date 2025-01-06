@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 11:54
+ * Last modified 06/01/2025, 17:01
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -83,6 +83,14 @@ class MainActivity : AppCompatActivity() {
     private val permissionRequestLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { isGranted ->
             if (isGranted.values.any { !it }) {
+                MaterialAlertDialogBuilder(
+                    this,
+                    R.style.ThemeOverlay_LyricCast_MaterialAlertDialog_NoTitle
+                )
+                    .setMessage("You rejected some permissions. Selected features like sessions will not work.")
+                    .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
+                    .create()
+                    .show()
                 // TODO: Handle permission denied
             }
         }

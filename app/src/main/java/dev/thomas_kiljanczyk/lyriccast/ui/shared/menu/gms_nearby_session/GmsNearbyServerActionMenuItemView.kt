@@ -1,14 +1,13 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 19:04
+ * Last modified 06/01/2025, 18:07
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.provider.Settings
 import android.view.View
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.appcompat.view.menu.MenuItemImpl
@@ -17,7 +16,9 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
+import dev.thomas_kiljanczyk.lyriccast.shared.extensions.findParentFragmentActivity
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbySessionServerContext
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session.dialog.StartSessionServerDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.flowOn
@@ -70,16 +71,15 @@ class GmsNearbyServerActionMenuItemView(context: Context?) : ActionMenuItemView(
         super.onClick(v)
 
         if (gmsNearbySessionServerContext.serverIsRunning.value) {
+            // TODO: show dialog with connected devices and ask if user wants to stop the session
             gmsNearbySessionServerContext.stopServer()
         } else {
-            // TODO: show dialog with device name as default (changeable) session name
-            val deviceName =
-                Settings.Global.getString(context.contentResolver, Settings.Global.DEVICE_NAME)
-            try {
-                // TODO: wait in the dialog until session started before closing
-                gmsNearbySessionServerContext.startServer(deviceName)
-            } catch (ex: SecurityException) {
-                // TODO: handle exception
+            val activity = context.findParentFragmentActivity()
+            if (activity != null) {
+                StartSessionServerDialogFragment().show(
+                    activity.supportFragmentManager,
+                    StartSessionServerDialogFragment.TAG
+                )
             }
         }
     }

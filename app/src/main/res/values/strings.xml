@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+  ~ Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 04/01/2025, 15:56
+  ~ Last modified 06/01/2025, 17:29
   -->
 
 <resources>
@@ -123,10 +123,4 @@
     <string name="placeholder_gms_nearby_server_device">Bluetooth Device</string>
     <string name="dialog_fragment_choose_session_title">Choose session</string>
     <string name="dialog_fragment_close">Close</string>
-
-    <!-- GMS Nearby Server Context -->
-    <string name="gms_nearby_server_connected">%s has disconnected</string>
-    <string name="gms_nearby_server_connected_unknown">Unknown device has disconnected</string>
-    <string name="gms_nearby_server_disconnected">%s has disconnected</string>
-    <string name="gms_nearby_server_disconnected_unknown">Unknown device has disconnected</string>
 </resources>
