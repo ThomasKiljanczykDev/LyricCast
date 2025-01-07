@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
+ * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 17:01
+ * Last modified 07/01/2025, 20:16
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -193,9 +193,8 @@ class MainActivity : AppCompatActivity() {
                         navController.navigate(R.id.action_Songs_to_Setlists)
                     }
 
-                    // TODO: localize
                     2 -> {
-                        // TODO: disable
+                        // TODO: disable when session server is running
                         Log.v(TAG, "Switching to join session")
                         val intent = Intent(baseContext, SessionClientActivity::class.java)
                         startActivity(intent)

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 19:03
+ * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 18:35
+ * Last modified 07/01/2025, 20:23
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -21,6 +21,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentSessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogFragment
@@ -72,20 +73,29 @@ class SessionClientActivity : AppCompatActivity() {
         viewModel.connectionState.onEach { connectionState ->
             when (connectionState) {
                 SessionClientModel.ConnectionState.CONNECTED -> {
-                    // TODO: localize
-                    Toast.makeText(baseContext, "Connected to server", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext,
+                        R.string.session_client_connected,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 SessionClientModel.ConnectionState.DISCONNECTED -> {
-                    // TODO: localize
-                    Toast.makeText(baseContext, "Disconnected from server", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        baseContext,
+                        R.string.session_client_disconnected,
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                     showChooseSessionDialog()
                 }
 
                 SessionClientModel.ConnectionState.FAILED -> {
-                    // TODO: localize
-                    Toast.makeText(baseContext, "Failed to connect to server", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        baseContext,
+                        R.string.session_client_failed_to_connect,
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }

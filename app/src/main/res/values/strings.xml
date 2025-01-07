@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
+  ~ Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 06/01/2025, 17:29
+  ~ Last modified 07/01/2025, 20:23
   -->
 
 <resources>
@@ -26,14 +26,18 @@
     <string name="title_controls">Controls</string>
     <string name="title_setlists">Setlists</string>
     <string name="title_songs">Songs</string>
+    <string name="title_session_client">Session</string>
 
     <!-- Hints -->
     <string name="hint_song_title">Song title</string>
     <string name="hint_song_category">Category</string>
     <string name="hint_setlist_name">Setlist name</string>
+    <string name="hint_session_name">Session name</string>
     <string name="hint_import_format">Format</string>
 
     <!-- Option/Action Menu -->
+    <string name="option_menu_start_session">Start session</string>
+    <string name="option_menu_stop_session">Stop session</string>
     <string name="option_menu_cast">Cast</string>
     <string name="action_menu_button_delete">Delete</string>
 
@@ -59,6 +63,7 @@
     <string name="main_activity_button_add_setlist">Add setlist</string>
     <string name="main_activity_loading_file">Loading file …</string>
     <string name="main_activity_setlist_is_empty">Setlist is empty!</string>
+    <string name="main_activity_tab_join_session">Join Session</string>
 
     <!-- Song/Setlist Controls -->
     <string name="controls_previous">Previous</string>
@@ -120,7 +125,17 @@
     <string name="category_none">NONE</string>
 
     <!-- Session Client -->
-    <string name="placeholder_gms_nearby_server_device">Bluetooth Device</string>
+    <string name="session_client_connected">Connected</string>
+    <string name="session_client_disconnected">Disconnected</string>
+    <string name="session_client_failed_to_connect">Failed to connect</string>
+    <string name="placeholder_gms_nearby_server_device">GMS Nearby Device</string>
     <string name="dialog_fragment_choose_session_title">Choose session</string>
+    <string name="dialog_fragment_choose_session_looking_for_session">Looking for session...</string>
     <string name="dialog_fragment_close">Close</string>
+
+    <!-- Start Session Dialog -->
+    <string name="dialog_fragment_start_session_title">Start session</string>
+    <string name="dialog_fragment_start_session_start">Start</string>
+    <string name="dialog_fragment_start_session_error_empty_name">Please enter the name</string>
+
 </resources>

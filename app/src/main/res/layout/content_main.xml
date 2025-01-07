@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
+  ~ Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 06/01/2025, 11:54
+  ~ Last modified 07/01/2025, 20:23
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,12 +48,11 @@
             android:icon="@drawable/round_playlist_play_24"
             android:text="@string/title_setlists" />
 
-        <!-- TODO: localize text -->
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/round_login_24"
-            android:text="Join Session" />
+            android:text="@string/main_activity_tab_join_session" />
 
     </com.google.android.material.tabs.TabLayout>
 

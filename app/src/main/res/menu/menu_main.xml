@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+  ~ Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 04/01/2025, 16:37
+  ~ Last modified 07/01/2025, 20:12
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,11 +9,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="AlwaysShowAction">
 
-    <!-- TODO: localize title -->
     <item
         android:id="@+id/menu_start_session"
         android:icon="@drawable/menu_round_present_to_all_24"
-        android:title="Start session"
+        android:title="@string/option_menu_start_session"
         app:actionProviderClass="dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session.GmsNearbyServerActionProvider"
         app:showAsAction="always" />
 

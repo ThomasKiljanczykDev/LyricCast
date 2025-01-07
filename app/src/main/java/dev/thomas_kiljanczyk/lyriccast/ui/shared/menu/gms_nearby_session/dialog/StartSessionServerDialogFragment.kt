@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
+ * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 18:26
+ * Last modified 07/01/2025, 20:16
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session.dialog
@@ -36,8 +36,8 @@ class SessionNameTextWatcher(
     private val viewModel: StartSessionServerDialogModel
 ) : TextWatcher {
 
-    // TODO: localize
-    private val enterNameErrorText = "Please enter a name"
+    private val enterNameErrorText =
+        resources.getString(R.string.dialog_fragment_start_session_error_empty_name)
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
     }
@@ -108,10 +108,10 @@ class StartSessionServerDialogFragment : DialogFragment() {
         return MaterialAlertDialogBuilder(
             requireContext(), R.style.ThemeOverlay_LyricCast_MaterialAlertDialog
         )
-            // TODO: localize
-            .setTitle("Start session").setNegativeButton(android.R.string.cancel, null)
-            // TODO: localize
-            .setPositiveButton("Start", null).setView(binding.root).create()
+            .setTitle(R.string.dialog_fragment_start_session_title)
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(R.string.dialog_fragment_start_session_start, null)
+            .setView(binding.root).create()
     }
 
     override fun onCreateView(

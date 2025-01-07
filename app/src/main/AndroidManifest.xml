@@ -83,10 +83,9 @@
             android:theme="@style/Theme.LyricCast.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
-        <!-- TODO: localize title -->
         <activity
             android:name=".ui.session_client.SessionClientActivity"
-            android:label="Session Client"
+            android:label="@string/title_session_client"
             android:parentActivityName="dev.thomas_kiljanczyk.lyriccast.ui.session_client.SessionClientActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.LyricCast.NoActionBar"

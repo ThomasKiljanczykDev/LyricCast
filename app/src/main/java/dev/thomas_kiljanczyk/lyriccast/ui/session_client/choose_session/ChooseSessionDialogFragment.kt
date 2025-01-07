@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
+ * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 19:11
+ * Last modified 06/01/2025, 19:32
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.databinding.DialogFragmentChooseSessionBinding
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -62,10 +63,12 @@ class ChooseSessionDialogFragment(
     ): View {
         setupRecyclerView()
 
-        viewModel.devices.onEach {
-            setSubViewVisibility(it.isNotEmpty())
-            recyclerViewAdapter.submitList(it)
-        }.flowOn(Dispatchers.Main).launchIn(lifecycleScope)
+        viewModel.devices
+            .debounce(500)
+            .onEach {
+                setSubViewVisibility(it.isNotEmpty())
+                recyclerViewAdapter.submitList(it)
+            }.flowOn(Dispatchers.Main).launchIn(lifecycleScope)
         viewModel.startDiscovery()
 
         return binding.root

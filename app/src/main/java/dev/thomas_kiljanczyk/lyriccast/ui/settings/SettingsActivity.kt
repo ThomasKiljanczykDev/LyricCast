@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 01:00
+ * Last modified 07/01/2025, 12:49
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -149,7 +149,9 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.preferences, rootKey)
+            lifecycleScope.launch(Dispatchers.IO) {
+                setPreferencesFromResource(R.xml.preferences, rootKey)
+            }
         }
     }
 }

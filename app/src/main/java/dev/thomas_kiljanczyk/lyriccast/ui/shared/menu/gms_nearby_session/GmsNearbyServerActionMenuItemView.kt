@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
+ * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 18:07
+ * Last modified 07/01/2025, 20:25
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session
@@ -57,9 +57,11 @@ class GmsNearbyServerActionMenuItemView(context: Context?) : ActionMenuItemView(
                 val newIconResId =
                     if (it) R.drawable.menu_round_cancel_presentation_24 else R.drawable.menu_round_present_to_all_24
 
-                setIcon(ResourcesCompat.getDrawable(context.resources, newIconResId, null))
-                // TODO: localize
-                itemData.title = if (it) "Stop session" else "Start session"
+                setIcon(ResourcesCompat.getDrawable(resources, newIconResId, null))
+
+                val newTitleResId =
+                    if (it) R.string.option_menu_stop_session else R.string.option_menu_start_session
+                itemData.title = resources.getString(newTitleResId)
             }
                 .onCompletion { serverIsRunningJob = null }
                 .flowOn(Dispatchers.Main)
