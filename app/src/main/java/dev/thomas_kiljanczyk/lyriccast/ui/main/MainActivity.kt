@@ -199,7 +199,7 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(baseContext, SessionClientActivity::class.java)
                         startActivity(intent)
 
-                        // TODO: find a better way to handle this
+                        // TODO: nice to have - find a better way to handle this
                         // Prevents the tab from being selected
                         recreate()
                     }

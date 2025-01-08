@@ -33,7 +33,7 @@ kotlin-plugin-serialization = "2.1.0"
 androidXTestCore = "1.6.1"
 androidXTestExtKotlinRunner = "1.2.1"
 espresso = "3.6.1"
-# TODO: Check if this can be migrated to jupyter api
+# TODO: nice to have - Check if this can be migrated to jupyter api
 junit = "4.13.2"
 truth = "1.4.4"
 

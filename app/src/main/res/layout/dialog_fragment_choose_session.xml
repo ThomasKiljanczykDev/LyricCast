@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_looking_for_session"
         app:layout_constraintVertical_weight="1" />
 
-    <!-- TODO: make the height dynamic with max height of 200dp -->
+    <!-- TODO: nice to have - make the height dynamic with max height of 200dp -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_gms_nearby_sessions"
         android:layout_width="0dp"

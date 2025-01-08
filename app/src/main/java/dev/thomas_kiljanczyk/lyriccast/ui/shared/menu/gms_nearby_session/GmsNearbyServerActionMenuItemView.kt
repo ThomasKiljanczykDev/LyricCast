@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-// TODO: migrate to a custom non-RestrictedApi view
+// TODO: nice to have - migrate to a custom non-RestrictedApi view
 @SuppressLint("RestrictedApi")
 @AndroidEntryPoint
 class GmsNearbyServerActionMenuItemView(context: Context?) : ActionMenuItemView(context) {

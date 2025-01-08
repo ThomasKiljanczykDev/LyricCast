@@ -125,7 +125,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.extJunitKtx)
     androidTestImplementation(libs.androidx.test.espresso)
     androidTestImplementation(libs.androidx.test.espressoContrib) {
-        // TODO: Workaround for protobuf-lite test issues
+        // TODO: nice to have - workaround for protobuf-lite test issues, try to remove it in the future
         // Source: https://stackoverflow.com/questions/66154727/java-lang-nosuchmethoderror-no-static-method-registerdefaultinstance-with-fireb
         exclude(module = "protobuf-lite")
     }

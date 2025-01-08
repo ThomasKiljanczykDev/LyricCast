@@ -95,7 +95,7 @@ class LyricCastApplication : Application() {
             RepositoryFactory.initializeMongoDbRealm()
         }
 
-        // TODO: Add color harmonization
+        // TODO: nice to have - Add color harmonization
 
         dataStore.data
             .onEach {
