@@ -1,7 +1,10 @@
 ![Now in Android](docs/images/LyricCast-splash.png "Now in Android")
 
 [//]: # (TODO: add link after the app is publicly released)
-<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70" style="filter: grayscale(1.0)" title="Coming soon!" alt="Get it on Google Play. Coming soon!">
+<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70" title="Coming soon!" alt="Get it on Google Play. Coming soon!">
+
+> [!NOTE]
+> LyricCast is undergoing closed testing on Google Play. Public access is coming soon!
 
 # LyricCast
 
