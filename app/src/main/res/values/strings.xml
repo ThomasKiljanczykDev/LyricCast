@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
+  ~ Created by Tomasz Kiljanczyk on 13/01/2025, 00:19
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 12/01/2025, 23:12
+  ~ Last modified 13/01/2025, 00:18
   -->
 
 <resources>
@@ -63,7 +63,7 @@
     <string name="main_activity_loading_file">Loading file …</string>
     <string name="main_activity_setlist_is_empty">Setlist is empty!</string>
     <string name="main_activity_tab_join_session">Join Session</string>
-    <string name="main_activity_cannot_join_session">Cannot join session while server is running</string>
+    <string name="main_activity_cannot_join_session">Cannot join session while hosting a session</string>
     <string name="main_activity_missing_permissions">You have rejected some permissions. Selected features like sessions will not work.</string>
 
     <!-- Song/Setlist Controls -->
@@ -126,11 +126,11 @@
     <string name="category_none">NONE</string>
 
     <!-- Session Client -->
-    <string name="session_client_connected">Connected</string>
-    <string name="session_client_disconnected">Disconnected</string>
-    <string name="session_client_failed_to_connect">Failed to connect</string>
+    <string name="session_client_connected">Session connected</string>
+    <string name="session_client_disconnected">Session disconnected</string>
+    <string name="session_client_failed_to_connect">Failed to connect to the session</string>
     <string name="session_client_failed_to_start_lookup">Failed to start session lookup</string>
-    <string name="placeholder_gms_nearby_server_device">GMS Nearby Device</string>
+    <string name="placeholder_gms_nearby_server_device" translatable="false">GMS Nearby Device</string>
     <string name="dialog_fragment_choose_session_title">Choose session</string>
     <string name="dialog_fragment_choose_session_looking_for_session">Looking for session…</string>
 
