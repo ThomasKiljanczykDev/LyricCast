@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 03/01/2025, 00:38
+ * Last modified 11/01/2025, 18:33
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby
@@ -18,7 +18,6 @@ import com.google.android.gms.nearby.connection.Payload
 import com.google.android.gms.nearby.connection.PayloadCallback
 import com.google.android.gms.tasks.Task
 
-// TODO: finish implementation
 class ConnectionsClientFakeImpl : ConnectionsClient {
     override fun getApiKey(): ApiKey<ConnectionsOptions> {
         TODO("Not yet implemented")

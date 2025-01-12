@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 19:32
+ * Last modified 12/01/2025, 23:55
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -40,6 +40,8 @@ class ChooseSessionDialogFragment(
 
     private lateinit var recyclerViewAdapter: GmsNearbySessionItemsAdapter
 
+    private lateinit var defaultProgressIndicatorColor: IntArray
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         viewModel = ViewModelProvider(requireActivity())[ChooseSessionDialogModel::class.java]
         viewModel.reset()
@@ -49,7 +51,7 @@ class ChooseSessionDialogFragment(
         val dialog = MaterialAlertDialogBuilder(
             requireActivity(), R.style.ThemeOverlay_LyricCast_MaterialAlertDialog
         ).setTitle(R.string.dialog_fragment_choose_session_title).setCancelable(false)
-            .setNegativeButton(R.string.dialog_fragment_close) { _, _ ->
+            .setNegativeButton(R.string.close) { _, _ ->
                 onClose()
             }.setView(binding.root).create()
 
@@ -61,6 +63,8 @@ class ChooseSessionDialogFragment(
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        defaultProgressIndicatorColor = binding.pbGmsNearbyServerDevices.indicatorColor
+
         setupRecyclerView()
 
         viewModel.devices
@@ -70,6 +74,25 @@ class ChooseSessionDialogFragment(
                 recyclerViewAdapter.submitList(it)
             }.flowOn(Dispatchers.Main).launchIn(lifecycleScope)
         viewModel.startDiscovery()
+
+        viewModel.sessionStartError.onEach {
+            if (it) {
+                val errorProgressColor =
+                    requireContext().getColor(R.color.error_Indeterminate_progress_bar)
+                binding.pbGmsNearbyServerDevices.let { progressBar ->
+                    progressBar.setIndicatorColor(errorProgressColor)
+                    progressBar.isIndeterminate = false
+                    progressBar.setProgress(100, true)
+                }
+                binding.tvLookingForSession.setText(R.string.session_client_failed_to_start_lookup)
+            } else {
+                binding.pbGmsNearbyServerDevices.let { progressBar ->
+                    progressBar.setIndicatorColor(*defaultProgressIndicatorColor)
+                    progressBar.isIndeterminate = true
+                }
+                binding.tvLookingForSession.setText(R.string.dialog_fragment_choose_session_looking_for_session)
+            }
+        }.flowOn(Dispatchers.Main).launchIn(lifecycleScope)
 
         return binding.root
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Tomasz Kiljanczyk on 06/05/2021, 14:38
-  ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 06/05/2021, 14:32
+  ~ Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 12/01/2025, 22:39
   -->
 
 <resources>
@@ -28,7 +28,7 @@
     <!-- Launch Activity -->
     <string name="launch_activity_turn_on_wifi">Włącz WiFi aby umożliwić rzutowanie.</string>
     <string name="launch_activity_go_to_settings">Przejdź do ustawień</string>
-    <string name="launch_activity_ignore">Ignoruj</string>
+    <string name="ignore">Ignoruj</string>
 
     <!-- Main Activity -->
     <string name="main_activity_loading_file">Wczytywanie pliku …</string>

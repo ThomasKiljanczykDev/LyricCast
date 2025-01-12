@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 18:29
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 17:46
+ * Last modified 12/01/2025, 22:40
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.extensions
@@ -10,6 +10,5 @@ import android.content.Context
 import android.content.ContextWrapper
 import androidx.fragment.app.FragmentActivity
 
-tailrec fun Context.findParentFragmentActivity(): FragmentActivity? =
-    this as? FragmentActivity
-        ?: (this as? ContextWrapper)?.baseContext?.findParentFragmentActivity()
+fun Context.findParentFragmentActivity(): FragmentActivity? = this as? FragmentActivity
+    ?: (this as? ContextWrapper)?.baseContext?.findParentFragmentActivity()

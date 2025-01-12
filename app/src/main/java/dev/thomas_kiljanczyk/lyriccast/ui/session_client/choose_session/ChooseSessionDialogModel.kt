@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 19:18
+ * Last modified 12/01/2025, 23:55
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -41,6 +41,10 @@ class ChooseSessionDialogModel @Inject constructor(
     val devices: StateFlow<List<GmsNearbySessionItem>>
         get() = _devices
 
+    private val _sessionStartError = MutableSharedFlow<Boolean>()
+    val sessionStartError: SharedFlow<Boolean>
+        get() = _sessionStartError
+
     fun reset() {
         deviceMap.clear()
         _devices.value = emptyList()
@@ -74,7 +78,9 @@ class ChooseSessionDialogModel @Inject constructor(
             }, discoveryOptions
         ).addOnFailureListener { e ->
             Log.e(TAG, "Failed to start discovering", e)
-            // TODO: show a explanatory message to the user
+            viewModelScope.launch {
+                _sessionStartError.emit(true)
+            }
         }
     }
 

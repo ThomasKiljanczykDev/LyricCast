@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 04/01/2025, 16:41
+ * Last modified 12/01/2025, 23:55
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -19,11 +19,11 @@ import dev.thomas_kiljanczyk.lyriccast.datatransfer.factories.ImportSongXmlParse
 import dev.thomas_kiljanczyk.lyriccast.datatransfer.models.CategoryDto
 import dev.thomas_kiljanczyk.lyriccast.datatransfer.models.SetlistDto
 import dev.thomas_kiljanczyk.lyriccast.datatransfer.models.SongDto
+import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbySessionServerContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.InputStream
@@ -32,11 +32,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainModel @Inject constructor(
-    private val dataTransferRepository: DataTransferRepository
+    private val dataTransferRepository: DataTransferRepository,
+    private val gmsNearbySessionServerContext: GmsNearbySessionServerContext
 ) : ViewModel() {
     private companion object {
         const val TAG = "MainViewModel"
     }
+
+    val isSessionServerRunning: Boolean
+        get() = gmsNearbySessionServerContext.serverIsRunning.value
 
     fun exportAll(
         cacheDir: String,

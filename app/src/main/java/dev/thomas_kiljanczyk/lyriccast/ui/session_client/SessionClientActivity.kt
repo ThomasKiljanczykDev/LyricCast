@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 07/01/2025, 20:23
+ * Last modified 12/01/2025, 23:25
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
@@ -22,10 +23,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
+import dev.thomas_kiljanczyk.lyriccast.application.LyricCastApplication
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentSessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogFragment
 import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogModel
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.fragments.PermissionsRejectedDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -45,6 +48,24 @@ class SessionClientActivity : AppCompatActivity() {
 
     private var chooseSessionDialog: ChooseSessionDialogFragment? = null
 
+    private val permissionRequestLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { isGranted ->
+            if (isGranted.values.any { !it }) {
+                chooseSessionDialog?.dismiss()
+                chooseSessionDialog = null
+
+                PermissionsRejectedDialogFragment(
+                    R.string.dialog_fragment_start_session_missing_permissions,
+                    onIgnore = {
+                        showChooseSessionDialog()
+                    }).show(
+                    supportFragmentManager, TAG
+                )
+            } else {
+                showChooseSessionDialog()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -54,8 +75,7 @@ class SessionClientActivity : AppCompatActivity() {
         setSupportActionBar(rootBinding.toolbarControls)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        pickDeviceDialogViewModel =
-            ViewModelProvider(this)[ChooseSessionDialogModel::class.java]
+        pickDeviceDialogViewModel = ViewModelProvider(this)[ChooseSessionDialogModel::class.java]
 
         binding = ContentSessionClientBinding.bind(rootBinding.contentSessionClient.root)
 
@@ -74,29 +94,21 @@ class SessionClientActivity : AppCompatActivity() {
             when (connectionState) {
                 SessionClientModel.ConnectionState.CONNECTED -> {
                     Toast.makeText(
-                        baseContext,
-                        R.string.session_client_connected,
-                        Toast.LENGTH_SHORT
+                        baseContext, R.string.session_client_connected, Toast.LENGTH_SHORT
                     ).show()
                 }
 
                 SessionClientModel.ConnectionState.DISCONNECTED -> {
                     Toast.makeText(
-                        baseContext,
-                        R.string.session_client_disconnected,
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                        baseContext, R.string.session_client_disconnected, Toast.LENGTH_SHORT
+                    ).show()
                     showChooseSessionDialog()
                 }
 
                 SessionClientModel.ConnectionState.FAILED -> {
                     Toast.makeText(
-                        baseContext,
-                        R.string.session_client_failed_to_connect,
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                        baseContext, R.string.session_client_failed_to_connect, Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }.flowOn(Dispatchers.Main).launchIn(lifecycleScope)
@@ -116,13 +128,16 @@ class SessionClientActivity : AppCompatActivity() {
 
             WindowInsetsCompat.CONSUMED
         }
-
-        showChooseSessionDialog()
     }
 
     private fun setupObservers() {
         pickDeviceDialogViewModel.serverEndpointId.onEach(this::observeDialogBluetoothDevice)
             .launchIn(lifecycleScope)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        permissionRequestLauncher.launch(LyricCastApplication.PERMISSIONS)
     }
 
     override fun onResume() {
@@ -144,10 +159,9 @@ class SessionClientActivity : AppCompatActivity() {
         val dialog = ChooseSessionDialogFragment(onClose = { finish() })
         chooseSessionDialog = dialog
 
-        dialog
-            .show(
-                supportFragmentManager, ChooseSessionDialogFragment.TAG
-            )
+        dialog.show(
+            supportFragmentManager, ChooseSessionDialogFragment.TAG
+        )
     }
 
     private fun observeDialogBluetoothDevice(endpointId: String?) {

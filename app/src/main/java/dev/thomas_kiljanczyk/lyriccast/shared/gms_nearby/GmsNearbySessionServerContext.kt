@@ -1,14 +1,12 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 19:18
+ * Last modified 12/01/2025, 22:29
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby
 
-import android.Manifest
 import android.util.Log
-import androidx.annotation.RequiresPermission
 import com.google.android.gms.nearby.connection.AdvertisingOptions
 import com.google.android.gms.nearby.connection.ConnectionInfo
 import com.google.android.gms.nearby.connection.ConnectionResolution
@@ -40,6 +38,8 @@ class GmsNearbySessionServerContext(
         DISCONNECTED, CONNECTED, FAILED
     }
 
+    data class AdvertisingStateInfo(val state: AdvertisingState, val exception: Exception?)
+
     data class DeviceConnectionInfo(val deviceName: String, val connectionState: ConnectionState)
 
     private val _serverIsRunning: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -48,8 +48,8 @@ class GmsNearbySessionServerContext(
     private val _deviceConnectionInfo: MutableSharedFlow<DeviceConnectionInfo> = MutableSharedFlow()
     val deviceConnectionInfo: Flow<DeviceConnectionInfo> = _deviceConnectionInfo
 
-    private val _advertisingState: MutableSharedFlow<AdvertisingState> = MutableSharedFlow()
-    val advertisingState: Flow<AdvertisingState> = _advertisingState
+    private val _advertisingState: MutableSharedFlow<AdvertisingStateInfo> = MutableSharedFlow()
+    val advertisingState: Flow<AdvertisingStateInfo> = _advertisingState
 
     private val _receivedPayload: MutableSharedFlow<ReceivedPayload> = MutableSharedFlow()
     val receivedPayload: Flow<ReceivedPayload> = _receivedPayload
@@ -81,8 +81,7 @@ class GmsNearbySessionServerContext(
                     CoroutineScope(Dispatchers.Default).launch {
                         _deviceConnectionInfo.emit(
                             DeviceConnectionInfo(
-                                connectionInfo.endpointName,
-                                ConnectionState.CONNECTED
+                                connectionInfo.endpointName, ConnectionState.CONNECTED
                             )
                         )
                     }
@@ -92,8 +91,7 @@ class GmsNearbySessionServerContext(
                     CoroutineScope(Dispatchers.Default).launch {
                         _deviceConnectionInfo.emit(
                             DeviceConnectionInfo(
-                                connectionInfo.endpointName,
-                                ConnectionState.FAILED
+                                connectionInfo.endpointName, ConnectionState.FAILED
                             )
                         )
                     }
@@ -106,8 +104,7 @@ class GmsNearbySessionServerContext(
                 CoroutineScope(Dispatchers.Default).launch {
                     _deviceConnectionInfo.emit(
                         DeviceConnectionInfo(
-                            connectionInfo.endpointName,
-                            ConnectionState.DISCONNECTED
+                            connectionInfo.endpointName, ConnectionState.DISCONNECTED
                         )
                     )
                 }
@@ -116,7 +113,6 @@ class GmsNearbySessionServerContext(
         }
     }
 
-    @RequiresPermission(anyOf = [Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH])
     fun startServer(deviceName: String) {
         val advertisingOptions = AdvertisingOptions.Builder().setStrategy(Strategy.P2P_STAR).build()
 
@@ -128,13 +124,13 @@ class GmsNearbySessionServerContext(
         ).addOnSuccessListener {
             _serverIsRunning.value = true
             CoroutineScope(Dispatchers.Default).launch {
-                _advertisingState.emit(AdvertisingState.ADVERTISING)
+                _advertisingState.emit(AdvertisingStateInfo(AdvertisingState.ADVERTISING, null))
             }
         }.addOnFailureListener { e: Exception? ->
             Log.e(TAG, "Failed to start server", e)
             _serverIsRunning.value = false
             CoroutineScope(Dispatchers.Default).launch {
-                _advertisingState.emit(AdvertisingState.FAILED)
+                _advertisingState.emit(AdvertisingStateInfo(AdvertisingState.FAILED, e))
             }
         }
     }
@@ -145,7 +141,7 @@ class GmsNearbySessionServerContext(
         connectionsClient.stopAllEndpoints()
         _serverIsRunning.value = false
         CoroutineScope(Dispatchers.Default).launch {
-            _advertisingState.emit(AdvertisingState.NOT_ADVERTISING)
+            _advertisingState.emit(AdvertisingStateInfo(AdvertisingState.NOT_ADVERTISING, null))
         }
     }
 

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 07/01/2025, 20:16
+ * Last modified 12/01/2025, 23:55
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -18,6 +18,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -81,19 +82,7 @@ class MainActivity : AppCompatActivity() {
     private val exportChooserResultLauncher = registerForActivityResult(this::exportAll)
     private val importChooserResultLauncher = registerForActivityResult(this::import)
     private val permissionRequestLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { isGranted ->
-            if (isGranted.values.any { !it }) {
-                MaterialAlertDialogBuilder(
-                    this,
-                    R.style.ThemeOverlay_LyricCast_MaterialAlertDialog_NoTitle
-                )
-                    .setMessage("You rejected some permissions. Selected features like sessions will not work.")
-                    .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
-                    .create()
-                    .show()
-                // TODO: Handle permission denied
-            }
-        }
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
 
     @Inject
     lateinit var castContext: CastContext
@@ -194,10 +183,17 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     2 -> {
-                        // TODO: disable when session server is running
-                        Log.v(TAG, "Switching to join session")
-                        val intent = Intent(baseContext, SessionClientActivity::class.java)
-                        startActivity(intent)
+                        if (!viewModel.isSessionServerRunning) {
+                            Log.v(TAG, "Switching to join session")
+                            val intent = Intent(baseContext, SessionClientActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                baseContext,
+                                R.string.main_activity_cannot_join_session,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
                         // TODO: nice to have - find a better way to handle this
                         // Prevents the tab from being selected
@@ -411,6 +407,7 @@ class MainActivity : AppCompatActivity() {
 
             LyricCastApplication.PERMISSIONS.any(::shouldShowRequestPermissionRationale) -> {
                 // TODO: handle permission rationale
+                Log.d(TAG, "Permission rationale")
             }
 
             else -> {
@@ -429,10 +426,10 @@ class MainActivity : AppCompatActivity() {
     private fun turnOnWifi() {
         MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_LyricCast_MaterialAlertDialog_NoTitle)
             .setMessage(getString(R.string.launch_activity_turn_on_wifi))
-            .setPositiveButton(getString(R.string.launch_activity_go_to_settings)) { _, _ ->
+            .setPositiveButton(R.string.launch_activity_go_to_settings) { _, _ ->
                 openWifiSettings()
             }
-            .setNegativeButton(getString(R.string.launch_activity_ignore), null)
+            .setNegativeButton(R.string.ignore, null)
             .create()
             .show()
     }

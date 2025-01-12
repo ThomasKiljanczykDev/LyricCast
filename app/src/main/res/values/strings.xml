@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
+  ~ Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 07/01/2025, 20:23
+  ~ Last modified 12/01/2025, 23:12
   -->
 
 <resources>
@@ -44,7 +44,6 @@
     <!-- Launch Activity -->
     <string name="launch_activity_turn_on_wifi">Turn on WiFi to enable casting.</string>
     <string name="launch_activity_go_to_settings">Go to settings</string>
-    <string name="launch_activity_ignore">Ignore</string>
 
     <!-- Main Activity -->
     <string name="main_activity_import_delete_all_before_import">Delete all before import</string>
@@ -64,6 +63,8 @@
     <string name="main_activity_loading_file">Loading file …</string>
     <string name="main_activity_setlist_is_empty">Setlist is empty!</string>
     <string name="main_activity_tab_join_session">Join Session</string>
+    <string name="main_activity_cannot_join_session">Cannot join session while server is running</string>
+    <string name="main_activity_missing_permissions">You have rejected some permissions. Selected features like sessions will not work.</string>
 
     <!-- Song/Setlist Controls -->
     <string name="controls_previous">Previous</string>
@@ -128,14 +129,21 @@
     <string name="session_client_connected">Connected</string>
     <string name="session_client_disconnected">Disconnected</string>
     <string name="session_client_failed_to_connect">Failed to connect</string>
+    <string name="session_client_failed_to_start_lookup">Failed to start session lookup</string>
     <string name="placeholder_gms_nearby_server_device">GMS Nearby Device</string>
     <string name="dialog_fragment_choose_session_title">Choose session</string>
-    <string name="dialog_fragment_choose_session_looking_for_session">Looking for session...</string>
-    <string name="dialog_fragment_close">Close</string>
+    <string name="dialog_fragment_choose_session_looking_for_session">Looking for session…</string>
 
     <!-- Start Session Dialog -->
     <string name="dialog_fragment_start_session_title">Start session</string>
     <string name="dialog_fragment_start_session_start">Start</string>
     <string name="dialog_fragment_start_session_error_empty_name">Please enter the name</string>
+    <string name="dialog_fragment_start_session_session_started">Session started</string>
+    <string name="dialog_fragment_start_session_session_start_failed">Failed to start session</string>
+    <string name="dialog_fragment_start_session_session_start_missing_permissions">Failed to start session due to missing permission</string>
+    <string name="dialog_fragment_start_session_missing_permissions">You have rejected permissions required for the session feature. Please enable them in the settings.</string>
 
+    <!-- Generic -->
+    <string name="ignore">Ignore</string>
+    <string name="close">Close</string>
 </resources>
