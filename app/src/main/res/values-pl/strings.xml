@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Tomasz Kiljanczyk on 13/01/2025, 00:19
+  ~ Created by Tomasz Kiljanczyk on 13/01/2025, 01:11
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 13/01/2025, 00:19
+  ~ Last modified 13/01/2025, 01:10
   -->
 
 <resources>
@@ -54,7 +54,7 @@
 
 
     <!-- Song/Setlist Controls -->
-    <string name="main_activity_cannot_join_session">" Nie można dołączyć do innej sesji podczas hostowania własnej"</string>
+    <string name="main_activity_cannot_join_session">Nie można dołączyć do innej sesji podczas hostowania własnej</string>
     <string name="main_activity_missing_permissions">Odrzuciłeś niektóre uprawnienia. Wybrane funkcje, takie jak sesje, nie będą działać.</string>
     <string name="controls_previous">Poprzedni</string>
     <string name="controls_next">Następny</string>

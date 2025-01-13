@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 13/01/2025, 00:19
+  ~ Created by Tomasz Kiljanczyk on 13/01/2025, 01:11
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 13/01/2025, 00:18
+  ~ Last modified 13/01/2025, 01:11
   -->
 
 <resources>
@@ -63,7 +63,7 @@
     <string name="main_activity_loading_file">Loading file …</string>
     <string name="main_activity_setlist_is_empty">Setlist is empty!</string>
     <string name="main_activity_tab_join_session">Join Session</string>
-    <string name="main_activity_cannot_join_session">Cannot join session while hosting a session</string>
+    <string name="main_activity_cannot_join_session">You cannot join another session while hosting your own</string>
     <string name="main_activity_missing_permissions">You have rejected some permissions. Selected features like sessions will not work.</string>
 
     <!-- Song/Setlist Controls -->
