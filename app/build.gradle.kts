@@ -21,9 +21,9 @@ plugins {
 android {
     val major = 1
     val minor = 1
-    val patch = 1
-    // used for alpha, beta, etc. versions
-    val revision = 0
+    val patch = 0
+    // used for hotfix, alpha, beta, etc. versions
+    val revision = 1
 
     defaultConfig {
         applicationId = "dev.thomas_kiljanczyk.lyriccast"
