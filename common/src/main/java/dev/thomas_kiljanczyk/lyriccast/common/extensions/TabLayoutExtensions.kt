@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:07
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 12:56
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 12:04
  */
 
 package dev.thomas_kiljanczyk.lyriccast.common.extensions
@@ -14,7 +14,7 @@ fun TabLayout.moveTabLeft(tab: TabLayout.Tab) {
         return
     }
 
-    val otherTab = this.getTabAt(position - 1)!!
+    val otherTab = this.getTabAt(position - 1) ?: return
 
     swapTabs(tab, otherTab)
 }
@@ -25,7 +25,7 @@ fun TabLayout.moveTabRight(tab: TabLayout.Tab) {
         return
     }
 
-    val otherTab = this.getTabAt(position + 1)!!
+    val otherTab = this.getTabAt(position + 1) ?: return
 
     swapTabs(tab, otherTab)
 }

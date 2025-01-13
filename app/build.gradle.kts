@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.androidx.navigationSafeArgs)
     alias(libs.plugins.hilt)
@@ -19,10 +20,10 @@ plugins {
 
 android {
     val major = 1
-    val minor = 0
+    val minor = 1
     val patch = 0
-    // used for alpha, beta, etc. versions
-    val revision = 0
+    // used for hotfix, alpha, beta, etc. versions
+    val revision = 1
 
     defaultConfig {
         applicationId = "dev.thomas_kiljanczyk.lyriccast"
@@ -38,7 +39,7 @@ android {
         // minor - up to 999
         // major - up to 21
         versionCode = major * 100_000_000 + minor * 100_000 + patch * 100 + revision
-        versionName = "$major.$minor.$patch ${if (revision > 0) ".$revision" else ""}"
+        versionName = "$major.$minor.$patch${if (revision > 0) ".$revision" else ""}"
 
         testInstrumentationRunner = "dev.thomas_kiljanczyk.lyriccast.HiltTestRunner"
         resourceConfigurations += listOf("en", "pl")
@@ -87,6 +88,8 @@ dependencies {
 
     // App dependencies
     implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.play.services.nearby)
 
     // Architecture Components
     implementation(libs.androidx.datastore)
@@ -122,11 +125,11 @@ dependencies {
     androidTestImplementation(libs.androidx.test.extJunitKtx)
     androidTestImplementation(libs.androidx.test.espresso)
     androidTestImplementation(libs.androidx.test.espressoContrib) {
-        // TODO: Workaround for protobuf-lite test issues
+        // TODO: nice to have - workaround for protobuf-lite test issues, try to remove it in the future
         // Source: https://stackoverflow.com/questions/66154727/java-lang-nosuchmethoderror-no-static-method-registerdefaultinstance-with-fireb
         exclude(module = "protobuf-lite")
     }
-
+    androidTestImplementation(libs.androidx.rules)
 
     // AndroidX Test - Hilt testing
     androidTestImplementation(libs.hiltTesting)

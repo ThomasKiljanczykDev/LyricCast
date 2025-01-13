@@ -1,21 +1,12 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 02/01/2025, 00:01
  */
 
 package dev.thomas_kiljanczyk.lyriccast.datatransfer.models
 
-import dev.thomas_kiljanczyk.lyriccast.datatransfer.extensions.getStringList
-import org.json.JSONObject
+import kotlinx.serialization.Serializable
 
-data class SetlistDto(val name: String, val songs: List<String>) {
-    constructor(json: JSONObject) : this(json.getString("name"), json.getStringList("songs"))
-
-    fun toJson(): JSONObject {
-        return JSONObject().apply {
-            put("name", name)
-            put("songs", JSONObject.wrap(songs))
-        }
-    }
-}
+@Serializable
+data class SetlistDto(val name: String, val songs: List<String>)

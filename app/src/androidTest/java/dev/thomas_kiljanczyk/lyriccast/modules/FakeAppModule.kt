@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:07
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 16:06
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 16:06
  */
 
 package dev.thomas_kiljanczyk.lyriccast.modules
@@ -10,6 +10,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
+import com.google.android.gms.cast.framework.CastContext
+import com.google.android.gms.nearby.connection.ConnectionsClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -26,6 +28,10 @@ import dev.thomas_kiljanczyk.lyriccast.repositories.CategoriesRepositoryFakeImpl
 import dev.thomas_kiljanczyk.lyriccast.repositories.DataTransferRepositoryFakeImpl
 import dev.thomas_kiljanczyk.lyriccast.repositories.SetlistsRepositoryFakeImpl
 import dev.thomas_kiljanczyk.lyriccast.repositories.SongsRepositoryFakeImpl
+import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
+import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ConnectionsClientFakeImpl
+import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbySessionServerContext
+import dev.thomas_kiljanczyk.lyriccast.shared.misc.LyricCastMessagingContext
 import java.io.File
 import java.util.UUID
 import javax.inject.Singleton
@@ -65,6 +71,15 @@ class FakeAppModule {
         }
     }
 
+    @Provides
+    fun provideCastContext(@ApplicationContext context: Context): CastContext {
+        return CastContext.getSharedInstance(context)
+    }
+
+    @Provides
+    fun provideConnectionsClient(): ConnectionsClient {
+        return ConnectionsClientFakeImpl()
+    }
 
     @Provides
     @Singleton
@@ -96,4 +111,27 @@ class FakeAppModule {
     @Provides
     @Singleton
     fun provideCategoriesRepository(): CategoriesRepository = CategoriesRepositoryFakeImpl()
+
+    @Provides
+    @Singleton
+    fun provideCastMessagingContext(castContext: CastContext): CastMessagingContext {
+        return CastMessagingContext(castContext)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGmsNearbyServerContext(
+        connectionsClient: ConnectionsClient
+    ): GmsNearbySessionServerContext {
+        return GmsNearbySessionServerContext(connectionsClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLyricCastMessagingContext(
+        castMessagingContext: CastMessagingContext,
+        gmsNearbySessionServerContext: GmsNearbySessionServerContext
+    ): LyricCastMessagingContext {
+        return LyricCastMessagingContext(castMessagingContext, gmsNearbySessionServerContext)
+    }
 }

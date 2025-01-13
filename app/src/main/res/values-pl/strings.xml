@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Tomasz Kiljanczyk on 06/05/2021, 14:38
-  ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 06/05/2021, 14:32
+  ~ Created by Tomasz Kiljanczyk on 13/01/2025, 01:11
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 13/01/2025, 01:10
   -->
 
 <resources>
@@ -16,19 +16,23 @@
     <string name="title_songs">Piosenki</string>
 
     <!-- Hints -->
+    <string name="title_session_client">Sesja</string>
     <string name="hint_song_title">Tytuł piosenki</string>
     <string name="hint_song_category">Kategoria</string>
     <string name="hint_setlist_name">Nazwa listy</string>
+    <string name="hint_session_name">Nazwa sesji</string>
     <string name="hint_import_format">Format</string>
 
     <!-- Option/Action Menu -->
+    <string name="option_menu_stop_session">Zatrzynaj sesję</string>
     <string name="option_menu_cast">Rzutuj</string>
     <string name="action_menu_button_delete">Usuń</string>
 
     <!-- Launch Activity -->
     <string name="launch_activity_turn_on_wifi">Włącz WiFi aby umożliwić rzutowanie.</string>
     <string name="launch_activity_go_to_settings">Przejdź do ustawień</string>
-    <string name="launch_activity_ignore">Ignoruj</string>
+    <string name="dialog_fragment_start_session_missing_permissions">" Odrzuciłeś uprawnienia wymagane dla funkcji sesji. Proszę włączyć je w ustawieniach."</string>
+    <string name="ignore">Ignoruj</string>
 
     <!-- Main Activity -->
     <string name="main_activity_loading_file">Wczytywanie pliku …</string>
@@ -50,6 +54,8 @@
 
 
     <!-- Song/Setlist Controls -->
+    <string name="main_activity_cannot_join_session">Nie można dołączyć do innej sesji podczas hostowania własnej</string>
+    <string name="main_activity_missing_permissions">Odrzuciłeś niektóre uprawnienia. Wybrane funkcje, takie jak sesje, nie będą działać.</string>
     <string name="controls_previous">Poprzedni</string>
     <string name="controls_next">Następny</string>
 
@@ -102,4 +108,19 @@
     <string name="category_color_steel_blue">Stalowonienieski</string>
     <string name="category_all">WSZYSTKIE</string>
     <string name="category_none">BRAK</string>
+    <string name="option_menu_start_session">Rozpocznij sesję</string>
+    <string name="main_activity_tab_join_session">Dołącz do sesji</string>
+    <string name="dialog_fragment_choose_session_title">Wybierz sesję</string>
+    <string name="dialog_fragment_choose_session_looking_for_session">Szukam sesji…</string>
+    <string name="dialog_fragment_start_session_title">Rozpoczynanie sesji</string>
+    <string name="dialog_fragment_start_session_start">Rozpocznij</string>
+    <string name="session_client_connected">Połączono się z sesją</string>
+    <string name="session_client_disconnected">Sesja rozłączona</string>
+    <string name="session_client_failed_to_connect">Połączenie z sesją nie powiodło się</string>
+    <string name="session_client_failed_to_start_lookup">Szukanie sesji nie powiodło się</string>
+    <string name="close">Zamknij</string>
+    <string name="dialog_fragment_start_session_session_started">Sesja rozpoczęta</string>
+    <string name="dialog_fragment_start_session_session_start_failed">Rozpoczęcie sesji nie powiodło się</string>
+    <string name="dialog_fragment_start_session_session_start_missing_permissions">Rozpoczęcie sesji nie powiodło się z powodu brakujących uprawnień</string>
+    <string name="dialog_fragment_start_session_error_empty_name">Proszę podać nazwę sesji</string>
 </resources>

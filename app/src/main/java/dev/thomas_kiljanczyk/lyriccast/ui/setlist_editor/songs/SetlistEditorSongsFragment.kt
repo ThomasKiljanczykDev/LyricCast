@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 01:11
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.songs
@@ -34,7 +34,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SetlistEditorSongsFragment : Fragment() {
@@ -118,9 +117,7 @@ class SetlistEditorSongsFragment : Fragment() {
                 categorySpinnerAdapter.submitCollection(it)
 
                 val firstCategoryName = categorySpinnerAdapter.getItem(0).category.name
-                withContext(Dispatchers.Main) {
-                    binding.dropdownCategory.setText(firstCategoryName)
-                }
+                binding.dropdownCategory.setText(firstCategoryName)
             }
             .flowOn(Dispatchers.Main)
             .launchIn(lifecycleScope)

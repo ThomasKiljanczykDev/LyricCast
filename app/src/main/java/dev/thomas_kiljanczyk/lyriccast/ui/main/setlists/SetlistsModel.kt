@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 00:24
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.setlists
@@ -19,8 +19,8 @@ import dev.thomas_kiljanczyk.lyriccast.domain.models.SetlistItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
-import org.json.JSONObject
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.OutputStream
 import javax.inject.Inject
@@ -52,25 +52,20 @@ class SetlistsModel @Inject constructor(
     private val itemFilter = SetlistItemFilter()
 
     init {
-        setlistsRepository.getAllSetlists()
-            .onEach { setlists ->
-                val setlistItems = setlists.map { SetlistItem(it) }.sorted()
+        setlistsRepository.getAllSetlists().onEach { setlists ->
+            val setlistItems = setlists.map { SetlistItem(it) }.sorted()
 
-                allSetlists = setlistItems
-                emitSetlists()
-            }.flowOn(Dispatchers.Default)
-            .launchIn(viewModelScope)
+            allSetlists = setlistItems
+            emitSetlists()
+        }.flowOn(Dispatchers.Default).launchIn(viewModelScope)
 
-        searchValues.setlistNameFlow
-            .debounce(500)
-            .onEach { emitSetlists() }
+        searchValues.setlistNameFlow.debounce(500).onEach { emitSetlists() }
             .launchIn(viewModelScope)
     }
 
     suspend fun deleteSelectedSetlists() {
-        val selectedSetlists = allSetlists
-            .filter { item -> item.isSelected }
-            .map { item -> item.setlist.id }
+        val selectedSetlists =
+            allSetlists.filter { item -> item.isSelected }.map { item -> item.setlist.id }
         setlistsRepository.deleteSetlists(selectedSetlists)
     }
 
@@ -86,10 +81,10 @@ class SetlistsModel @Inject constructor(
     }
 
     fun exportSelectedSetlists(
-        cacheDir: String,
-        outputStream: OutputStream
+        cacheDir: String, outputStream: OutputStream
     ): Flow<Int> = flow {
-        val exportData: DatabaseTransferData = dataTransferRepository.getDatabaseTransferData()
+        val exportData: DatabaseTransferData =
+            dataTransferRepository.getDatabaseTransferData()
 
         val exportDir = File(cacheDir, ".export")
         exportDir.deleteRecursively()
@@ -99,32 +94,21 @@ class SetlistsModel @Inject constructor(
 
         val setlistNames: Set<String> = selectedSetlists.map { it.setlist.name }.toSet()
 
-        val exportSetlists = exportData.setlistDtos!!
-            .filter { it.name in setlistNames }
+        val exportSetlists = exportData.setlistDtos!!.filter { it.name in setlistNames }
 
         val songTitles: Set<String> = exportSetlists.flatMap { it.songs }.toSet()
+        val categoryNames: Set<String> =
+            exportData.songDtos!!.filter { it.title in songTitles }.mapNotNull { it.category }
+                .toSet()
 
-        val categoryNames: Set<String> = exportData.songDtos!!
-            .filter { it.title in songTitles }
-            .mapNotNull { it.category }
-            .toSet()
-
-        val songJsons: List<JSONObject> = exportData.songDtos!!
-            .filter { it.title in songTitles }
-            .map { it.toJson() }
-
-        val categoryJsons = exportData.categoryDtos!!
-            .filter { it.name in categoryNames }
-            .map { it.toJson() }
-
-        val setlistJsons = exportSetlists.filter { it.name in setlistNames }
-            .map { it.toJson() }
+        val filteredSongDtos = exportData.songDtos!!.filter { it.title in songTitles }
+        val filteredCategoryDtos = exportData.categoryDtos!!.filter { it.name in categoryNames }
 
         emit(R.string.main_activity_export_saving_json)
 
-        val songsString = JSONArray(songJsons).toString()
-        val categoriesString = JSONArray(categoryJsons).toString()
-        val setlistsString = JSONArray(setlistJsons).toString()
+        val songsString = Json.encodeToString(filteredSongDtos)
+        val categoriesString = Json.encodeToString(filteredCategoryDtos)
+        val setlistsString = Json.encodeToString(exportSetlists)
         File(exportDir, "songs.json").writeText(songsString)
         File(exportDir, "categories.json").writeText(categoriesString)
         File(exportDir, "setlists.json").writeText(setlistsString)
@@ -140,8 +124,7 @@ class SetlistsModel @Inject constructor(
     }.flowOn(Dispatchers.Default)
 
     fun selectSetlist(setlistId: Long, selected: Boolean): Boolean {
-        val setlist = allSetlists
-            .firstOrNull { it.setlist.idLong == setlistId } ?: return false
+        val setlist = allSetlists.firstOrNull { it.setlist.idLong == setlistId } ?: return false
 
         setlist.isSelected = selected
         return true

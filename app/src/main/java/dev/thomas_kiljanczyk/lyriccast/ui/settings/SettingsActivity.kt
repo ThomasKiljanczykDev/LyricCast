@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 07/01/2025, 12:49
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -18,12 +18,14 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.application.settingsDataStore
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySettingsBinding
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -57,7 +59,7 @@ class SettingsActivity : AppCompatActivity() {
                 return@OnSharedPreferenceChangeListener
             }
 
-            runBlocking {
+            lifecycleScope.launch(Dispatchers.IO) {
                 settingsDataStore.updateData { settings ->
                     val settingsBuilder = settings.toBuilder()
                     when (key) {
@@ -109,8 +111,10 @@ class SettingsActivity : AppCompatActivity() {
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        PreferenceManager.getDefaultSharedPreferences(baseContext)
-            .registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+        lifecycleScope.launch(Dispatchers.Default) {
+            PreferenceManager.getDefaultSharedPreferences(baseContext)
+                .registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+        }
 
         setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -145,7 +149,9 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.preferences, rootKey)
+            lifecycleScope.launch(Dispatchers.IO) {
+                setPreferencesFromResource(R.xml.preferences, rootKey)
+            }
         }
     }
 }

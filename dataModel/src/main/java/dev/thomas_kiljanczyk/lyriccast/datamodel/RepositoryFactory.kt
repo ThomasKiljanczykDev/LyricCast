@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 00:34
  */
 
 package dev.thomas_kiljanczyk.lyriccast.datamodel
@@ -21,7 +21,7 @@ import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.impl.mongo.SongsR
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 object RepositoryFactory {
     private val schema = setOf(
@@ -31,10 +31,11 @@ object RepositoryFactory {
         SetlistDocument::class,
     )
 
+    private lateinit var realm: Realm
+
     fun createSongsRepository(provider: RepositoryProvider): SongsRepository {
         return when (provider) {
             RepositoryProvider.MONGO -> {
-                val realm = openRealm()
                 SongsRepositoryMongoImpl(realm)
             }
         }
@@ -43,7 +44,6 @@ object RepositoryFactory {
     fun createSetlistsRepository(provider: RepositoryProvider): SetlistsRepository {
         return when (provider) {
             RepositoryProvider.MONGO -> {
-                val realm = openRealm()
                 SetlistsRepositoryMongoImpl(realm)
             }
         }
@@ -52,7 +52,6 @@ object RepositoryFactory {
     fun createCategoriesRepository(provider: RepositoryProvider): CategoriesRepository {
         return when (provider) {
             RepositoryProvider.MONGO -> {
-                val realm = openRealm()
                 CategoriesRepositoryMongoImpl(realm)
             }
         }
@@ -63,17 +62,15 @@ object RepositoryFactory {
     ): DataTransferRepository {
         return when (provider) {
             RepositoryProvider.MONGO -> {
-                val realm = openRealm()
                 DataTransferRepositoryMongoImpl(realm)
             }
         }
     }
 
-    private fun openRealm(): Realm {
-        return runBlocking(Dispatchers.IO) {
-            val realmConfiguration = RealmConfiguration.Builder(schema).build()
-            Realm.open(realmConfiguration)
-        }
+    suspend fun initializeMongoDbRealm() = withContext(Dispatchers.IO) {
+        val realmConfiguration = RealmConfiguration.Builder(schema).build()
+        val realm = Realm.open(realmConfiguration)
+        this@RepositoryFactory.realm = realm
     }
 
     enum class RepositoryProvider {

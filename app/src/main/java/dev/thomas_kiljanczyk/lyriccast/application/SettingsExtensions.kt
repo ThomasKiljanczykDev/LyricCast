@@ -1,17 +1,15 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:06
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 03/01/2025, 00:43
  */
 
 package dev.thomas_kiljanczyk.lyriccast.application
 
-import org.json.JSONObject
-
-fun AppSettings.getCastConfigurationJson(): JSONObject {
-    val configuration = JSONObject()
-    configuration.put("backgroundColor", this.backgroundColor)
-    configuration.put("fontColor", this.fontColor)
-    configuration.put("maxFontSize", this.maxFontSize)
-    return configuration
+fun AppSettings.getCastConfiguration(): CastConfiguration {
+    return CastConfiguration(
+        this.backgroundColor,
+        this.fontColor,
+        this.maxFontSize
+    )
 }

@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 26/09/2021, 17:29
-  ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24/08/2021, 19:39
+  ~ Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 07/01/2025, 12:51
   -->
 
 <resources>
@@ -52,7 +52,8 @@
 
 
     <style name="ThemeOverlay.LyricCast.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
-        <!-- TODO: set to false when title padding issue is fixed by google -->
+        <item name="android:backgroundTint">@color/background_1</item>
+        <!-- TODO: nice to have - set to false when title padding issue is fixed by google -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.3</item>
@@ -61,5 +62,4 @@
     <style name="ThemeOverlay.LyricCast.MaterialAlertDialog.NoTitle" parent="@style/ThemeOverlay.LyricCast.MaterialAlertDialog">
         <item name="android:windowNoTitle">true</item>
     </style>
-
 </resources>

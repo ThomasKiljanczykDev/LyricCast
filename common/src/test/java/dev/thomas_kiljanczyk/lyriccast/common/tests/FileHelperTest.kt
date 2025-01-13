@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 02/01/2025, 22:52
  */
 
 package dev.thomas_kiljanczyk.lyriccast.common.tests
@@ -15,7 +15,6 @@ import org.junit.Test
 import java.io.File
 
 
-// TODO: Fix the tests
 class FileHelperTest {
 
     private companion object {

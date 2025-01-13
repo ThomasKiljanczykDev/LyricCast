@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 01:11
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_controls
@@ -24,18 +24,16 @@ import androidx.datastore.core.DataStore
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.application.AppSettings
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySetlistControlsBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentSetlistControlsBinding
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessageHelper
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CustomMediaRouteActionProvider
+import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.ui.settings.SettingsActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.listeners.ClickAdapterItemListener
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.listeners.LongClickAdapterItemListener
-import kotlinx.coroutines.CoroutineScope
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast.CustomMediaRouteActionProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
@@ -52,6 +50,12 @@ class SetlistControlsActivity : AppCompatActivity() {
     @Inject
     lateinit var dataStore: DataStore<AppSettings>
 
+    @Inject
+    lateinit var castMessagingContext: CastMessagingContext
+
+    @Inject
+    lateinit var castContext: CastContext
+
     private lateinit var binding: ContentSetlistControlsBinding
 
     private lateinit var songItemsAdapter: ControlsSongItemsAdapter
@@ -66,13 +70,10 @@ class SetlistControlsActivity : AppCompatActivity() {
         setSupportActionBar(rootBinding.toolbarControls)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val sessionsManager: SessionManager = CastContext.getSharedInstance()!!.sessionManager
-        viewModel.initialize(sessionsManager)
-
         val setlistId: String = intent.getStringExtra("setlistId")!!
         viewModel.loadSetlist(setlistId)
 
-        CastMessageHelper.isBlanked
+        castMessagingContext.isBlanked
             .onEach { blanked ->
                 if (blanked) {
                     binding.btnSetlistBlank.setBackgroundColor(getColor(R.color.red))
@@ -124,7 +125,7 @@ class SetlistControlsActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch(Dispatchers.Main) {
             val settings = dataStore.data.first()
 
             if (settings.controlButtonsHeight > 0.0) {
@@ -147,7 +148,7 @@ class SetlistControlsActivity : AppCompatActivity() {
 
         val castActionProvider =
             MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_cast)) as CustomMediaRouteActionProvider
-        castActionProvider.routeSelector = CastContext.getSharedInstance()!!.mergedSelector!!
+        castActionProvider.routeSelector = castContext.mergedSelector!!
 
         return true
     }
@@ -196,7 +197,11 @@ class SetlistControlsActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.btnSetlistBlank.setOnClickListener { viewModel.sendBlank() }
+        binding.btnSetlistBlank.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.sendBlank()
+            }
+        }
         binding.btnSetlistPrev.setOnClickListener { viewModel.previousSlide() }
         binding.btnSetlistNext.setOnClickListener { viewModel.nextSlide() }
     }

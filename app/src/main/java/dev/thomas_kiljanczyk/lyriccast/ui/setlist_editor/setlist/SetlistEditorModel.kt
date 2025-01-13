@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 19:30
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 19:18
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.setlist
@@ -89,7 +89,7 @@ class SetlistEditorModel @Inject constructor(
 
         val setlist = Setlist(setlistId, setlistName, presentation.toList())
         setlistsRepository.upsertSetlist(setlist)
-        Log.i(TAG, "Created setlist: $setlist")
+        Log.d(TAG, "Created setlist: $setlist")
     }
 
     fun hideSelectionCheckboxes() {

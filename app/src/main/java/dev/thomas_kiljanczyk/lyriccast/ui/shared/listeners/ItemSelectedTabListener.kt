@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:07
+ * Created by Tomasz Kiljanczyk on 04/01/2025, 16:41
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 02/01/2025, 23:28
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.listeners
@@ -13,7 +13,7 @@ class ItemSelectedTabListener(
 ) : TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
-        listener(tab)
+        return listener(tab)
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {

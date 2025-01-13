@@ -1,12 +1,11 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:43
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 01:41
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.songs
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -120,7 +119,6 @@ class SongsFragment : Fragment() {
         }
     }
 
-    @SuppressLint("CutPasteId")
     private fun setupCategorySpinner() {
         val categorySpinnerAdapter = CategorySpinnerAdapter(binding.dropdownCategory.context)
 
@@ -141,7 +139,7 @@ class SongsFragment : Fragment() {
                     binding.dropdownCategory.setText(firstCategoryName)
                 }
             }
-            .flowOn(Dispatchers.Main)
+            .flowOn(Dispatchers.Default)
             .launchIn(lifecycleScope)
     }
 
@@ -303,34 +301,30 @@ class SongsFragment : Fragment() {
         }
 
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-            lifecycleScope.launch(Dispatchers.Default) {
-                val result = when (item.itemId) {
-                    R.id.action_menu_delete -> {
+            when (item.itemId) {
+                R.id.action_menu_delete -> {
+                    lifecycleScope.launch(Dispatchers.Default) {
                         viewModel.deleteSelectedSongs()
-                        true
+                        withContext(Dispatchers.Main) { mode.finish() }
                     }
-
-                    R.id.action_menu_export_selected -> {
-                        startExport()
-                        true
-                    }
-
-                    R.id.action_menu_edit -> {
-                        editSelectedSong()
-                        true
-                    }
-
-                    R.id.action_menu_add_setlist -> {
-                        createAdhocSetlist()
-                        true
-                    }
-
-                    else -> false
                 }
 
-                if (result) {
-                    withContext(Dispatchers.Main) { mode.finish() }
+                R.id.action_menu_export_selected -> {
+                    startExport()
+                    mode.finish()
                 }
+
+                R.id.action_menu_edit -> {
+                    editSelectedSong()
+                    mode.finish()
+                }
+
+                R.id.action_menu_add_setlist -> {
+                    createAdhocSetlist()
+                    mode.finish()
+                }
+
+                else -> {}
             }
 
             return true

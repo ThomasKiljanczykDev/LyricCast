@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:06
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 12/01/2025, 23:54
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.fragments
@@ -30,12 +30,10 @@ class ProgressDialogFragment(
     private lateinit var binding: DialogFragmentProgressBinding
 
     private lateinit var defaultTextColor: ColorStateList
-    private var errorProgressColor: Int = Int.MIN_VALUE
+    private lateinit var defaultProgressIndicatorColor: IntArray
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogFragmentProgressBinding.inflate(layoutInflater)
-
-        errorProgressColor = requireContext().getColor(R.color.error_Indeterminate_progress_bar)
 
         binding.btnProgressOk.visibility = View.GONE
         binding.btnProgressOk.setOnClickListener { dismiss() }
@@ -49,10 +47,9 @@ class ProgressDialogFragment(
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        defaultProgressIndicatorColor = binding.pgbProgress.indicatorColor
         defaultTextColor = binding.btnProgressOk.textColors
         return binding.root
     }
@@ -72,10 +69,20 @@ class ProgressDialogFragment(
 
     private fun setErrorColor(errorColor: Boolean) {
         if (errorColor) {
-            binding.pgbProgress.indeterminateTintList = ColorStateList.valueOf(errorProgressColor)
+            val errorProgressColor =
+                requireContext().getColor(R.color.error_Indeterminate_progress_bar)
+            binding.pgbProgress.let {
+                it.setIndicatorColor(errorProgressColor)
+                it.isIndeterminate = false
+                it.setProgress(100, true)
+            }
+
             binding.btnProgressOk.setTextColor(errorProgressColor)
         } else {
-            binding.pgbProgress.indeterminateTintList = null
+            binding.pgbProgress.let {
+                it.setIndicatorColor(*defaultProgressIndicatorColor)
+                it.isIndeterminate = true
+            }
             binding.btnProgressOk.setTextColor(defaultTextColor)
         }
     }

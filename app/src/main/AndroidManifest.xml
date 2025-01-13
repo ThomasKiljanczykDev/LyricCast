@@ -9,6 +9,35 @@
     tools:ignore="LockedOrientationActivity">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADVERTISE"
+        android:minSdkVersion="31" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_CONNECT"
+        android:minSdkVersion="31" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:minSdkVersion="31"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
+    <uses-permission
+        android:name="android.permission.NEARBY_WIFI_DEVICES"
+        android:minSdkVersion="33"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="tiramisu" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -50,6 +79,14 @@
             android:name=".ui.song_editor.SongEditorActivity"
             android:label="@string/title_song_editor"
             android:parentActivityName="dev.thomas_kiljanczyk.lyriccast.ui.song_editor.SongEditorActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.LyricCast.NoActionBar"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".ui.session_client.SessionClientActivity"
+            android:label="@string/title_session_client"
+            android:parentActivityName="dev.thomas_kiljanczyk.lyriccast.ui.session_client.SessionClientActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.LyricCast.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize" />

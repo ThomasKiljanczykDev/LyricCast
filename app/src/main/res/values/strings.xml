@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 12/11/2022, 19:57
-  ~ Copyright (c) 2022 . All rights reserved.
-  ~ Last modified 12/11/2022, 19:31
+  ~ Created by Tomasz Kiljanczyk on 13/01/2025, 01:11
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 13/01/2025, 01:11
   -->
 
 <resources>
@@ -26,21 +26,24 @@
     <string name="title_controls">Controls</string>
     <string name="title_setlists">Setlists</string>
     <string name="title_songs">Songs</string>
+    <string name="title_session_client">Session</string>
 
     <!-- Hints -->
     <string name="hint_song_title">Song title</string>
     <string name="hint_song_category">Category</string>
     <string name="hint_setlist_name">Setlist name</string>
+    <string name="hint_session_name">Session name</string>
     <string name="hint_import_format">Format</string>
 
     <!-- Option/Action Menu -->
+    <string name="option_menu_start_session">Start session</string>
+    <string name="option_menu_stop_session">Stop session</string>
     <string name="option_menu_cast">Cast</string>
     <string name="action_menu_button_delete">Delete</string>
 
     <!-- Launch Activity -->
     <string name="launch_activity_turn_on_wifi">Turn on WiFi to enable casting.</string>
     <string name="launch_activity_go_to_settings">Go to settings</string>
-    <string name="launch_activity_ignore">Ignore</string>
 
     <!-- Main Activity -->
     <string name="main_activity_import_delete_all_before_import">Delete all before import</string>
@@ -59,6 +62,9 @@
     <string name="main_activity_button_add_setlist">Add setlist</string>
     <string name="main_activity_loading_file">Loading file …</string>
     <string name="main_activity_setlist_is_empty">Setlist is empty!</string>
+    <string name="main_activity_tab_join_session">Join Session</string>
+    <string name="main_activity_cannot_join_session">You cannot join another session while hosting your own</string>
+    <string name="main_activity_missing_permissions">You have rejected some permissions. Selected features like sessions will not work.</string>
 
     <!-- Song/Setlist Controls -->
     <string name="controls_previous">Previous</string>
@@ -118,4 +124,26 @@
     <string name="category_color_steel_blue">Steel blue</string>
     <string name="category_all">ALL</string>
     <string name="category_none">NONE</string>
+
+    <!-- Session Client -->
+    <string name="session_client_connected">Session connected</string>
+    <string name="session_client_disconnected">Session disconnected</string>
+    <string name="session_client_failed_to_connect">Failed to connect to the session</string>
+    <string name="session_client_failed_to_start_lookup">Failed to start session lookup</string>
+    <string name="placeholder_gms_nearby_server_device" translatable="false">GMS Nearby Device</string>
+    <string name="dialog_fragment_choose_session_title">Choose session</string>
+    <string name="dialog_fragment_choose_session_looking_for_session">Looking for session…</string>
+
+    <!-- Start Session Dialog -->
+    <string name="dialog_fragment_start_session_title">Start session</string>
+    <string name="dialog_fragment_start_session_start">Start</string>
+    <string name="dialog_fragment_start_session_error_empty_name">Please enter the name</string>
+    <string name="dialog_fragment_start_session_session_started">Session started</string>
+    <string name="dialog_fragment_start_session_session_start_failed">Failed to start session</string>
+    <string name="dialog_fragment_start_session_session_start_missing_permissions">Failed to start session due to missing permission</string>
+    <string name="dialog_fragment_start_session_missing_permissions">You have rejected permissions required for the session feature. Please enable them in the settings.</string>
+
+    <!-- Generic -->
+    <string name="ignore">Ignore</string>
+    <string name="close">Close</string>
 </resources>

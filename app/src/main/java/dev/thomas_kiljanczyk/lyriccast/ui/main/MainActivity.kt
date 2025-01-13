@@ -1,12 +1,13 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 12/01/2025, 23:55
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 12/01/2025, 23:55
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Build
@@ -17,8 +18,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuItemCompat
@@ -33,21 +36,23 @@ import com.google.android.gms.cast.framework.CastContext
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
+import dev.thomas_kiljanczyk.lyriccast.application.LyricCastApplication
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivityMainBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentMainBinding
 import dev.thomas_kiljanczyk.lyriccast.datamodel.models.ImportOptions
 import dev.thomas_kiljanczyk.lyriccast.datatransfer.enums.ImportFormat
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CustomMediaRouteActionProvider
 import dev.thomas_kiljanczyk.lyriccast.shared.extensions.registerForActivityResult
 import dev.thomas_kiljanczyk.lyriccast.shared.utils.DialogFragmentUtils
 import dev.thomas_kiljanczyk.lyriccast.ui.category_manager.CategoryManagerActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog.ImportDialogFragment
 import dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog.ImportDialogModel
 import dev.thomas_kiljanczyk.lyriccast.ui.main.setlists.SetlistsFragment
+import dev.thomas_kiljanczyk.lyriccast.ui.session_client.SessionClientActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.SetlistEditorActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.settings.SettingsActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.fragments.ProgressDialogFragment
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.listeners.ItemSelectedTabListener
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast.CustomMediaRouteActionProvider
 import dev.thomas_kiljanczyk.lyriccast.ui.song_editor.SongEditorActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -59,7 +64,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.Closeable
-import java.util.concurrent.Executors
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -76,8 +81,11 @@ class MainActivity : AppCompatActivity() {
 
     private val exportChooserResultLauncher = registerForActivityResult(this::exportAll)
     private val importChooserResultLauncher = registerForActivityResult(this::import)
+    private val permissionRequestLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
 
-    private val castExecutor = Executors.newSingleThreadExecutor()
+    @Inject
+    lateinit var castContext: CastContext
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -100,10 +108,7 @@ class MainActivity : AppCompatActivity() {
 
         setupListeners()
 
-        if (!wifiStateChecked) {
-            checkWifiEnabled()
-            wifiStateChecked = true
-        }
+        checkPermissions()
 
         setOnApplyWindowInsetsListener(rootBinding.root) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -129,9 +134,7 @@ class MainActivity : AppCompatActivity() {
         val castActionProvider =
             MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_cast)) as CustomMediaRouteActionProvider
 
-        // TODO: Apply this approach to every .getSharedInstance() usage
-        castActionProvider.routeSelector =
-            CastContext.getSharedInstance(this, castExecutor).result.mergedSelector!!
+        castActionProvider.routeSelector = castContext.mergedSelector!!
 
         return true
     }
@@ -168,12 +171,34 @@ class MainActivity : AppCompatActivity() {
                 tab ?: return@ItemSelectedTabListener
 
                 val navController = findNavController(R.id.navh_main)
-                if (tab.text == getString(R.string.title_songs)) {
-                    Log.v(TAG, "Switching to song list")
-                    navController.navigate(R.id.action_Setlists_to_Songs)
-                } else if (tab.text == getString(R.string.title_setlists)) {
-                    Log.v(TAG, "Switching to setlists")
-                    navController.navigate(R.id.action_Songs_to_Setlists)
+                when (tab.position) {
+                    0 -> {
+                        Log.v(TAG, "Switching to song list")
+                        navController.navigate(R.id.action_Setlists_to_Songs)
+                    }
+
+                    1 -> {
+                        Log.v(TAG, "Switching to setlists")
+                        navController.navigate(R.id.action_Songs_to_Setlists)
+                    }
+
+                    2 -> {
+                        if (!viewModel.isSessionServerRunning) {
+                            Log.v(TAG, "Switching to join session")
+                            val intent = Intent(baseContext, SessionClientActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                baseContext,
+                                R.string.main_activity_cannot_join_session,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        // TODO: nice to have - find a better way to handle this
+                        // Prevents the tab from being selected
+                        recreate()
+                    }
                 }
             })
 
@@ -257,9 +282,7 @@ class MainActivity : AppCompatActivity() {
                 outputStream
             )
 
-            withContext(Dispatchers.Main) {
-                handleDialogMessages(dialogFragment, exportMessageFlow, outputStream)
-            }
+            handleDialogMessages(dialogFragment, exportMessageFlow, outputStream)
         }
     }
 
@@ -271,12 +294,10 @@ class MainActivity : AppCompatActivity() {
             delay(10)
         }
 
-        withContext(Dispatchers.Main) {
-            importDialog.isAccepted
-                .onEach { if (it) startImport() }
-                .flowOn(Dispatchers.Default)
-                .launchIn(importDialog.lifecycleScope)
-        }
+        importDialog.isAccepted
+            .onEach { if (it) startImport() }
+            .flowOn(Dispatchers.Default)
+            .launchIn(importDialog.lifecycleScope)
     }
 
     private fun importLyricCast(uri: Uri) =
@@ -301,9 +322,7 @@ class MainActivity : AppCompatActivity() {
                     importOptions
                 )
 
-            withContext(Dispatchers.Main) {
-                handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
-            }
+            handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
         }
 
     private fun importOpenSong(uri: Uri) =
@@ -330,16 +349,14 @@ class MainActivity : AppCompatActivity() {
                     importOptions
                 )
 
-            withContext(Dispatchers.Main) {
-                handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
-            }
+            handleDialogMessages(dialogFragment, importMessageFlow, inputStream)
         }
 
-    private fun handleDialogMessages(
+    private suspend fun handleDialogMessages(
         dialogFragment: ProgressDialogFragment,
         messageFlow: Flow<Int>?,
         stream: Closeable
-    ) {
+    ) = withContext(Dispatchers.Main) {
         if (messageFlow != null) {
             messageFlow.onEach { dialogFragment.setMessage(it) }
                 .onCompletion {
@@ -350,7 +367,7 @@ class MainActivity : AppCompatActivity() {
                 }.flowOn(Dispatchers.Main)
                 .launchIn(dialogFragment.lifecycleScope)
         } else {
-            stream.close()
+            withContext(Dispatchers.IO) { stream.close() }
             dialogFragment.setErrorState(true)
             dialogFragment.setMessage(R.string.main_activity_import_incorrect_file_format)
         }
@@ -376,6 +393,29 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun checkPermissions() {
+        when {
+            LyricCastApplication.PERMISSIONS.all {
+                this.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
+            } -> {
+                if (!wifiStateChecked) {
+                    checkWifiEnabled()
+                    wifiStateChecked = true
+                }
+                return
+            }
+
+            LyricCastApplication.PERMISSIONS.any(::shouldShowRequestPermissionRationale) -> {
+                // TODO: handle permission rationale
+                Log.d(TAG, "Permission rationale")
+            }
+
+            else -> {
+                permissionRequestLauncher.launch(LyricCastApplication.PERMISSIONS)
+            }
+        }
+    }
+
     private fun checkWifiEnabled() {
         val wifiManager = baseContext.getSystemService(WIFI_SERVICE) as WifiManager
         if (!wifiManager.isWifiEnabled) {
@@ -386,10 +426,10 @@ class MainActivity : AppCompatActivity() {
     private fun turnOnWifi() {
         MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_LyricCast_MaterialAlertDialog_NoTitle)
             .setMessage(getString(R.string.launch_activity_turn_on_wifi))
-            .setPositiveButton(getString(R.string.launch_activity_go_to_settings)) { _, _ ->
+            .setPositiveButton(R.string.launch_activity_go_to_settings) { _, _ ->
                 openWifiSettings()
             }
-            .setNegativeButton(getString(R.string.launch_activity_ignore), null)
+            .setNegativeButton(R.string.ignore, null)
             .create()
             .show()
     }

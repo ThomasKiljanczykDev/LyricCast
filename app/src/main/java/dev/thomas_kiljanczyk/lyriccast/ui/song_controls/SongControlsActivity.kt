@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 06/01/2025, 01:11
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_controls
@@ -27,10 +27,9 @@ import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.application.AppSettings
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySongControlsBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentSongControlsBinding
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessageHelper
-import dev.thomas_kiljanczyk.lyriccast.shared.cast.CustomMediaRouteActionProvider
+import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.ui.settings.SettingsActivity
-import kotlinx.coroutines.CoroutineScope
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast.CustomMediaRouteActionProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
@@ -47,6 +46,12 @@ class SongControlsActivity : AppCompatActivity() {
     @Inject
     lateinit var dataStore: DataStore<AppSettings>
 
+    @Inject
+    lateinit var castMessagingContext: CastMessagingContext
+
+    @Inject
+    lateinit var castContext: CastContext
+
     private lateinit var binding: ContentSongControlsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,14 +65,11 @@ class SongControlsActivity : AppCompatActivity() {
 
         binding = ContentSongControlsBinding.bind(rootBinding.contentSongControls.root)
 
-        val sessionsManager = CastContext.getSharedInstance()!!.sessionManager
-        viewModel.initialize(sessionsManager)
-
         val songId: String = intent.getStringExtra("songId")!!
         viewModel.loadSong(songId)
         binding.tvControlsSongTitle.text = viewModel.songTitle
 
-        CastMessageHelper.isBlanked
+        castMessagingContext.isBlanked
             .onEach { blanked ->
                 if (blanked) {
                     binding.btnSongBlank.setBackgroundColor(getColor(R.color.red))
@@ -110,7 +112,7 @@ class SongControlsActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             val settings = dataStore.data.first()
             if (settings.controlButtonsHeight > 0.0) {
                 val params = binding.songControlsButtonContainer.layoutParams
@@ -123,7 +125,10 @@ class SongControlsActivity : AppCompatActivity() {
                 binding.songControlsButtonContainer.layoutParams = params
             }
         }
-        viewModel.sendSlide()
+
+        lifecycleScope.launch {
+            viewModel.sendSlide()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -132,7 +137,7 @@ class SongControlsActivity : AppCompatActivity() {
         val castActionProvider =
             MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_cast)) as CustomMediaRouteActionProvider
 
-        castActionProvider.routeSelector = CastContext.getSharedInstance()!!.mergedSelector!!
+        castActionProvider.routeSelector = castContext.mergedSelector!!
 
         return true
     }
@@ -149,9 +154,9 @@ class SongControlsActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.btnSongBlank.setOnClickListener { viewModel.sendBlank() }
-        binding.btnSongPrev.setOnClickListener { viewModel.previousSlide() }
-        binding.btnSongNext.setOnClickListener { viewModel.nextSlide() }
+        binding.btnSongBlank.setOnClickListener { lifecycleScope.launch { viewModel.sendBlank() } }
+        binding.btnSongPrev.setOnClickListener { lifecycleScope.launch { viewModel.previousSlide() } }
+        binding.btnSongNext.setOnClickListener { lifecycleScope.launch { viewModel.nextSlide() } }
     }
 
     private fun goToSettings() {

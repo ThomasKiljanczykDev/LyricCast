@@ -1,10 +1,10 @@
 /*
- * Created by Tomasz Kiljanczyk on 08/12/2024, 21:35
- * Copyright (c) 2024 . All rights reserved.
- * Last modified 08/12/2024, 21:07
+ * Created by Tomasz Kiljanczyk on 13/01/2025, 09:48
+ * Copyright (c) 2025 . All rights reserved.
+ * Last modified 13/01/2025, 09:38
  */
 
-package dev.thomas_kiljanczyk.lyriccast.shared.cast
+package dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast
 
 import android.content.Context
 import android.os.Bundle
@@ -19,6 +19,7 @@ class CustomMediaRouteControllerDialogFragment : MediaRouteControllerDialogFragm
         val dialog = super.onCreateControllerDialog(context, savedInstanceState)
         dialog.isVolumeControlEnabled = false
         dialog.setTitle("")
+
         return dialog
     }
 }
