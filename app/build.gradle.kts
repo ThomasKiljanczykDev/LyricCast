@@ -39,7 +39,7 @@ android {
         // minor - up to 999
         // major - up to 21
         versionCode = major * 100_000_000 + minor * 100_000 + patch * 100 + revision
-        versionName = "$major.$minor.$patch ${if (revision > 0) ".$revision" else ""}"
+        versionName = "$major.$minor.$patch${if (revision > 0) ".$revision" else ""}"
 
         testInstrumentationRunner = "dev.thomas_kiljanczyk.lyriccast.HiltTestRunner"
         resourceConfigurations += listOf("en", "pl")
