@@ -31,8 +31,10 @@ Category manager is accessible through the action menu on the main screen.
 You can name the category and set a color for easier identification.
 Category name must be unique.
 
-<img src="docs/images/LyricCast-categories-1.png" alt="Category Editor - category list" height="640">
-<img src="docs/images/LyricCast-categories-2.png" alt="Category Editor - add/edit category dialog" height="640">
+<p float="left">
+  <img src="docs/images/LyricCast-categories-1.png" alt="Category Editor - category list" height="640">
+  <img src="docs/images/LyricCast-categories-2.png" alt="Category Editor - add/edit category dialog" height="640">
+</p>
 
 ### Songs
 
@@ -41,8 +43,10 @@ The song editor allows you to set the song title, assign a category, and add lyr
 Lyrics are split in sections which can be then shown on the screen one after another.
 Song title must be unique.
 
-<img src="docs/images/LyricCast-songs-1.png" alt="Songs - song list" height="640">
-<img src="docs/images/LyricCast-songs-2.png" alt="Songs - song editor" height="640">
+<p float="left">
+  <img src="docs/images/LyricCast-songs-1.png" alt="Songs - song list" height="640">
+  <img src="docs/images/LyricCast-songs-2.png" alt="Songs - song editor" height="640">
+</p>
 
 ### Setlists
 
@@ -54,8 +58,10 @@ Songs can be reordered by dragging them using the handle on the right side.
 You can also duplicate songs withing the setlist by long pressing the song and selecting 'Duplicate' in the action menu.
 Setlist name must be unique.
 
-<img src="docs/images/LyricCast-setlists-1.png" alt="Setlists - setlist list" height="640">
-<img src="docs/images/LyricCast-setlists-2.png" alt="Setlists - setlist editor" height="640">
+<p float="left">
+  <img src="docs/images/LyricCast-setlists-1.png" alt="Setlists - setlist list" height="640">
+  <img src="docs/images/LyricCast-setlists-2.png" alt="Setlists - setlist editor" height="640">
+</p>
 
 ### Import/Export
 
@@ -77,13 +83,22 @@ You can blank the screen from the song/setlist controls if need be.
 
 The cast lyrics will be automatically resized to fit the screen with a maximum font size set in the settings.
 
-<img src="docs/images/LyricCast-cast-1.png" alt="Controls - song" height="640">
-<img src="docs/images/LyricCast-cast-2.png" alt="Controls - setlists" height="640">
+<p float="left">
+  <img src="docs/images/LyricCast-cast-1.png" alt="Controls - song" height="640">
+  <img src="docs/images/LyricCast-cast-2.png" alt="Controls - setlists" height="640">
+</p>
 
-## [WIP] Start a session and let others join in.
+## Start a session and let others join in.
 
-*Coming soon* - *LyricCast* will allow you to start a session and let others join in.
+*LyricCast* allows you to start a session and let others join in.
 When joining a session you will see the lyrics that are currently being cast by the session host.
+The session feature is based on [Nearby Connections API](https://developers.google.com/nearby/connections/overview).
+A session host cannot join another session.
+
+<p float="left">
+  <img src="docs/images/LyricCast-session-1.png" alt="Controls - song" height="640">
+  <img src="docs/images/LyricCast-session-2.png" alt="Controls - setlists" height="640">
+</p>
 
 ## Settings
 
@@ -150,12 +165,19 @@ This project consists of modules:
 ```mermaid
 %%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
 flowchart LR
-  subgraph androidDevice
-    application[LyricCast Application]
+  subgraph androidDevice1[Android Device]
+    application1[LyricCast Application]
     mongodbRealm[MongoDB Realm]
-    application -->|Store| mongodbRealm -->|Retrieve| application
+    application1 -->|Store| mongodbRealm -->|Retrieve| application1
   end
-  application -->|Cast| B[Google Cast Device]
+
+  subgraph androidDevice2[Android Device]
+    application2[LyricCast Application]
+  end
+
+  application2 -->|Join session| application1
+  application1 -->|Cast| application2
+  application1 -->|Cast| googleCastDevice[Google Cast Device]
 ```
 
 # Build
