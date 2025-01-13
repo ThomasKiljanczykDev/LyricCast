@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 13/01/2025, 09:48
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 22:09
+ * Last modified 13/01/2025, 09:48
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.cast
@@ -14,7 +14,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class CastMessagingContext(
@@ -30,9 +29,6 @@ class CastMessagingContext(
     val isBlanked: StateFlow<Boolean> get() = _isBlanked
 
     suspend fun sendContentMessage(message: String) {
-        val castSession =
-            withContext(Dispatchers.Main) { castContext.sessionManager.currentCastSession }
-
         val formattedMessage = message.replace("\n", "<br>").replace("\r", "")
 
         val messageContentJson = TextCastMessage(formattedMessage).toJson()
@@ -40,12 +36,17 @@ class CastMessagingContext(
         Log.d(TAG, "Sending content message")
         Log.d(TAG, "Namespace: $CONTENT_NAMESPACE")
         Log.d(TAG, "Content: $messageContentJson")
-        if (castSession == null) {
-            Log.d(TAG, "Message not sent (no session)")
-            return
-        }
 
-        castSession.sendMessage(CONTENT_NAMESPACE, messageContentJson)
+        return withContext(Dispatchers.Main) {
+            val castSession =
+                castContext.sessionManager.currentCastSession
+            if (castSession == null) {
+                Log.d(TAG, "Message not sent (no session)")
+                return@withContext
+            }
+
+            castSession.sendMessage(CONTENT_NAMESPACE, messageContentJson)
+        }
     }
 
     suspend fun sendBlank(blanked: Boolean) {
@@ -59,7 +60,7 @@ class CastMessagingContext(
 
     suspend fun sendConfiguration(configuration: CastConfiguration) {
         sendControlMessage(
-            ControlAction.CONFIGURE, configuration.toJson()
+            ControlAction.CONFIGURE, configuration
         )
     }
 
@@ -79,14 +80,17 @@ class CastMessagingContext(
         Log.d(TAG, "Sending control message")
         Log.d(TAG, "Namespace: $CONTROL_NAMESPACE")
         Log.d(TAG, "Content: $messageJson")
-        if (isNotInSession()) {
-            Log.d(TAG, "Message not sent (no session)")
-            return
-        }
 
-        val castSession =
-            withContext(Dispatchers.Main) { castContext.sessionManager.currentCastSession!! }
-        castSession.sendMessage(CONTROL_NAMESPACE, messageJson)
+        withContext(Dispatchers.Main) {
+            if (isNotInSession()) {
+                Log.d(TAG, "Message not sent (no session)")
+                return@withContext
+            }
+
+            val castSession =
+                withContext(Dispatchers.Main) { castContext.sessionManager.currentCastSession!! }
+            castSession.sendMessage(CONTROL_NAMESPACE, messageJson)
+        }
     }
 
 }

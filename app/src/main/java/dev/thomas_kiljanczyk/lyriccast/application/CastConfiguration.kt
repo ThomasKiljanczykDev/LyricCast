@@ -1,22 +1,16 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 19:35
+ * Created by Tomasz Kiljanczyk on 13/01/2025, 09:48
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 18:38
+ * Last modified 13/01/2025, 09:47
  */
 
 package dev.thomas_kiljanczyk.lyriccast.application
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 @Serializable
 data class CastConfiguration(
     val backgroundColor: String,
     val fontColor: String,
     val maxFontSize: Int
-) {
-    fun toJson(): String {
-        return Json.encodeToString(this)
-    }
-}
+)

@@ -21,7 +21,7 @@ plugins {
 android {
     val major = 1
     val minor = 1
-    val patch = 0
+    val patch = 1
     // used for alpha, beta, etc. versions
     val revision = 0
 

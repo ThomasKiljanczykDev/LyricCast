@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 05/01/2025, 21:30
+ * Created by Tomasz Kiljanczyk on 13/01/2025, 09:48
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 05/01/2025, 21:03
+ * Last modified 13/01/2025, 09:35
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast
@@ -17,8 +17,8 @@ class CustomMediaRouteChooserDialogFragment : MediaRouteChooserDialogFragment() 
         context: Context,
         savedInstanceState: Bundle?
     ): MediaRouteChooserDialog {
-        val dialog = MediaRouteChooserDialog(context)
-        dialog.window?.setBackgroundDrawableResource(R.drawable.media_route_chooser_dialog_background)
+        val dialog = super.onCreateChooserDialog(context, savedInstanceState)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.media_route_dialog_background)
 
         return dialog
     }
