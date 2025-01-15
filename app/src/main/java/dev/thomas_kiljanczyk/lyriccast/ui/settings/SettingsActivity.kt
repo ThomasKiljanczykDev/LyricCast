@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 07/01/2025, 20:26
+ * Created by Tomasz Kiljanczyk on 15/01/2025, 19:32
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 07/01/2025, 12:49
+ * Last modified 15/01/2025, 19:31
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dev.thomas_kiljanczyk.lyriccast.R
+import dev.thomas_kiljanczyk.lyriccast.application.setValue
 import dev.thomas_kiljanczyk.lyriccast.application.settingsDataStore
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySettingsBinding
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,10 @@ class SettingsActivity : AppCompatActivity() {
 
     private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? =
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            if (key == null) {
+                return@OnSharedPreferenceChangeListener
+            }
+
             var preferenceValue: String
             try {
                 preferenceValue = sharedPreferences.getString(key, "")!!
@@ -61,34 +66,9 @@ class SettingsActivity : AppCompatActivity() {
 
             lifecycleScope.launch(Dispatchers.IO) {
                 settingsDataStore.updateData { settings ->
-                    val settingsBuilder = settings.toBuilder()
-                    when (key) {
-                        "appTheme" -> {
-                            val appThemeValue = preferenceValue.toInt()
-                            settingsBuilder.appTheme = appThemeValue
-                        }
-
-                        "controlsButtonHeight" -> {
-                            settingsBuilder.controlButtonsHeight = preferenceValue.toFloat()
-                        }
-
-                        "blankedOnStart" -> {
-                            settingsBuilder.blankOnStart = preferenceValue.toBooleanStrict()
-                        }
-
-                        "backgroundColor" -> {
-                            settingsBuilder.backgroundColor = preferenceValue
-                        }
-
-                        "fontColor" -> {
-                            settingsBuilder.fontColor = preferenceValue
-                        }
-
-                        "fontMaxSize" -> {
-                            settingsBuilder.maxFontSize = preferenceValue.toInt()
-                        }
-                    }
-                    settingsBuilder.build()
+                    settings.toBuilder().setValue(
+                        key, preferenceValue
+                    ).build()
                 }
             }
         }
@@ -136,9 +116,7 @@ class SettingsActivity : AppCompatActivity() {
 
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
         ): View {
             val contextThemeWrapper: Context =
                 ContextThemeWrapper(activity, R.style.ThemeOverlay_LyricCast_MaterialAlertDialog)

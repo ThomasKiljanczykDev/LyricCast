@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 06/01/2025, 01:11
+ * Created by Tomasz Kiljanczyk on 15/01/2025, 19:32
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 00:39
+ * Last modified 15/01/2025, 19:30
  */
 
 package dev.thomas_kiljanczyk.lyriccast.application
@@ -14,9 +14,11 @@ import android.os.Build
 import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
+import androidx.preference.PreferenceManager
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
+import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.datamodel.RepositoryFactory
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastSessionListener
@@ -37,8 +39,7 @@ class LyricCastApplication : Application() {
 
         private fun preparePermissionArray(): Array<String> {
             val result = mutableListOf(
-                Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.CHANGE_WIFI_STATE
+                Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE
             )
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
@@ -79,15 +80,12 @@ class LyricCastApplication : Application() {
         super.onCreate()
 
         // Initializes CastContext
-        castContext.sessionManager.addSessionManagerListener(CastSessionListener(
-            onStarted = {
-                CoroutineScope(Dispatchers.Default).launch {
-                    val blankOnStart = dataStore.data.first().blankOnStart
-                    castMessagingContext.sendBlank(blankOnStart)
-                }
-            },
-            onEnded = { castMessagingContext.onSessionEnded() }
-        ))
+        castContext.sessionManager.addSessionManagerListener(CastSessionListener(onStarted = {
+            CoroutineScope(Dispatchers.Default).launch {
+                val blankOnStart = dataStore.data.first().blankOnStart
+                castMessagingContext.sendBlank(blankOnStart)
+            }
+        }, onEnded = { castMessagingContext.onSessionEnded() }))
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
@@ -95,16 +93,31 @@ class LyricCastApplication : Application() {
             RepositoryFactory.initializeMongoDbRealm()
         }
 
-        // TODO: nice to have - Add color harmonization
+        // Set default values for preferences
+        CoroutineScope(Dispatchers.IO).launch {
+            PreferenceManager.setDefaultValues(applicationContext, R.xml.preferences, false)
+            settingsDataStore.updateData { settings ->
+                val settingsBuilder = settings.toBuilder()
 
-        dataStore.data
-            .onEach {
-                var appTheme: Int? = it.appTheme
-                appTheme = if (appTheme == 0) null else appTheme
-                if (appTheme != null) {
-                    AppCompatDelegate.setDefaultNightMode(appTheme)
+                PreferenceManager.getDefaultSharedPreferences(applicationContext).all.forEach { (key, value) ->
+                    settingsBuilder.setValue(
+                        key, value
+                    )
                 }
-            }.launchIn(CoroutineScope(Dispatchers.Main))
+
+                return@updateData settingsBuilder.build()
+            }
+        }
+
+
+        // TODO: nice to have - Add color harmonization
+        dataStore.data.onEach {
+            var appTheme: Int? = it.appTheme
+            appTheme = if (appTheme == 0) null else appTheme
+            if (appTheme != null) {
+                AppCompatDelegate.setDefaultNightMode(appTheme)
+            }
+        }.launchIn(CoroutineScope(Dispatchers.Main))
 
 
         val isDebuggable = applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
@@ -114,20 +127,15 @@ class LyricCastApplication : Application() {
     }
 
     private fun setupStrictMode() {
-        val threadPolicy = StrictMode.ThreadPolicy.Builder()
-            .detectAll()
-            .permitCustomSlowCalls()
-            .penaltyLog()
-            .penaltyDialog()
-            .build()
+        val threadPolicy =
+            StrictMode.ThreadPolicy.Builder().detectAll().permitCustomSlowCalls().penaltyLog()
+                .penaltyDialog().build()
 
         StrictMode.setThreadPolicy(threadPolicy)
 
-        val vmPolicy = StrictMode.VmPolicy.Builder()
-            .detectActivityLeaks()
-            .detectFileUriExposure()
-            .penaltyLog()
-            .build()
+        val vmPolicy =
+            StrictMode.VmPolicy.Builder().detectActivityLeaks().detectFileUriExposure().penaltyLog()
+                .build()
 
         StrictMode.setVmPolicy(vmPolicy)
     }

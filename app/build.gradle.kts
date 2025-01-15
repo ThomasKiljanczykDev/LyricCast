@@ -23,7 +23,7 @@ android {
     val minor = 1
     val patch = 0
     // used for hotfix, alpha, beta, etc. versions
-    val revision = 1
+    val revision = 2
 
     defaultConfig {
         applicationId = "dev.thomas_kiljanczyk.lyriccast"
