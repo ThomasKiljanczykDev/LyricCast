@@ -40,6 +40,6 @@ jobs:
         run: yarn build
 
       - name: Deploy the app
-        run: aws s3 sync js/app/dist s3://${{ vars.LYRICCAST_RECEIVER_AWS_BUCKET_NAME }}/ --delete
+        run: aws s3 sync js/google-cast-custom-receiver-app/dist s3://${{ vars.LYRICCAST_RECEIVER_AWS_BUCKET_NAME }}/ --delete
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.LYRICCAST_RECEIVER_AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
