@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 12/01/2025, 23:51
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_looking_for_session"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:singleLine="true"
+        android:text="@string/dialog_fragment_choose_session_looking_for_session"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/pb_gms_nearby_server_devices"
+        app:layout_constraintEnd_toEndOf="@+id/rcv_gms_nearby_sessions"
+        app:layout_constraintStart_toStartOf="@+id/rcv_gms_nearby_sessions"
+        app:layout_constraintTop_toTopOf="@+id/rcv_gms_nearby_sessions"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_weight="1" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pb_gms_nearby_server_devices"
+        style="@style/Widget.Material3.LinearProgressIndicator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="@+id/rcv_gms_nearby_sessions"
+        app:layout_constraintEnd_toEndOf="@+id/rcv_gms_nearby_sessions"
+        app:layout_constraintStart_toStartOf="@+id/rcv_gms_nearby_sessions"
+        app:layout_constraintTop_toBottomOf="@+id/tv_looking_for_session"
+        app:layout_constraintVertical_weight="1" />
+
+    <!-- TODO: nice to have - make the height dynamic with max height of 200dp -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_gms_nearby_sessions"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_session" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

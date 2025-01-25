@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 10/01/2025, 01:46
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navh_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/tbl_main_fragments"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph_main" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tbl_main_fragments"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIndicatorGravity="top">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/round_music_note_24"
+            android:longClickable="false"
+            android:text="@string/title_songs" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/round_playlist_play_24"
+            android:text="@string/title_setlists" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/round_login_24"
+            android:text="@string/main_activity_tab_join_session" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <ImageView
+        android:id="@+id/imv_main_dim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/color"
+        tools:ignore="ContentDescription" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cstl_fab_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:animateLayoutChanges="true"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/fab_add"
+        app:layout_constraintEnd_toEndOf="@+id/fab_add">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/LinearLayout2"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/main_activity_button_add_setlist"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_add_setlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:contentDescription="@string/main_activity_button_add_setlist"
+                android:visibility="visible"
+                app:backgroundTint="@color/fab_background_secondary"
+                app:elevation="@dimen/cardview_default_elevation"
+                app:fabCustomSize="40dp"
+                app:maxImageSize="24dp"
+                app:srcCompat="@drawable/round_playlist_add_24"
+                app:tint="@color/icon_secondary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="@string/main_activity_button_add_song"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_add_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:contentDescription="@string/main_activity_button_add_song"
+                android:cropToPadding="false"
+                android:scaleType="center"
+                android:visibility="visible"
+                app:backgroundTint="@color/fab_background_secondary"
+                app:elevation="@dimen/cardview_default_elevation"
+                app:fabCustomSize="40dp"
+                app:srcCompat="@drawable/round_music_note_24"
+                app:tint="@color/icon_secondary"
+                app:useCompatPadding="false" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/main_activity_button_add_song"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scaleType="center"
+        app:backgroundTint="@color/fab_background_primary"
+        app:elevation="@dimen/cardview_default_elevation"
+        app:layout_constraintBottom_toTopOf="@+id/tbl_main_fragments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="48dp"
+        app:srcCompat="@drawable/round_add_24"
+        app:tint="@color/icon_secondary" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

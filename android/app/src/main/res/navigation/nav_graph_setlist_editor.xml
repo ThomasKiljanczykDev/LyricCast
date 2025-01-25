@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 08/12/2024, 21:35
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_setlist_editor"
+    app:startDestination="@id/SetlistEditor">
+
+    <fragment
+        android:id="@+id/SetlistEditorSongs"
+        android:name="dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.songs.SetlistEditorSongsFragment"
+        android:label="@string/title_songs"
+        tools:layout="@layout/fragment_songs">
+
+        <action
+            android:id="@+id/action_SetlistEditorSongs_to_SetlistEditor"
+            app:destination="@id/SetlistEditor"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/SetlistEditor"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="setlistId"
+            app:argType="string" />
+        <argument
+            android:name="presentation"
+            app:argType="string[]" />
+        <argument
+            android:name="setlistName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/SetlistEditor"
+        android:name="dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.setlist.SetlistEditorFragment"
+        android:label="@string/title_songs"
+        tools:layout="@layout/fragment_setlist_editor">
+
+        <action
+            android:id="@+id/action_SetlistEditor_to_SetlistEditorSongs"
+            app:destination="@id/SetlistEditorSongs"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="setlistId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="presentation"
+            android:defaultValue="@null"
+            app:argType="string[]"
+            app:nullable="true" />
+        <argument
+            android:name="setlistName"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

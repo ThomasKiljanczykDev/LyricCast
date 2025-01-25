@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 08/12/2024, 19:50
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- fix status bar color in action mode -->
+    <color name="abc_decor_view_status_guard" tools:override="true">@android:color/transparent
+    </color>
+    <color name="abc_decor_view_status_guard_light" tools:override="true">
+        @android:color/transparent
+    </color>
+
+    <color name="placeholder_card_color_1">@color/maroon</color>
+    <color name="error_Indeterminate_progress_bar">@color/red</color>
+
+    <color name="text">@color/dark_text</color>
+
+    <color name="button_text_1">@color/bright_text</color>
+    <color name="button_text_2">@color/dark_text</color>
+    <color name="button_background">@color/background_4</color>
+</resources>
