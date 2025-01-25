@@ -497,18 +497,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lyriccast-receiver/app@workspace:app":
-  version: 0.0.0-use.local
-  resolution: "@lyriccast-receiver/app@workspace:app"
-  dependencies:
-    "@types/chromecast-caf-receiver": "npm:^6.0.20"
-    typescript: "npm:<5.8"
-    vite: "npm:^6.0.7"
-    vite-tsconfig-paths: "npm:^5.1.4"
-    zod: "npm:^3.24.1"
-  languageName: unknown
-  linkType: soft
-
 "@lyriccast-receiver/eslint-config@workspace:*, @lyriccast-receiver/eslint-config@workspace:eslint-config":
   version: 0.0.0-use.local
   resolution: "@lyriccast-receiver/eslint-config@workspace:eslint-config"
@@ -521,6 +509,18 @@ __metadata:
     typescript-eslint: "npm:^8.20.0"
   peerDependencies:
     eslint: ^9
+  languageName: unknown
+  linkType: soft
+
+"@lyriccast-receiver/google-cast-custom-receiver-app@workspace:google-cast-custom-receiver-app":
+  version: 0.0.0-use.local
+  resolution: "@lyriccast-receiver/google-cast-custom-receiver-app@workspace:google-cast-custom-receiver-app"
+  dependencies:
+    "@types/chromecast-caf-receiver": "npm:^6.0.20"
+    typescript: "npm:<5.8"
+    vite: "npm:^6.0.7"
+    vite-tsconfig-paths: "npm:^5.1.4"
+    zod: "npm:^3.24.1"
   languageName: unknown
   linkType: soft
 
