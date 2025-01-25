@@ -1,0 +1,45 @@
+name: Deploy custom receiver app
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'Environment'
+        options:
+          - 'production'
+          - 'development'
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  deploy-app:
+    name: Deploy app
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/GitHubActionsRole
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Install dependencies
+        working-directory: js/google-cast-custom-receiver-app
+        run: yarn workspaces focus @lyriccast-receiver/google-cast-custom-receiver-app
+
+      - name: Build the app
+        working-directory: js/google-cast-custom-receiver-app
+        run: yarn build
+
+      - name: Deploy the app
+        run: aws s3 sync js/app/dist s3://${{ vars.AWS_BUCKET_NAME }}/ --delete
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"

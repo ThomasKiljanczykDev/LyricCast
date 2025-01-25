@@ -1,0 +1,5 @@
+cd js
+
+yarn format
+yarn lint
+(cd iac && yarn check-types)

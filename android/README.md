@@ -1,4 +1,4 @@
-![Now in Android](docs/images/LyricCast-splash.png "Now in Android")
+![LyricCast](docs/images/LyricCast-splash.png "LyricCast")
 
 [//]: # (TODO: add link after the app is publicly released)
 <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70" title="Coming soon!" alt="Get it on Google Play. Coming soon!">
@@ -6,19 +6,9 @@
 > [!NOTE]
 > LyricCast is undergoing closed testing on Google Play. Public access is coming soon!
 
-# LyricCast
+# LyricCast Android Client
 
-*LyricCast* is an Android application that allows you to cast lyrics to your TV screen using Google
-Cast.
-The main audience for the app is churches, where the lyrics are projected on the screen during the
-service.
-Current solutions require proprietary hardware and software which are expensive and often slow
-responding.
-*LyricCast* aims to provide a simple and affordable solution for churches and other organizations
-that need to cast
-lyrics
-to a TV screen using off the shelf devices.
-*LyricCast* is localized in English and Polish.
+This is the Android client for the *LyricCast* app.
 
 # Features
 
@@ -122,8 +112,8 @@ The settings screen consists of multiple sections.
 
 In this section you can change the following settings:
 
-- Theme - choose between light, dark or system default theme.
-- Controls button height - set the height of the controls buttons. This option is useful if you need
+* Theme - choose between light, dark or system default theme.
+* Controls button height - set the height of the controls buttons. This option is useful if you need
   to be able to
   quickly tap the buttons and don't miss.
 
@@ -131,11 +121,11 @@ In this section you can change the following settings:
 
 In this section you can change the following settings:
 
-- Blanked on start - when casting lyrics, the screen will be initially blanked.
+* Blanked on start - when casting lyrics, the screen will be initially blanked.
   The blank is applied after successfully connecting to the cast device.
-- Background color - the background color of the cast lyrics screen.
-- Font color - the font color of the cast lyrics screen.
-- Maximum font size - the maximum font size of the cast lyrics screen.
+* Background color - the background color of the cast lyrics screen.
+* Font color - the font color of the cast lyrics screen.
+* Maximum font size - the maximum font size of the cast lyrics screen.
 
 # Development Environment
 
@@ -165,12 +155,12 @@ The app project is modularized to separate concerns and make the codebase more m
 This project consists of modules:
 
 * app - LyricCast app:
-    * application - application related classes.
+    * application - application related classes
     * di - dependency injection related classes.
-    * domain - domain specific classes.
+    * domain - domain specific classes
     * shared - extensions, google cast, etc.
     * ui - view segregated by features (feature based structure)
-* common - it's in the name.
+* common - it's in the name
 * dataModel - repositories, data structures
 * dataTransfer - format converters (app-json, app-xml, etc)
 
@@ -179,19 +169,19 @@ This project consists of modules:
 ```mermaid
 %%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
 flowchart LR
-  subgraph androidDevice1[Android Device]
-    application1[LyricCast Application]
-    mongodbRealm[MongoDB Realm]
-    application1 -->|Store| mongodbRealm -->|Retrieve| application1
-  end
+    subgraph androidDevice1[Android Device]
+        application1[LyricCast Application]
+        mongodbRealm[MongoDB Realm]
+        application1 -->|Store| mongodbRealm -->|Retrieve| application1
+    end
 
-  subgraph androidDevice2[Android Device]
-    application2[LyricCast Application]
-  end
+    subgraph androidDevice2[Android Device]
+        application2[LyricCast Application]
+    end
 
-  application2 -->|Join session| application1
-  application1 -->|Cast| application2
-  application1 -->|Cast| googleCastDevice[Google Cast Device]
+    application2 -->|Join session| application1
+    application1 -->|Cast| application2
+    application1 -->|Cast| googleCastDevice[Google Cast Device]
 ```
 
 # Build
@@ -217,14 +207,14 @@ provide a simplified implementation with additional testing hooks.
 
 Examples:
 
-- In instrumentation tests, `MutableList` based repository implementations are used instead of the
+* In instrumentation tests, `MutableList` based repository implementations are used instead of the
   standard MongoDB
   Realm one.
 
 Following projects contain tests:
 
-- `app` - a set of instrumented tests
-- `common` - a set of unit tests
+* `app` - a set of instrumented tests
+* `common` - a set of unit tests
 
 To run the tests go to the corresponding module and run the whole test directory or selected tests
 using the IDE.
@@ -235,8 +225,8 @@ The app was designed using [Material 3 guidelines](https://m3.material.io/).
 
 The app has two themes:
 
-- Dynamic color - uses colors based on
+* Dynamic color - uses colors based on
   the [user's current color theme](https://material.io/blog/announcing-material-you) (if supported)
-- Default theme - uses predefined colors when dynamic color is not supported
+* Default theme - uses predefined colors when dynamic color is not supported
 
 Each theme also supports dark mode.

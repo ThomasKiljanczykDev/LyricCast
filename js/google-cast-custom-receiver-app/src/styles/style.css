@@ -1,0 +1,38 @@
+/*
+ * Created by Thomas Kiljanczyk on 04/04/2021, 20:27
+ * Copyright (c) 2021 . All rights reserved.
+ * Last modified 04/04/2021, 20:26
+ */
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: black;
+    color: white;
+}
+
+.vertical-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.text-container {
+    position: absolute;
+    width: 99%;
+    height: 99%;
+    top: 0.5%;
+    left: 0.5%;
+}
+
+p {
+    --fontSize: 78px;
+
+    white-space: nowrap;
+    overflow: visible;
+    font-size: var(--fontSize) !important;
+    margin: 0;
+}
