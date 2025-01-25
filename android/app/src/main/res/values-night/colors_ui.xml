@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 07/05/2024, 23:59
+  -->
+
+<resources>
+    <color name="text">@color/bright_text</color>
+
+    <color name="button_text_1">@color/dark_text</color>
+    <color name="button_text_2">@color/bright_text</color>
+    <color name="button_background">@color/background_4</color>
+</resources>

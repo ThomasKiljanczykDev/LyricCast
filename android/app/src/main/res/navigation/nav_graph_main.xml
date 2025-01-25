@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 08/12/2024, 21:35
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/Songs">
+
+    <fragment
+        android:id="@+id/Songs"
+        android:name="dev.thomas_kiljanczyk.lyriccast.ui.main.songs.SongsFragment"
+        android:label="@string/title_songs"
+        tools:layout="@layout/fragment_songs">
+
+        <action
+            android:id="@+id/action_Songs_to_Setlists"
+            app:destination="@id/Setlists"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/Setlists"
+        android:name="dev.thomas_kiljanczyk.lyriccast.ui.main.setlists.SetlistsFragment"
+        android:label="@string/title_setlists"
+        tools:layout="@layout/fragment_setlists">
+        <action
+            android:id="@+id/action_Setlists_to_Songs"
+            app:destination="@id/Songs"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

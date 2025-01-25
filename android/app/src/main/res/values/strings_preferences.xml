@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 19/11/2024, 21:25
+  -->
+
+<resources>
+    <!-- Keys -->
+    <string name="preference_theme_key" translatable="false">appTheme</string>
+    <string name="preference_controls_button_height_key" translatable="false">controlsButtonHeight</string>
+    <string name="preference_cast_background_key" translatable="false">backgroundColor</string>
+    <string name="preference_cast_font_color_key" translatable="false">fontColor</string>
+    <string name="preference_cast_max_font_size_key" translatable="false">fontMaxSize</string>
+    <string name="preference_blank_key" translatable="false">blankedOnStart</string>
+
+    <!-- Default values -->
+    <string name="preference_theme_default_value" translatable="false">-1</string>
+    <string name="preference_controls_buttons_height_default_value" translatable="false">88</string>
+    <string name="preference_cast_background_color_default_value" translatable="false">Black</string>
+    <string name="preference_cast_font_color_default_value" translatable="false">White</string>
+
+    <!-- Titles -->
+    <string name="preference_theme_title">Theme</string>
+    <string name="preference_controls_button_height_title">Controls button height</string>
+    <string name="preference_cast_background_title">Background color</string>
+    <string name="preference_cast_font_color_title">Font color</string>
+    <string name="preference_cast_max_font_size_title">Maximum font size</string>
+    <string name="preference_blank_title">Blanked on start</string>
+
+    <!-- Section titles -->
+    <string name="preference_section_app">Application</string>
+    <string name="preference_section_chromecast" translatable="false">Chromecast</string>
+
+
+    <!-- Theme entries -->
+    <string name="preference_theme_light">Light</string>
+    <string name="preference_theme_dark">Dark</string>
+    <string name="preference_theme_system">System default</string>
+
+    <!-- Theme entries -->
+    <string name="preference_controls_buttons_height_small">Small</string>
+    <string name="preference_controls_buttons_height_medium">Medium</string>
+    <string name="preference_controls_buttons_height_large">Large</string>
+
+    <!-- Color entries -->
+    <string name="preference_color_black">Black</string>
+    <string name="preference_color_white">White</string>
+    <string name="preference_color_blue">Blue</string>
+    <string name="preference_color_red">Red</string>
+    <string name="preference_color_pink">Pink</string>
+</resources>

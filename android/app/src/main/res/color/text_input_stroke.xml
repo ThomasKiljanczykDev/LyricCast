@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 07/05/2024, 23:59
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/accent" android:state_focused="true" />
+    <!-- 4% overlay over 42% colorOnSurface -->
+    <item android:alpha="0.46" android:color="@color/text" android:state_hovered="true" />
+    <item android:alpha="0.38" android:color="@color/text" android:state_enabled="false" />
+    <item android:alpha="0.42" android:color="@color/text" />
+</selector>

@@ -1,0 +1,85 @@
+<!--
+  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Copyright (c) 2025 . All rights reserved.
+  ~ Last modified 07/05/2024, 23:59
+  -->
+
+<resources>
+    <!-- Theme Preference -->
+    <string-array name="theme_entries">
+        <item>@string/preference_theme_light</item>
+        <item>@string/preference_theme_dark</item>
+        <item>@string/preference_theme_system</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Controls Button Height Preference -->
+    <string-array name="control_buttons_height_entries">
+        <item>@string/preference_controls_buttons_height_small</item>
+        <item>@string/preference_controls_buttons_height_medium</item>
+        <item>@string/preference_controls_buttons_height_large</item>
+    </string-array>
+    <string-array name="control_buttons_height_values">
+        <item>88</item>
+        <item>104</item>
+        <item>128</item>
+    </string-array>
+
+    <!-- Color Preference -->
+    <string-array name="color_entries">
+        <item>@string/preference_color_black</item>
+        <item>@string/preference_color_white</item>
+        <item>@string/preference_color_blue</item>
+        <item>@string/preference_color_red</item>
+        <item>@string/preference_color_pink</item>
+    </string-array>
+    <string-array name="color_values">
+        <item>Black</item>
+        <item>White</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>DeepPink</item>
+    </string-array>
+
+    <!-- Import/Export -->
+    <string-array name="import_formats">
+        <item>OpenSong</item>
+        <item>LyricCast</item>
+    </string-array>
+
+    <!-- Category colors -->
+    <string-array name="category_color_names">
+        <item>@string/category_color_maroon</item>
+        <item>@string/category_color_tomato</item>
+        <item>@string/category_color_golden</item>
+        <item>@string/category_color_olive</item>
+        <item>@string/category_color_cyan</item>
+        <item>@string/category_color_turquoise</item>
+        <item>@string/category_color_royal_blue</item>
+        <item>@string/category_color_violet</item>
+        <item>@string/category_color_pink</item>
+        <item>@string/category_color_navajo_white</item>
+        <item>@string/category_color_slate_gray</item>
+        <item>@string/category_color_gray</item>
+        <item>@string/category_color_steel_blue</item>
+    </string-array>
+    <string-array name="category_color_values">
+        <item>@color/maroon</item>
+        <item>@color/tomato</item>
+        <item>@color/golden_rod</item>
+        <item>@color/olive_drab</item>
+        <item>@color/dark_cyan</item>
+        <item>@color/turquoise</item>
+        <item>@color/royal_blue</item>
+        <item>@color/blue_violet</item>
+        <item>@color/deep_pink</item>
+        <item>@color/navajo_white</item>
+        <item>@color/slate_gray</item>
+        <item>@color/gray</item>
+        <item>@color/light_steel_blue</item>
+    </string-array>
+</resources>
