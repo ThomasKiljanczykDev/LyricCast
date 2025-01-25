@@ -10,10 +10,10 @@ local.properties
 .idea/androidTestResultsUserPreferences.xml
 .idea/deploymentTargetSelector.xml
 .DS_Store
-./build
-./captures
+/build
+/captures
 .externalNativeBuild
 .cxx
 .kotlin
 
-./app/release/
+/app/release/

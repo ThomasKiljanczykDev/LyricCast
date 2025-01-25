@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_category_manager.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_session_client.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_setlist_controls.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_setlist_editor.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_song_controls.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_song_editor.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_category_manager.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_main.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_session_client.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_setlist_controls.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_setlist_editor.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/content_song_controls.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_fragment_choose_session.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_fragment_edit_category.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_fragment_import.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_fragment_progress.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_fragment_start_session_server.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_setlist_editor.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_songs.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_session.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_controls.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/navigation/nav_graph_main.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/xml/preferences.xml">
+        <config>
+          <theme>@style/Theme.LyricCast.DarkActionBar</theme>
+        </config>
+      </layout>
+    </layouts>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\aszcz\.android\avd\Medium_Phone_4GB_RAM_API_27.avd)]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LyricCast" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+        <option value="resourceFile" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="H:\My Drive\Document Files\AndroidKeystores\android-release.keystore" />
+    <option name="KEY_ALIAS" value="LyricCast-release" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Gunock&quot;
+  }
+}</component>
+  <component name="GitRewordedCommitMessages">
+    <option name="onto" value="a9bc9c447742532b161f140e236f58dfac18056b" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Gunock/lyric-cast-android-client.git&quot;,
+    &quot;accountId&quot;: &quot;b4112c54-32bc-4449-be2b-2b5efd850cb2&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2g9ogLrAE3NlRWuzfwpAHzNvIDU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.DeleteCategoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.EditCategoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.Tests in 'dev'.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.Tests in 'dev.thomas_kiljanczyk.lyriccast'.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.categoryIsDeleted().executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.categoryIsEdited().executor&quot;: &quot;Run&quot;,
+    &quot;ApkExportedModule&quot;: &quot;LyricCast.app&quot;,
+    &quot;BundleExportedModule&quot;: &quot;LyricCast.app&quot;,
+    &quot;ExportApk.ApkPathForLyricCast.app&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\app&quot;,
+    &quot;ExportBundle.BundlePathForLyricCast.app&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\app&quot;,
+    &quot;Gradle.FileHelperTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.StringsExtensionsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'dev'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'dev.thomas_kiljanczyk.lyriccast.common.tests'.executor&quot;: &quot;Run&quot;,
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/projects/private/lyric-cast-android-client/docs/images&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/monorepo&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/projects/freelance/DiagnosisReportGenerator/js&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Suggestions&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Kotlin&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\typescript\\lib&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;ExportApk.BuildVariants&quot;: [
+      &quot;release&quot;
+    ]
+  }
+}</component>
+  <component name="PsdUISettings">
+    <option name="MODULE_TAB" value="Properties" />
+    <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\private\lyric-cast-android-client" />
+      <recent name="C:\projects\private\lyric-cast-android-client\js" />
+      <recent name="C:\projects\private\lyric-cast-android-client\js\google-cast-custom-receiver-app" />
+      <recent name="C:\projects\private\lyric-cast-android-client\docs\images" />
+      <recent name="C:\projects\private\lyric-cast-android-client\app\src\main\java\dev\thomas_kiljanczyk\lyriccast\shared\extensions" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\projects\private\lyric-cast-android-client\docs\images" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.shared.misc" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.cast" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.shared" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="dev.thomas_kiljanczyk.lyriccast.ui.shared.menu.gms_nearby_session.dialog" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.shared.misc" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.shared.menu" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.shared.cast" />
+      <recent name="dev.thomas_kiljanczyk.lyriccast.application" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="LyricCast.app" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Trace" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests in 'dev'" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+      <module name="LyricCast.app" />
+      <option name="ANDROID_TEST_RUN_CONFIGURATION_SCHEMA_VERSION" value="0" />
+      <option name="TESTING_TYPE" value="1" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="dev" />
+      <option name="TEST_NAME_REGEX" value="" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="RETENTION_ENABLED" value="No" />
+      <option name="RETENTION_MAX_SNAPSHOTS" value="2" />
+      <option name="RETENTION_COMPRESS_SNAPSHOTS" value="false" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileHelperTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":common:testDebugUnitTest" />
+            <option value="--tests" />
+            <option value="&quot;dev.thomas_kiljanczyk.lyriccast.common.tests.FileHelperTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="StringsExtensionsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":common:testDebugUnitTest" />
+            <option value="--tests" />
+            <option value="&quot;dev.thomas_kiljanczyk.lyriccast.common.tests.StringsExtensionsTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'dev'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":common:testDebugUnitTest" />
+            <option value="--tests" />
+            <option value="&quot;dev.*&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'dev.thomas_kiljanczyk.lyriccast.common.tests'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":common:testDebugUnitTest" />
+            <option value="--tests" />
+            <option value="&quot;dev.thomas_kiljanczyk.lyriccast.common.tests.*&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="" />
+      <created>1715119265969</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715119265969</updated>
+      <workItem from="1732657504552" duration="15000" />
+      <workItem from="1736462760618" duration="5100000" />
+      <workItem from="1736469753532" duration="269000" />
+      <workItem from="1736805453279" duration="2096000" />
+      <workItem from="1737828056276" duration="4588000" />
+      <workItem from="1737837571803" duration="606000" />
+      <workItem from="1737838297861" duration="270000" />
+    </task>
+    <task id="LOCAL-00001" summary="Upgrade to AGP 8.7.2">
+      <option name="closed" value="true" />
+      <created>1732049663992</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732049663992</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fix system bars insets">
+      <option name="closed" value="true" />
+      <created>1733656706676</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733656706676</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fix inset on older android versions, fix status bar color in action mode, fix app bar elevation in older android versions">
+      <option name="closed" value="true" />
+      <created>1733684979042</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733684979042</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Re-add fitsSystemWindows to all activity roots">
+      <option name="closed" value="true" />
+      <created>1733685449505</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733685449505</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fix song highlight logic in SetlistControlsActivity">
+      <option name="closed" value="true" />
+      <created>1733687526676</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733687526676</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update dependencies">
+      <option name="closed" value="true" />
+      <created>1733688210114</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733688210114</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Change package name">
+      <option name="closed" value="true" />
+      <created>1733690122331</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733690122331</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Set version to 1.0.0">
+      <option name="closed" value="true" />
+      <created>1733690466725</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733690466725</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update dependencies">
+      <option name="closed" value="true" />
+      <created>1735239116955</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1735239116955</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update dependencies">
+      <option name="closed" value="true" />
+      <created>1735257226514</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1735257226514</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Disable minification for non-app modules to resolve R8 issues">
+      <option name="closed" value="true" />
+      <created>1735262541937</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1735262541937</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Remove google-services.json">
+      <option name="closed" value="true" />
+      <created>1735302488916</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1735302488916</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update .gitignore">
+      <option name="closed" value="true" />
+      <created>1735302536365</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1735302536365</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Update versioning scheme, update firebase plugin configuration">
+      <option name="closed" value="true" />
+      <created>1735306578650</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1735306578650</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Fix incorrect nav bar inset in setlist editor">
+      <option name="closed" value="true" />
+      <created>1735750733174</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1735750733174</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Initial session implementation">
+      <option name="closed" value="true" />
+      <created>1736005313240</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1736005313240</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Implement client --&gt; server communication">
+      <option name="closed" value="true" />
+      <created>1736102135856</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1736102135856</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add padding and text in dialog_fragment_choose_session.xml">
+      <option name="closed" value="true" />
+      <created>1736103768445</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1736103768445</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Make media route dialog corners rounded">
+      <option name="closed" value="true" />
+      <created>1736109028307</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1736109028307</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Rework the usage Dispatchers.Main, remove all instances of runBlocking apart from MongoDB realm initialization and CastContext retrieval, move MongoDB realm initialization invoke to the LyricCastApplication, move CastContext to the DI container">
+      <option name="closed" value="true" />
+      <created>1736122312580</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1736122312580</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Fix issues found when running Android tests">
+      <option name="closed" value="true" />
+      <created>1736124195419</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1736124195419</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add handling of different connection state in Session Client activity, add debouncing to messages broadcasted via Google Cast and GMS Nearby,">
+      <option name="closed" value="true" />
+      <created>1736164566790</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1736164566790</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Disable crashlytics for debug configuration">
+      <option name="closed" value="true" />
+      <created>1736164710202</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1736164710202</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Remove executor usage in getSharedInstance for CastContext">
+      <option name="closed" value="true" />
+      <created>1736176020827</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1736176020827</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Add start session dialog">
+      <option name="closed" value="true" />
+      <created>1736184573900</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1736184573900</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Move GMS Nearby logic from Choose to ChooseSessionDialogModel, fix small padding issue fragment_songs.xml when selected songs switch was hidden">
+      <option name="closed" value="true" />
+      <created>1736186625133</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1736186625133</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Adjust log levels, correct cast dialog background color, fix setlist controls not sending latest slides to newly connected session devices">
+      <option name="closed" value="true" />
+      <created>1736188280907</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1736188280907</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Add choose session rcv debounce, add all english localization, tweak dialog and dropdown overlay background color">
+      <option name="closed" value="true" />
+      <created>1736277961306</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1736277961306</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Add 'nice to have' to optional TODO notes">
+      <option name="closed" value="true" />
+      <created>1736373848545</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1736373848545</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Add improved README.md">
+      <option name="closed" value="true" />
+      <created>1736468644527</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1736468644527</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Upgrade project to AGP 8.8.0, update dependencies">
+      <option name="closed" value="true" />
+      <created>1736469035433</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1736469035433</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add Get It On Google Play related note">
+      <option name="closed" value="true" />
+      <created>1736469962376</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1736469962376</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Resolve TODO comments">
+      <option name="closed" value="true" />
+      <created>1736722532297</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1736722532297</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Add polish localization for the session feature">
+      <option name="closed" value="true" />
+      <created>1736723988167</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1736723988167</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Correct english localization for session hosting">
+      <option name="closed" value="true" />
+      <created>1736727079538</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1736727079538</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Fix invalid coroutine context for Google Cast operations, fix invalid configuration message formatting in CastMessagingContext">
+      <option name="closed" value="true" />
+      <created>1736758113505</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1736758113505</updated>
+    </task>
+    <task id="LOCAL-00037" summary="x">
+      <option name="closed" value="true" />
+      <created>1736758124600</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1736758124600</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Exclude app/release from the repository, remove redundant space in versionName">
+      <option name="closed" value="true" />
+      <created>1736758633193</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1736758633193</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Bump revision version">
+      <option name="closed" value="true" />
+      <created>1736759116555</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1736759116555</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Update ReadMe sessions section">
+      <option name="closed" value="true" />
+      <created>1736806735504</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1736806735504</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Add google cast custom receiver app code">
+      <option name="closed" value="true" />
+      <created>1737830844728</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1737830844728</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Update environment variable names in cd-google-cast-receiver.yml">
+      <option name="closed" value="true" />
+      <created>1737831210560</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1737831210560</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Update yarn.lock">
+      <option name="closed" value="true" />
+      <created>1737831903458</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1737831903458</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Make media route dialog corners rounded" />
+    <MESSAGE value="Rework the usage Dispatchers.Main, remove all instances of runBlocking apart from MongoDB realm initialization and CastContext retrieval, move MongoDB realm initialization invoke to the LyricCastApplication, move CastContext to the DI container" />
+    <MESSAGE value="Fix issues found when running Android tests" />
+    <MESSAGE value="Add handling of different connection state in Session Client activity, add debouncing to messages broadcasted via Google Cast and GMS Nearby," />
+    <MESSAGE value="Disable crashlytics for debug configuration" />
+    <MESSAGE value="Remove executor usage in getSharedInstance for CastContext" />
+    <MESSAGE value="Add start session dialog" />
+    <MESSAGE value="Move GMS Nearby logic from Choose to ChooseSessionDialogModel, fix small padding issue fragment_songs.xml when selected songs switch was hidden" />
+    <MESSAGE value="Adjust log levels, correct cast dialog background color, fix setlist controls not sending latest slides to newly connected session devices" />
+    <MESSAGE value="Add choose session rcv debounce, add all english localization, tweak dialog and dropdown overlay background color" />
+    <MESSAGE value="Add 'nice to have' to optional TODO notes" />
+    <MESSAGE value="Add improved README.md" />
+    <MESSAGE value="Upgrade project to AGP 8.8.0, update dependencies" />
+    <MESSAGE value="Add Get It On Google Play related note" />
+    <MESSAGE value="Resolve TODO comments" />
+    <MESSAGE value="Add polish localization for the session feature" />
+    <MESSAGE value="Correct english localization for session hosting" />
+    <MESSAGE value="Fix invalid coroutine context for Google Cast operations, fix invalid configuration message formatting in CastMessagingContext" />
+    <MESSAGE value="x" />
+    <MESSAGE value="Exclude app/release from the repository, remove redundant space in versionName" />
+    <MESSAGE value="Bump revision version" />
+    <MESSAGE value="Update ReadMe sessions section" />
+    <MESSAGE value="Add google cast custom receiver app code" />
+    <MESSAGE value="Update environment variable names in cd-google-cast-receiver.yml" />
+    <MESSAGE value="Update yarn.lock" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update yarn.lock" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="play_dynamic_filters_status">
+    <option name="appIdToCheckInfo">
+      <map>
+        <entry key="dev.thomas_kiljanczyk.lyriccast">
+          <value>
+            <CheckInfo lastCheckTimestamp="1736957597577" />
+          </value>
+        </entry>
+        <entry key="dev.thomas_kiljanczyk.lyriccast.datamodel.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1736720328813" />
+          </value>
+        </entry>
+        <entry key="dev.thomas_kiljanczyk.lyriccast.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1736957597579" />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
