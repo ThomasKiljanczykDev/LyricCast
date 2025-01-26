@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: js/lyriccast-privacy-policy
-        run: yarn workspaces focus @lyriccast/lyriccast-privacy-policy
+        run: yarn workspaces focus @lyriccast/privacy-policy
 
       - name: Build the app
         working-directory: js/lyriccast-privacy-policy
