@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: js/google-cast-custom-receiver-app
-        run: yarn workspaces focus @lyriccast-receiver/google-cast-custom-receiver-app
+        run: yarn workspaces focus @lyriccast/google-cast-custom-receiver-app
 
       - name: Build the app
         working-directory: js/google-cast-custom-receiver-app

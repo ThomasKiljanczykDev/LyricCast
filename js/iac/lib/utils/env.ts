@@ -1,7 +1,7 @@
 import 'dotenv/config';
-import {z} from 'zod';
+import { z } from 'zod';
 
-import {createEnv} from '@t3-oss/env-core';
+import { createEnv } from '@t3-oss/env-core';
 
 export enum DeploymentEnvironment {
     PRODUCTION = 'production',

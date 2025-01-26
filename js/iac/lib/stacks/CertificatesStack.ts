@@ -4,14 +4,15 @@
  * Last modified 24/11/2024, 00:48
  */
 import * as cdk from 'aws-cdk-lib';
-import {aws_certificatemanager as cm, aws_route53 as route53} from 'aws-cdk-lib';
-import {Construct} from 'constructs';
+import { aws_certificatemanager as cm, aws_route53 as route53 } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 
-import {DomainNameConstants} from '@/utils/constants';
-import type {BaseStackProps} from '@/utils/props';
+import { DomainNameConstants } from '@/utils/constants';
+import type { BaseStackProps } from '@/utils/props';
 
 class CertificatesStack extends cdk.Stack {
     public readonly lyricCastReceiverCertificate: cm.Certificate;
+    public readonly lyricCastPrivacyPolicyCertificate: cm.Certificate;
 
     constructor(scope: Construct, id: string, props: BaseStackProps) {
         super(scope, id, {
@@ -34,6 +35,20 @@ class CertificatesStack extends cdk.Stack {
                 domainName: DomainNameConstants.getLyricCastReceiverDomainName(
                     props.domainNameBase
                 ),
+                validation: cm.CertificateValidation.fromDns(hostedZone)
+            }
+        );
+
+        this.lyricCastPrivacyPolicyCertificate = new cm.Certificate(
+            this,
+            'lyriccast-privacy-policy-certificate',
+            {
+                domainName: DomainNameConstants.getLyricCastPrivacyPolicyShortDomainName(
+                    props.domainNameBase
+                ),
+                subjectAlternativeNames: [
+                    DomainNameConstants.getLyricCastPrivacyPolicyDomainName(props.domainNameBase)
+                ],
                 validation: cm.CertificateValidation.fromDns(hostedZone)
             }
         );

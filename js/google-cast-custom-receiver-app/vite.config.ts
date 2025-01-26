@@ -3,7 +3,7 @@
  * Copyright (c) 2024 . All rights reserved.
  * Last modified 24/11/2024, 14:30
  */
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({

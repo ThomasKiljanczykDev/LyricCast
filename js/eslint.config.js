@@ -1,6 +1,6 @@
 import tseslint from 'typescript-eslint';
 
-import {tsEslintConfig} from '@lyriccast-receiver/eslint-config';
+import { tsEslintConfig } from '@lyriccast/eslint-config';
 
 export default tseslint.config(...tsEslintConfig, {
     ignores: [

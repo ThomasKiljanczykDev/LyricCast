@@ -9,7 +9,7 @@ async function handler(event) {
     headers['content-security-policy'] = {
         value: "object-src 'none'; base-uri 'none'; frame-ancestors 'none';"
     };
-    headers['x-content-type-options'] = {value: 'nosniff'};
+    headers['x-content-type-options'] = { value: 'nosniff' };
 
     return response;
 }

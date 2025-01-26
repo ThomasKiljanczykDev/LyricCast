@@ -44,7 +44,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Install CDK
-        run: yarn workspaces focus @lyriccast-receiver/iac
+        run: yarn workspaces focus @lyriccast/iac
 
       - name: CDK Deploy
         run: yarn cdk deploy ${{ inputs.stack_name }} --require-approval never

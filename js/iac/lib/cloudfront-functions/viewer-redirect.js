@@ -14,7 +14,7 @@ async function handler(event) {
         return {
             statusCode: 302,
             statusDescription: 'Found',
-            headers: {location: {value: `/`}}
+            headers: { location: { value: `/` } }
         };
     }
 
