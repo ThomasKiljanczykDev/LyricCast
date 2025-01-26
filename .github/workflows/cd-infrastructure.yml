@@ -57,6 +57,7 @@ jobs:
     needs:
       - cdk-bootstrap
     uses: ./.github/workflows/cdk-deploy.yml
+    secrets: inherit
     with:
       environment: ${{ inputs.environment }}
       stack_name: 'certificates-${{ inputs.environment }}'
@@ -66,6 +67,7 @@ jobs:
     needs:
       - cdk-deploy-certificates
     uses: ./.github/workflows/cdk-deploy.yml
+    secrets: inherit
     with:
       environment: ${{ inputs.environment }}
       stack_name: 'lyriccast-receiver-${{ inputs.environment }}'
@@ -75,6 +77,7 @@ jobs:
     needs:
       - cdk-deploy-certificates
     uses: ./.github/workflows/cdk-deploy.yml
+    secrets: inherit
     with:
       environment: ${{ inputs.environment }}
       stack_name: 'lyriccast-privacy-policy-${{ inputs.environment }}'

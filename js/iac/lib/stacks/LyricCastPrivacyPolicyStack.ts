@@ -9,7 +9,7 @@ import { Construct } from 'constructs';
 import { CloudFrontToS3 } from '@aws-solutions-constructs/aws-cloudfront-s3';
 
 import { DomainNameConstants } from '@/utils/constants';
-import { env } from '@/utils/env';
+import { DeploymentEnvironment, env } from '@/utils/env';
 import type { BaseStackProps } from '@/utils/props';
 
 export interface LyricCastPrivacyPolicyStackProps extends BaseStackProps {
@@ -28,7 +28,7 @@ export default class LyricCastPrivacyPolicyStack extends cdk.Stack {
             DomainNameConstants.getLyricCastPrivacyPolicyDomainName(props.domainNameBase)
         ];
 
-        if (env.DEPLOYMENT_ENVIRONMENT === 'production') {
+        if (env.DEPLOYMENT_ENVIRONMENT === DeploymentEnvironment.PRODUCTION) {
             domainNames.push(DomainNameConstants.getLyricCastPrivacyPolicyRootDomainName());
         }
 
