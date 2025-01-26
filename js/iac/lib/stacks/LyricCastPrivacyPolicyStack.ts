@@ -9,6 +9,7 @@ import { Construct } from 'constructs';
 import { CloudFrontToS3 } from '@aws-solutions-constructs/aws-cloudfront-s3';
 
 import { DomainNameConstants } from '@/utils/constants';
+import { env } from '@/utils/env';
 import type { BaseStackProps } from '@/utils/props';
 
 export interface LyricCastPrivacyPolicyStackProps extends BaseStackProps {
@@ -23,6 +24,14 @@ export default class LyricCastPrivacyPolicyStack extends cdk.Stack {
             domainName: props.domainNameBase
         });
 
+        const domainNames = [
+            DomainNameConstants.getLyricCastPrivacyPolicyDomainName(props.domainNameBase)
+        ];
+
+        if (env.DEPLOYMENT_ENVIRONMENT === 'production') {
+            domainNames.push(DomainNameConstants.getLyricCastPrivacyPolicyRootDomainName());
+        }
+
         const cloudFrontS3 = new CloudFrontToS3(this, 'cloudfront-s3', {
             bucketProps: {
                 bucketName: `lyriccast-privacy-policy-${props.deploymentEnvironment}`
@@ -31,9 +40,7 @@ export default class LyricCastPrivacyPolicyStack extends cdk.Stack {
                 comment: `lyriccast-privacy-policy-${props.deploymentEnvironment}`,
                 priceClass: cloudFront.PriceClass.PRICE_CLASS_100,
                 httpVersion: cloudFront.HttpVersion.HTTP2_AND_3,
-                domainNames: [
-                    DomainNameConstants.getLyricCastPrivacyPolicyDomainName(props.domainNameBase)
-                ],
+                domainNames: domainNames,
                 certificate: props.certificate,
                 defaultRootObject: 'index.html'
             }

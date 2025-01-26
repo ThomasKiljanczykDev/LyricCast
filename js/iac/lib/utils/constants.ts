@@ -13,6 +13,10 @@ export class DomainNameConstants {
         return `lyriccast-privacy-policy.${domain}`;
     }
 
+    public static getLyricCastPrivacyPolicyRootDomainName(): string {
+        return `lyriccast-privacy-policy.thomas-kiljanczyk.dev`;
+    }
+
     public static getLyricCastPrivacyPolicyShortDomainName(domain: string): string {
         return `privacy-policy.${domain}`;
     }
