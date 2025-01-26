@@ -4,9 +4,14 @@ import * as dotenv from 'dotenv';
 import 'source-map-support/register';
 
 import CertificatesStack from '@/stacks/CertificatesStack';
+import LyricCastPrivacyPolicyStack from '@/stacks/LyricCastPrivacyPolicyStack';
 import LyricCastReceiverStack from '@/stacks/LyricCastReceiverStack';
 import { env } from '@/utils/env';
 import type { BaseStackProps } from '@/utils/props';
+
+
+
+
 
 dotenv.config();
 
@@ -23,7 +28,12 @@ function addProductionStacks() {
 
     new LyricCastReceiverStack(app, `lyriccast-receiver-production`, {
         ...baseProps,
-        lyricCastReceiverCertificate: certificateStack.lyricCastReceiverCertificate
+        certificate: certificateStack.lyricCastReceiverCertificate
+    });
+
+    new LyricCastPrivacyPolicyStack(app, `lyriccast-privacy-policy-production`, {
+        ...baseProps,
+        certificate: certificateStack.lyricCastPrivacyPolicyCertificate
     });
 }
 
@@ -32,7 +42,12 @@ function addDevelopmentStacks() {
 
     new LyricCastReceiverStack(app, `lyriccast-receiver-development`, {
         ...baseProps,
-        lyricCastReceiverCertificate: certificateStack.lyricCastReceiverCertificate
+        certificate: certificateStack.lyricCastReceiverCertificate
+    });
+
+    new LyricCastPrivacyPolicyStack(app, `lyriccast-privacy-policy-development`, {
+        ...baseProps,
+        certificate: certificateStack.lyricCastPrivacyPolicyCertificate
     });
 }
 

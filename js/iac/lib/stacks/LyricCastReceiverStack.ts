@@ -12,7 +12,7 @@ import { DomainNameConstants } from '@/utils/constants';
 import type { BaseStackProps } from '@/utils/props';
 
 export interface LyricCastReceiverStackProps extends BaseStackProps {
-    readonly lyricCastReceiverCertificate: cm.Certificate;
+    readonly certificate: cm.Certificate;
 }
 
 export default class LyricCastReceiverStack extends cdk.Stack {
@@ -77,7 +77,7 @@ export default class LyricCastReceiverStack extends cdk.Stack {
                 domainNames: [
                     DomainNameConstants.getLyricCastReceiverDomainName(props.domainNameBase)
                 ],
-                certificate: props.lyricCastReceiverCertificate
+                certificate: props.certificate
             }
         );
 

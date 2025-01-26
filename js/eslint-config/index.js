@@ -10,6 +10,10 @@ import errors from './src/errors.js';
 import style from './src/style.js';
 import typescript from './src/typescript.js';
 
+
+
+
+
 const baseEslintConfig = tseslint.config(...errors, ...style);
 
 const tsEslintConfig = tseslint.config(
@@ -17,7 +21,10 @@ const tsEslintConfig = tseslint.config(
     ...typescript,
     ...baseEslintConfig,
     ...tailwind.configs['flat/recommended'],
-    ...pluginVue.configs['flat/recommended'],
+    {
+        files: ['**/*.vue'],
+        extends: [...pluginVue.configs['flat/recommended']]
+    },
     eslintConfigPrettier,
     {
         rules: {

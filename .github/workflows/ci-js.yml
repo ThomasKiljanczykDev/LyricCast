@@ -44,3 +44,11 @@ jobs:
       - name: Check types - iac
         working-directory: js/iac
         run: yarn check-types
+
+      - name: Check types - custom receiver app
+        working-directory: js/google-cast-custom-receiver-app
+        run: yarn check-types
+
+      - name: Check types - privacy policy
+        working-directory: js/lyriccast-privacy-policy
+        run: yarn check-types
