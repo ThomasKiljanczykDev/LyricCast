@@ -1,4 +1,4 @@
-name: Deploy custom receiver app
+name: Deploy privacy policy
 
 on:
   workflow_dispatch:
