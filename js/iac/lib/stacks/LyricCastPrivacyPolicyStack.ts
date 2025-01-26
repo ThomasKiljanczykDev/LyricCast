@@ -34,7 +34,8 @@ export default class LyricCastPrivacyPolicyStack extends cdk.Stack {
                 domainNames: [
                     DomainNameConstants.getLyricCastPrivacyPolicyDomainName(props.domainNameBase)
                 ],
-                certificate: props.certificate
+                certificate: props.certificate,
+                defaultRootObject: 'index.html'
             }
         });
 
