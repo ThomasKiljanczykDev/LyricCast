@@ -12,7 +12,7 @@ import { DomainNameConstants } from '@/utils/constants';
 import type { BaseStackProps } from '@/utils/props';
 
 export interface LyricCastPrivacyPolicyStackProps extends BaseStackProps {
-    readonly certificate: cm.Certificate;
+    readonly certificate: cm.ICertificate;
 }
 
 export default class LyricCastPrivacyPolicyStack extends cdk.Stack {

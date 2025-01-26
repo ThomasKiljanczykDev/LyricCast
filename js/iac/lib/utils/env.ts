@@ -16,12 +16,15 @@ export const env = createEnv({
     server: {
         AWS_REGION: z.string().min(1),
         AWS_ACCOUNT_ID: z.string().min(1),
-        DEPLOYMENT_ENVIRONMENT: z.nativeEnum(DeploymentEnvironment)
+        DEPLOYMENT_ENVIRONMENT: z.nativeEnum(DeploymentEnvironment),
+        LYRICCAST_PRIVACY_POLICY_CERTIFICATE_ARN: z.string().optional()
     },
 
     runtimeEnv: {
         AWS_REGION: process.env.AWS_REGION,
         AWS_ACCOUNT_ID: process.env.AWS_ACCOUNT_ID,
-        DEPLOYMENT_ENVIRONMENT: process.env.DEPLOYMENT_ENVIRONMENT
+        DEPLOYMENT_ENVIRONMENT: process.env.DEPLOYMENT_ENVIRONMENT,
+        LYRICCAST_PRIVACY_POLICY_CERTIFICATE_ARN:
+            process.env.LYRICCAST_PRIVACY_POLICY_CERTIFICATE_ARN
     }
 });
