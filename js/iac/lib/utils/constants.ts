@@ -12,4 +12,8 @@ export class DomainNameConstants {
     public static getLyricCastPrivacyPolicyDomainName(domain: string): string {
         return `lyriccast-privacy-policy.${domain}`;
     }
+
+    public static getLyricCastPrivacyPolicyShortDomainName(domain: string): string {
+        return `privacy-policy.${domain}`;
+    }
 }
