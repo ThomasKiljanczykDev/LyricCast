@@ -61,7 +61,7 @@ jobs:
       stack_name: 'certificates-${{ inputs.environment }}'
 
   cdk-deploy-receiver-app:
-    name: Deploy app stack
+    name: Deploy receiver app stack
     needs:
       - cdk-deploy-certificates
     uses: ./.github/workflows/cdk-deploy.yml
@@ -70,7 +70,7 @@ jobs:
       stack_name: 'lyriccast-receiver-${{ inputs.environment }}'
 
   cdk-deploy-privacy-policy:
-    name: Deploy app stack
+    name: Deploy privacy policy stack
     needs:
       - cdk-deploy-certificates
     uses: ./.github/workflows/cdk-deploy.yml
