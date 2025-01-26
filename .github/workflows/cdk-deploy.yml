@@ -50,3 +50,4 @@ jobs:
         run: yarn cdk deploy ${{ inputs.stack_name }} --require-approval never
         env:
           DEPLOYMENT_ENVIRONMENT: ${{ inputs.environment }}
+          LYRICCAST_PRIVACY_POLICY_CERTIFICATE_ARN: ${{ secrets.LYRICCAST_PRIVACY_POLICY_CERTIFICATE_ARN }}

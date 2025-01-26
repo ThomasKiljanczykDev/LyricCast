@@ -50,6 +50,7 @@ jobs:
         run: yarn cdk bootstrap
         env:
           DEPLOYMENT_ENVIRONMENT: ${{ inputs.environment }}
+          LYRICCAST_PRIVACY_POLICY_CERTIFICATE_ARN: ${{ secrets.LYRICCAST_PRIVACY_POLICY_CERTIFICATE_ARN }}
 
   cdk-deploy-certificates:
     name: Deploy certificates stack
