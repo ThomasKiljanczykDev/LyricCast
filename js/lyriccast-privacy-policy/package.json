@@ -3,9 +3,9 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "dev": "vite --host",
-        "check-types": "tsc --noEmit",
+        "build": "vue-tsc -b && vite build",
+        "dev": "vite",
+        "check-types": "vue-tsc --noEmit",
         "serve": "vite preview"
     },
     "dependencies": {
@@ -22,7 +22,8 @@
         "tailwindcss": "^3.4.17",
         "typescript": "^5.7.3",
         "vite": "^6.0.11",
-        "vite-tsconfig-paths": "^5.1.4"
+        "vite-tsconfig-paths": "^5.1.4",
+        "vue-tsc": "^2.2.0"
     },
     "packageManager": "yarn@4.6.0"
 }

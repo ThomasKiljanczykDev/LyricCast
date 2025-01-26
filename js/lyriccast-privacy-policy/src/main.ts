@@ -5,7 +5,7 @@ import App from '@/app.vue';
 import '@/assets/styles/fonts.css';
 import '@/assets/styles/main.css';
 import '@/assets/styles/tailwind.css';
-import { routes } from '@/routes.ts';
+import { routes } from '@/routes';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.VITE_BASE_PUBLIC_PATH),

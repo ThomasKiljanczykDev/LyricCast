@@ -141,21 +141,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="Add deployments scripts for privacy policy, update js dependencies">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/cd-privacy-policy.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/iac/lib/stacks/LyricCastPrivacyPolicyStack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/cd-infrastructure.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/cd-infrastructure.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-js.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-js.yml" afterDir="false" />
+    <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/eslint-config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/eslint-config/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/eslint-config/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/eslint-config/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/google-cast-custom-receiver-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/google-cast-custom-receiver-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/iac/bin/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/bin/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/iac/lib/stacks/CertificatesStack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/lib/stacks/CertificatesStack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/iac/lib/stacks/LyricCastReceiverStack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/lib/stacks/LyricCastReceiverStack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/iac/lib/utils/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/lib/utils/constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/iac/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/app.vue" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/app.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/not-found.vue" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/not-found.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/js/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -518,7 +511,7 @@
       <workItem from="1737884333072" duration="73000" />
       <workItem from="1737884953783" duration="177000" />
       <workItem from="1737885785813" duration="669000" />
-      <workItem from="1737890340836" duration="1173000" />
+      <workItem from="1737890340836" duration="4562000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to AGP 8.7.2">
       <option name="closed" value="true" />
@@ -864,7 +857,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737831903458</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Add deployments scripts for privacy policy, update js dependencies">
+      <option name="closed" value="true" />
+      <created>1737892142973</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1737892142973</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

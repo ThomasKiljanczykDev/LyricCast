@@ -41,3 +41,5 @@ dist/
 .idea/**
 !.idea/prettier.xml
 !.idea/jsLinters/eslint.xml
+
+tsconfig.tsbuildinfo
