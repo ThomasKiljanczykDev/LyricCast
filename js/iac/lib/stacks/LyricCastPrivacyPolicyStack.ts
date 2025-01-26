@@ -24,7 +24,6 @@ export default class LyricCastPrivacyPolicyStack extends cdk.Stack {
         });
 
         const cloudFrontS3 = new CloudFrontToS3(this, 'cloudfront-s3', {
-            originPath: 'index.html',
             bucketProps: {
                 bucketName: `lyriccast-privacy-policy-${props.deploymentEnvironment}`
             },
