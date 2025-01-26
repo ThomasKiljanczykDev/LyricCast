@@ -8,12 +8,11 @@ This section outlines the architecture of the _LyricCast_ JavaScript part.
 
 ## Project structure
 
-[//]: # 'TODO: Update after adding the privacy policy page'
-
 This project consists of modules:
 
 - `iac` - contains the AWS CDK infrastructure as code
 - `google-cast-custom-receiver-app` - contains the Google Cast custom receiver app
+- `lyriccast-privacy-policy` - contains the privacy policy page
 - `eslint-config` - contains the shareable ESLint configuration
 
 ## Architecture components

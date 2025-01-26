@@ -143,13 +143,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/app.vue" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/app.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/not-found.vue" beforeDir="false" afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/not-found.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/js/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/js/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/lyriccast-privacy-policy/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +197,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/privacy-policy" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -270,7 +265,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "feature/privacy-policy",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/projects/private/lyric-cast-android-client/.github/workflows",
@@ -327,7 +322,7 @@
       <recent name="dev.thomas_kiljanczyk.lyriccast.application" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="LyricCast.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -399,91 +394,6 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests in 'dev'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":common:testDebugUnitTest" />
-            <option value="--tests" />
-            <option value="&quot;dev.*&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'dev.thomas_kiljanczyk.lyriccast.common.tests'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":common:testDebugUnitTest" />
-            <option value="--tests" />
-            <option value="&quot;dev.thomas_kiljanczyk.lyriccast.common.tests.*&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/js/lyriccast-privacy-policy/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/js/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="format" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/js/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="prepare" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="npm.build" />
-        <item itemvalue="npm.format" />
-        <item itemvalue="npm.prepare" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -511,7 +421,7 @@
       <workItem from="1737884333072" duration="73000" />
       <workItem from="1737884953783" duration="177000" />
       <workItem from="1737885785813" duration="669000" />
-      <workItem from="1737890340836" duration="4562000" />
+      <workItem from="1737890340836" duration="4880000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to AGP 8.7.2">
       <option name="closed" value="true" />
