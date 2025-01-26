@@ -3,3 +3,5 @@ cd js
 yarn format
 yarn lint
 (cd iac && yarn check-types)
+(cd google-cast-custom-receiver-app && yarn check-types)
+(cd lyriccast-privacy-policy && yarn check-types)

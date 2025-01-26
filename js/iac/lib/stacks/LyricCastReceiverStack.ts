@@ -6,10 +6,10 @@ import {
     aws_route53 as route53,
     aws_s3 as s3
 } from 'aws-cdk-lib';
-import {Construct} from 'constructs';
+import { Construct } from 'constructs';
 
-import {DomainNameConstants} from '@/utils/constants';
-import type {BaseStackProps} from '@/utils/props';
+import { DomainNameConstants } from '@/utils/constants';
+import type { BaseStackProps } from '@/utils/props';
 
 export interface LyricCastReceiverStackProps extends BaseStackProps {
     readonly lyricCastReceiverCertificate: cm.Certificate;

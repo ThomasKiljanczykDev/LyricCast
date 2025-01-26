@@ -141,7 +141,44 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="" />
+    <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/.env.sample" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/.yarnrc.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/postcss.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/app.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/assets/fonts/Inter-italic.var.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/assets/fonts/Inter-roman.var.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/assets/styles/fonts.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/assets/styles/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/assets/styles/tailwind.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/composables/theme.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/pages/not-found.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/src/vite-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/tailwind.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lyriccast-privacy-policy/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/cd-google-cast-receiver.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/cd-google-cast-receiver.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/cdk-deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/cdk-deploy.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/.husky/pre-commit" beforeDir="false" afterPath="$PROJECT_DIR$/js/.husky/pre-commit" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/eslint-config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/eslint-config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/eslint-config/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/eslint-config/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/eslint.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/google-cast-custom-receiver-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/google-cast-custom-receiver-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/iac/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/js/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -234,55 +271,58 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;Android Instrumented Tests.DeleteCategoryTest.executor&quot;: &quot;Run&quot;,
-    &quot;Android Instrumented Tests.EditCategoryTest.executor&quot;: &quot;Run&quot;,
-    &quot;Android Instrumented Tests.Tests in 'dev'.executor&quot;: &quot;Run&quot;,
-    &quot;Android Instrumented Tests.Tests in 'dev.thomas_kiljanczyk.lyriccast'.executor&quot;: &quot;Run&quot;,
-    &quot;Android Instrumented Tests.categoryIsDeleted().executor&quot;: &quot;Run&quot;,
-    &quot;Android Instrumented Tests.categoryIsEdited().executor&quot;: &quot;Run&quot;,
-    &quot;ApkExportedModule&quot;: &quot;LyricCast.app&quot;,
-    &quot;BundleExportedModule&quot;: &quot;LyricCast.app&quot;,
-    &quot;ExportApk.ApkPathForLyricCast.app&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\app&quot;,
-    &quot;ExportBundle.BundlePathForLyricCast.app&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\app&quot;,
-    &quot;Gradle.FileHelperTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.StringsExtensionsTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'dev'.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Tests in 'dev.thomas_kiljanczyk.lyriccast.common.tests'.executor&quot;: &quot;Run&quot;,
-    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/projects/private/lyric-cast-android-client/docs/images&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/monorepo&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/projects/freelance/DiagnosisReportGenerator/js&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Suggestions&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Kotlin&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "Android Instrumented Tests.DeleteCategoryTest.executor": "Run",
+    "Android Instrumented Tests.EditCategoryTest.executor": "Run",
+    "Android Instrumented Tests.Tests in 'dev'.executor": "Run",
+    "Android Instrumented Tests.Tests in 'dev.thomas_kiljanczyk.lyriccast'.executor": "Run",
+    "Android Instrumented Tests.categoryIsDeleted().executor": "Run",
+    "Android Instrumented Tests.categoryIsEdited().executor": "Run",
+    "ApkExportedModule": "LyricCast.app",
+    "BundleExportedModule": "LyricCast.app",
+    "ExportApk.ApkPathForLyricCast.app": "C:\\projects\\private\\lyric-cast-android-client\\app",
+    "ExportBundle.BundlePathForLyricCast.app": "C:\\projects\\private\\lyric-cast-android-client\\app",
+    "Gradle.FileHelperTest.executor": "Run",
+    "Gradle.StringsExtensionsTest.executor": "Run",
+    "Gradle.Tests in 'dev'.executor": "Run",
+    "Gradle.Tests in 'dev.thomas_kiljanczyk.lyriccast.common.tests'.executor": "Run",
+    "PROJECT_TRUSTED_KEY": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "ScreenshotViewer.SavePath": "C:/projects/private/lyric-cast-android-client/docs/images",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "feature/privacy-policy",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/projects/private/lyric-cast-android-client/js",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\prettier",
+    "project.structure.last.edited": "Suggestions",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ExportApk.BuildVariants&quot;: [
-      &quot;release&quot;
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
     ]
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Properties" />
     <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
@@ -290,11 +330,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\private\lyric-cast-android-client\js\lyriccast-privacy-policy" />
       <recent name="C:\projects\private\lyric-cast-android-client" />
       <recent name="C:\projects\private\lyric-cast-android-client\js" />
       <recent name="C:\projects\private\lyric-cast-android-client\js\google-cast-custom-receiver-app" />
       <recent name="C:\projects\private\lyric-cast-android-client\docs\images" />
-      <recent name="C:\projects\private\lyric-cast-android-client\app\src\main\java\dev\thomas_kiljanczyk\lyriccast\shared\extensions" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\projects\private\lyric-cast-android-client\docs\images" />
@@ -314,7 +354,7 @@
       <recent name="dev.thomas_kiljanczyk.lyriccast.application" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.format">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="LyricCast.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -448,54 +488,6 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileHelperTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":common:testDebugUnitTest" />
-            <option value="--tests" />
-            <option value="&quot;dev.thomas_kiljanczyk.lyriccast.common.tests.FileHelperTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="StringsExtensionsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":common:testDebugUnitTest" />
-            <option value="--tests" />
-            <option value="&quot;dev.thomas_kiljanczyk.lyriccast.common.tests.StringsExtensionsTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="Tests in 'dev'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -544,6 +536,32 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/js/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="format" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/js/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="prepare" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.format" />
+        <item itemvalue="npm.prepare" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -567,6 +585,10 @@
       <workItem from="1737828056276" duration="4588000" />
       <workItem from="1737837571803" duration="606000" />
       <workItem from="1737838297861" duration="270000" />
+      <workItem from="1737879336994" duration="802000" />
+      <workItem from="1737884333072" duration="73000" />
+      <workItem from="1737884953783" duration="177000" />
+      <workItem from="1737885785813" duration="669000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to AGP 8.7.2">
       <option name="closed" value="true" />

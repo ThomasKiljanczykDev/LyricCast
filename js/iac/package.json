@@ -1,26 +1,26 @@
 {
-  "name": "@lyriccast-receiver/iac",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "app/infrastructure.js",
-  "scripts": {
-    "check-types": "tsc --noEmit",
-    "compile": "npx tsc",
-    "cdk": "npx cdk"
-  },
-  "dependencies": {
-    "@t3-oss/env-core": "^0.11.1",
-    "aws-cdk": "^2.175.1",
-    "aws-cdk-lib": "^2.175.1",
-    "constructs": "^10.4.2",
-    "dotenv": "^16.4.7",
-    "source-map-support": "^0.5.21",
-    "zod": "^3.24.1"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.6",
-    "@types/source-map-support": "^0.5.10",
-    "typescript": "<5.8"
-  },
-  "packageManager": "yarn@4.5.0"
+    "name": "@lyriccast/iac",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "app/infrastructure.js",
+    "scripts": {
+        "check-types": "tsc --noEmit",
+        "compile": "npx tsc",
+        "cdk": "npx cdk"
+    },
+    "dependencies": {
+        "@t3-oss/env-core": "^0.11.1",
+        "aws-cdk": "^2.175.1",
+        "aws-cdk-lib": "^2.175.1",
+        "constructs": "^10.4.2",
+        "dotenv": "^16.4.7",
+        "source-map-support": "^0.5.21",
+        "zod": "^3.24.1"
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.6",
+        "@types/source-map-support": "^0.5.10",
+        "typescript": "<5.8"
+    },
+    "packageManager": "yarn@4.5.0"
 }

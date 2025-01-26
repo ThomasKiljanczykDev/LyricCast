@@ -3,7 +3,7 @@
  * Copyright (c) 2024 . All rights reserved.
  * Last modified 06/12/2024, 17:11
  */
-import {z} from 'zod';
+import { z } from 'zod';
 
 export enum LyricCastAction {
     BLANK = 'BLANK',

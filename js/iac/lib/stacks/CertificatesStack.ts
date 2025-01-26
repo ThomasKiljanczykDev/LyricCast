@@ -4,11 +4,11 @@
  * Last modified 24/11/2024, 00:48
  */
 import * as cdk from 'aws-cdk-lib';
-import {aws_certificatemanager as cm, aws_route53 as route53} from 'aws-cdk-lib';
-import {Construct} from 'constructs';
+import { aws_certificatemanager as cm, aws_route53 as route53 } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 
-import {DomainNameConstants} from '@/utils/constants';
-import type {BaseStackProps} from '@/utils/props';
+import { DomainNameConstants } from '@/utils/constants';
+import type { BaseStackProps } from '@/utils/props';
 
 class CertificatesStack extends cdk.Stack {
     public readonly lyricCastReceiverCertificate: cm.Certificate;

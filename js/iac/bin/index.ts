@@ -5,15 +5,15 @@ import 'source-map-support/register';
 
 import CertificatesStack from '@/stacks/CertificatesStack';
 import LyricCastReceiverStack from '@/stacks/LyricCastReceiverStack';
-import {env} from '@/utils/env';
-import type {BaseStackProps} from '@/utils/props';
+import { env } from '@/utils/env';
+import type { BaseStackProps } from '@/utils/props';
 
 dotenv.config();
 
 const app = new cdk.App();
 
 const baseProps: BaseStackProps = {
-    env: {account: env.AWS_ACCOUNT_ID, region: env.AWS_REGION},
+    env: { account: env.AWS_ACCOUNT_ID, region: env.AWS_REGION },
     deploymentEnvironment: env.DEPLOYMENT_ENVIRONMENT,
     domainNameBase: `${env.DEPLOYMENT_ENVIRONMENT}.apps.aws.thomas-kiljanczyk.dev`
 };

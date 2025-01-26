@@ -6,11 +6,13 @@
         "module": "ESNext",
         "skipLibCheck": true,
         "esModuleInterop": true,
-        "moduleResolution": "Bundler",
+        /* Bundler node */
+        "moduleResolution": "bundler",
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "verbatimModuleSyntax": true,
+        "jsx": "react-jsx",
         "noEmit": true,
         /* Linting */
         "strict": true,
@@ -23,9 +25,10 @@
         "noUncheckedIndexedAccess": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": true,
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["./lib/*"]
+            "@/*": ["src/*"]
         }
     },
-    "exclude": ["./node_modules"]
+    "exclude": ["./node_modules", "./dist"]
 }

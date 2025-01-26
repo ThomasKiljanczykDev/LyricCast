@@ -1,38 +1,38 @@
 {
-  "name": "@lyriccast-receiver/google-cast-custom-receiver-app",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "check-types": "tsc --noEmit",
-    "dev": "vite --config vite.config.ts dev",
-    "build:development": "vite --config vite.config.development.ts build",
-    "build": "vite build"
-  },
-  "dependencies": {
-    "zod": "^3.24.1"
-  },
-  "devDependencies": {
-    "@types/chromecast-caf-receiver": "^6.0.20",
-    "typescript": "<5.8",
-    "vite": "^6.0.7",
-    "vite-tsconfig-paths": "^5.1.4"
-  },
-  "browserslist": {
-    "production": [
-      ">0.3%",
-      "not ie 11",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      ">0.3%",
-      "not ie 11",
-      "not dead",
-      "not op_mini all",
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "@lyriccast/google-cast-custom-receiver-app",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "check-types": "tsc --noEmit",
+        "dev": "vite --config vite.config.ts dev",
+        "build:development": "vite --config vite.config.development.ts build",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "zod": "^3.24.1"
+    },
+    "devDependencies": {
+        "@types/chromecast-caf-receiver": "^6.0.20",
+        "typescript": "<5.8",
+        "vite": "^6.0.7",
+        "vite-tsconfig-paths": "^5.1.4"
+    },
+    "browserslist": {
+        "production": [
+            ">0.3%",
+            "not ie 11",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            ">0.3%",
+            "not ie 11",
+            "not dead",
+            "not op_mini all",
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

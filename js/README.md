@@ -1,14 +1,14 @@
 # LyricCast JavaScript
 
-This is the JavaScript part of the *LyricCast* app.
+This is the JavaScript part of the _LyricCast_ app.
 
 # Architecture
 
-This section outlines the architecture of the *LyricCast* JavaScript part.
+This section outlines the architecture of the _LyricCast_ JavaScript part.
 
 ## Project structure
 
-[//]: # (TODO: Update after adding the privacy policy page)
+[//]: # 'TODO: Update after adding the privacy policy page'
 
 This project consists of modules:
 
@@ -18,7 +18,7 @@ This project consists of modules:
 
 ## Architecture components
 
-This section presents components of the *LyricCast* JavaScript part.
+This section presents components of the _LyricCast_ JavaScript part.
 
 ### Custom Receiver Application Infrastructure
 

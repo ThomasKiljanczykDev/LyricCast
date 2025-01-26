@@ -3,17 +3,17 @@
  * Copyright (c) 2021 . All rights reserved.
  * Last modified 11/04/2021, 22:01
  */
-import {z} from 'zod';
+import { z } from 'zod';
 
 import LyricCastContext from './LyricCastContext';
-import {CONTENT_NAMESPACE, CONTROL_NAMESPACE} from './constants';
+import { CONTENT_NAMESPACE, CONTROL_NAMESPACE } from './constants';
 import {
     LyricCastAction,
     LyricCastConfig,
     LyricCastContentMessage,
     LyricCastControlMessage
 } from './models';
-import {resizeText} from './textAutoResize';
+import { resizeText } from './textAutoResize';
 
 function handleBlank(blankState: unknown) {
     const textContainerElement = document.getElementById('song-text-container');
