@@ -141,10 +141,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="Update README.md">
+    <list default="true" id="0902ec7e-5d80-4933-a0a4-2d39384f4549" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/iac/lib/stacks/CertificatesStack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/lib/stacks/CertificatesStack.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/iac/lib/utils/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/js/iac/lib/utils/env.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,59 +236,60 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.app.executor": "Run",
-    "Android Instrumented Tests.DeleteCategoryTest.executor": "Run",
-    "Android Instrumented Tests.EditCategoryTest.executor": "Run",
-    "Android Instrumented Tests.Tests in 'dev'.executor": "Run",
-    "Android Instrumented Tests.Tests in 'dev.thomas_kiljanczyk.lyriccast'.executor": "Run",
-    "Android Instrumented Tests.categoryIsDeleted().executor": "Run",
-    "Android Instrumented Tests.categoryIsEdited().executor": "Run",
-    "ApkExportedModule": "LyricCast.app",
-    "BundleExportedModule": "LyricCast.app",
-    "ExportApk.ApkPathForLyricCast.app": "C:\\projects\\private\\lyric-cast-android-client\\app",
-    "ExportBundle.BundlePathForLyricCast.app": "C:\\projects\\private\\lyric-cast-android-client\\app",
-    "Gradle.FileHelperTest.executor": "Run",
-    "Gradle.StringsExtensionsTest.executor": "Run",
-    "Gradle.Tests in 'dev'.executor": "Run",
-    "Gradle.Tests in 'dev.thomas_kiljanczyk.lyriccast.common.tests'.executor": "Run",
-    "PROJECT_TRUSTED_KEY": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "ScreenshotViewer.SavePath": "C:/projects/private/lyric-cast-android-client/docs/images",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/projects/private/lyric-cast-android-client/.github/workflows",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "yarn",
-    "npm.build.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\prettier",
-    "project.structure.last.edited": "Suggestions",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.DeleteCategoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.EditCategoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.Tests in 'dev'.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.Tests in 'dev.thomas_kiljanczyk.lyriccast'.executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.categoryIsDeleted().executor&quot;: &quot;Run&quot;,
+    &quot;Android Instrumented Tests.categoryIsEdited().executor&quot;: &quot;Run&quot;,
+    &quot;ApkExportedModule&quot;: &quot;LyricCast.app&quot;,
+    &quot;BundleExportedModule&quot;: &quot;LyricCast.app&quot;,
+    &quot;ExportApk.ApkPathForLyricCast.app&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\app&quot;,
+    &quot;ExportBundle.BundlePathForLyricCast.app&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\app&quot;,
+    &quot;Gradle.FileHelperTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.StringsExtensionsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'dev'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'dev.thomas_kiljanczyk.lyriccast.common.tests'.executor&quot;: &quot;Run&quot;,
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/projects/private/lyric-cast-android-client/docs/images&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/projects/private/lyric-cast-android-client/.github/workflows&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.check-types.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\prettier&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Suggestions&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\projects\\private\\lyric-cast-android-client\\js\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ExportApk.BuildVariants": [
-      "release"
+  &quot;keyToStringList&quot;: {
+    &quot;ExportApk.BuildVariants&quot;: [
+      &quot;release&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Properties" />
     <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
@@ -322,7 +321,7 @@
       <recent name="dev.thomas_kiljanczyk.lyriccast.application" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.check-types">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="LyricCast.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -394,6 +393,21 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="check-types" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/js/iac/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="check-types" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.check-types" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -421,7 +435,8 @@
       <workItem from="1737884333072" duration="73000" />
       <workItem from="1737884953783" duration="177000" />
       <workItem from="1737885785813" duration="669000" />
-      <workItem from="1737890340836" duration="5102000" />
+      <workItem from="1737890340836" duration="8187000" />
+      <workItem from="1739605938571" duration="423000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to AGP 8.7.2">
       <option name="closed" value="true" />
@@ -783,7 +798,31 @@
       <option name="project" value="LOCAL" />
       <updated>1737899014903</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Add optional argument to allow manual certificates for LyricCast privacy policy">
+      <option name="closed" value="true" />
+      <created>1737899345654</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1737899345654</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Add certificate to pipelines">
+      <option name="closed" value="true" />
+      <created>1737900593087</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1737900593087</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Fix secret propagation to reusable GitHub workflows">
+      <option name="closed" value="true" />
+      <created>1737907482193</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1737907482193</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -805,9 +844,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add handling of different connection state in Session Client activity, add debouncing to messages broadcasted via Google Cast and GMS Nearby," />
-    <MESSAGE value="Disable crashlytics for debug configuration" />
-    <MESSAGE value="Remove executor usage in getSharedInstance for CastContext" />
     <MESSAGE value="Add start session dialog" />
     <MESSAGE value="Move GMS Nearby logic from Choose to ChooseSessionDialogModel, fix small padding issue fragment_songs.xml when selected songs switch was hidden" />
     <MESSAGE value="Adjust log levels, correct cast dialog background color, fix setlist controls not sending latest slides to newly connected session devices" />
@@ -830,7 +866,10 @@
     <MESSAGE value="Add deployments scripts for privacy policy" />
     <MESSAGE value="Add deployments scripts for privacy policy, update js dependencies" />
     <MESSAGE value="Update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update README.md" />
+    <MESSAGE value="Add optional argument to allow manual certificates for LyricCast privacy policy" />
+    <MESSAGE value="Add certificate to pipelines" />
+    <MESSAGE value="Fix secret propagation to reusable GitHub workflows" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix secret propagation to reusable GitHub workflows" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
