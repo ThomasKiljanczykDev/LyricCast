@@ -1,10 +1,6 @@
 ![LyricCast](docs/images/LyricCast-splash.png "LyricCast")
 
-[//]: # (TODO: add link after the app is publicly released)
-<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70" title="Coming soon!" alt="Get it on Google Play. Coming soon!">
-
-> [!NOTE]
-> LyricCast is undergoing closed testing on Google Play. Public access is coming soon!
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70" title="Coming soon!" alt="Get it on Google Play. Coming soon!">](https://play.google.com/store/apps/details?id=dev.thomas_kiljanczyk.lyriccast)
 
 # LyricCast Android Client
 
