@@ -1,5 +1,7 @@
 ![LyricCast](docs/images/LyricCast-splash.png "LyricCast")
 
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70" title="Coming soon!" alt="Get it on Google Play. Coming soon!">](https://play.google.com/store/apps/details?id=dev.thomas_kiljanczyk.lyriccast)
+
 # LyricCast
 
 *LyricCast* is an Android application that allows you to cast lyrics to your TV screen using Google
