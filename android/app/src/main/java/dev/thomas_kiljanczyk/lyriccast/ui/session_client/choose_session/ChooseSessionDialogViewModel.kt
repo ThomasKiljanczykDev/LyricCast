@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 12/01/2025, 23:55
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ChooseSessionDialogModel @Inject constructor(
+class ChooseSessionDialogViewModel @Inject constructor(
     private val connectionsClient: ConnectionsClient
 ) : ViewModel() {
     companion object {

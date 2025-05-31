@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 25/01/2025, 18:54
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.setlist
@@ -16,7 +16,7 @@ import dev.thomas_kiljanczyk.lyriccast.shared.enums.NameValidationState
 class SetlistNameTextWatcher(
     resources: Resources,
     private val binding: FragmentSetlistEditorBinding,
-    private val viewModel: SetlistEditorModel
+    private val viewModel: SetlistEditorViewModel
 ) : TextWatcher {
 
     private val enterNameErrorText = resources.getString(R.string.setlist_editor_enter_name)

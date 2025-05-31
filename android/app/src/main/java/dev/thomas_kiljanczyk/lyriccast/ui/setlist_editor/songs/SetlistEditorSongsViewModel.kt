@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.songs
@@ -28,7 +28,7 @@ import javax.inject.Inject
 import kotlin.system.measureTimeMillis
 
 @HiltViewModel
-class SetlistEditorSongsModel @Inject constructor(
+class SetlistEditorSongsViewModel @Inject constructor(
     private val songsRepository: SongsRepository,
     private val categoriesRepository: CategoriesRepository
 ) : ViewModel() {

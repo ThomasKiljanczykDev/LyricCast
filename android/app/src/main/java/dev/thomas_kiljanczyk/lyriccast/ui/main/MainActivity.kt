@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 12/01/2025, 23:55
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -45,7 +45,7 @@ import dev.thomas_kiljanczyk.lyriccast.shared.extensions.registerForActivityResu
 import dev.thomas_kiljanczyk.lyriccast.shared.utils.DialogFragmentUtils
 import dev.thomas_kiljanczyk.lyriccast.ui.category_manager.CategoryManagerActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog.ImportDialogFragment
-import dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog.ImportDialogModel
+import dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog.ImportDialogViewModel
 import dev.thomas_kiljanczyk.lyriccast.ui.main.setlists.SetlistsFragment
 import dev.thomas_kiljanczyk.lyriccast.ui.session_client.SessionClientActivity
 import dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.SetlistEditorActivity
@@ -74,8 +74,8 @@ class MainActivity : AppCompatActivity() {
         var wifiStateChecked = false
     }
 
-    private val viewModel: MainModel by viewModels()
-    private val importDialogModel: ImportDialogModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
+    private val importDialogModel: ImportDialogViewModel by viewModels()
 
     private lateinit var binding: ContentMainBinding
 

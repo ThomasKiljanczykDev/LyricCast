@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 06/01/2025, 01:16
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.category_manager
@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryManagerModel @Inject constructor(
+class CategoryManagerViewModel @Inject constructor(
     private val categoriesRepository: CategoriesRepository
 ) : ViewModel() {
 

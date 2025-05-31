@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog
@@ -12,7 +12,7 @@ import dev.thomas_kiljanczyk.lyriccast.datatransfer.enums.ImportFormat
 import javax.inject.Inject
 
 @HiltViewModel
-class ImportDialogModel @Inject constructor() : ViewModel() {
+class ImportDialogViewModel @Inject constructor() : ViewModel() {
 
     var importFormat: ImportFormat = ImportFormat.NONE
 

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 25/01/2025, 18:54
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.import_dialog
@@ -28,7 +28,7 @@ class ImportDialogFragment : DialogFragment() {
         const val TAG = "ImportDialogFragment"
     }
 
-    private val viewModel: ImportDialogModel by activityViewModels()
+    private val viewModel: ImportDialogViewModel by activityViewModels()
 
     private lateinit var binding: DialogFragmentImportBinding
 

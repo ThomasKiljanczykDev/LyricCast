@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 10/01/2025, 01:46
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_controls
@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SongControlsModel @Inject constructor(
+class SongControlsViewModel @Inject constructor(
     dataStore: DataStore<AppSettings>,
     private val songsRepository: SongsRepository,
     private val castMessagingContext: CastMessagingContext,

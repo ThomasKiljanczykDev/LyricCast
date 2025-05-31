@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 25/01/2025, 18:54
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_editor
@@ -29,7 +29,7 @@ import javax.inject.Inject
 import kotlin.collections.set
 
 @HiltViewModel
-class SongEditorModel @Inject constructor(
+class SongEditorViewModel @Inject constructor(
     @ApplicationContext context: Context,
     categoriesRepository: CategoriesRepository,
     private val songsRepository: SongsRepository

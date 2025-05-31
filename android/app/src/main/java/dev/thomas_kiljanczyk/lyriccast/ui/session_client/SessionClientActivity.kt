@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 12/01/2025, 23:55
+ * Last modified 5/31/25, 2:02 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -27,7 +27,7 @@ import dev.thomas_kiljanczyk.lyriccast.application.LyricCastApplication
 import dev.thomas_kiljanczyk.lyriccast.databinding.ActivitySessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.databinding.ContentSessionClientBinding
 import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogFragment
-import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogModel
+import dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session.ChooseSessionDialogViewModel
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.fragments.PermissionsRejectedDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -40,11 +40,11 @@ class SessionClientActivity : AppCompatActivity() {
         const val TAG = "SessionClientActivity"
     }
 
-    private val viewModel: SessionClientModel by viewModels()
+    private val viewModel: SessionClientViewModel by viewModels()
 
     private lateinit var binding: ContentSessionClientBinding
 
-    private lateinit var pickDeviceDialogViewModel: ChooseSessionDialogModel
+    private lateinit var pickDeviceDialogViewModel: ChooseSessionDialogViewModel
 
     private var chooseSessionDialog: ChooseSessionDialogFragment? = null
 
@@ -75,7 +75,8 @@ class SessionClientActivity : AppCompatActivity() {
         setSupportActionBar(rootBinding.toolbarControls)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        pickDeviceDialogViewModel = ViewModelProvider(this)[ChooseSessionDialogModel::class.java]
+        pickDeviceDialogViewModel =
+            ViewModelProvider(this)[ChooseSessionDialogViewModel::class.java]
 
         binding = ContentSessionClientBinding.bind(rootBinding.contentSessionClient.root)
 
@@ -92,20 +93,20 @@ class SessionClientActivity : AppCompatActivity() {
 
         viewModel.connectionState.onEach { connectionState ->
             when (connectionState) {
-                SessionClientModel.ConnectionState.CONNECTED -> {
+                SessionClientViewModel.ConnectionState.CONNECTED -> {
                     Toast.makeText(
                         baseContext, R.string.session_client_connected, Toast.LENGTH_SHORT
                     ).show()
                 }
 
-                SessionClientModel.ConnectionState.DISCONNECTED -> {
+                SessionClientViewModel.ConnectionState.DISCONNECTED -> {
                     Toast.makeText(
                         baseContext, R.string.session_client_disconnected, Toast.LENGTH_SHORT
                     ).show()
                     showChooseSessionDialog()
                 }
 
-                SessionClientModel.ConnectionState.FAILED -> {
+                SessionClientViewModel.ConnectionState.FAILED -> {
                     Toast.makeText(
                         baseContext, R.string.session_client_failed_to_connect, Toast.LENGTH_SHORT
                     ).show()

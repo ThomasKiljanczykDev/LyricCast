@@ -23,9 +23,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="dev.thomas_kiljanczyk.lyriccast" />
-                  <option name="mobileSdkAppId" value="1:1032205717305:android:e7454a285c26a5a4b0e2e8" />
-                  <option name="projectId" value="lyriccast-67624" />
-                  <option name="projectNumber" value="1032205717305" />
+                  <option name="mobileSdkAppId" value="1:515626182551:android:b8b2f46dc3d3416f8c06d2" />
+                  <option name="projectId" value="lyriccast-896d5" />
+                  <option name="projectNumber" value="515626182551" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
