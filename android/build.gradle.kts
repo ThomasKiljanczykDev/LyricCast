@@ -26,4 +26,5 @@ plugins {
     alias(libs.plugins.mongoDbRealm) apply false
     alias(libs.plugins.protobuf) apply false
     alias(libs.plugins.google.googleServices) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }

@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 15/01/2025, 19:32
+  ~ Last modified 5/31/25, 3:49 PM
   -->
 
 <resources>
@@ -147,4 +147,7 @@
     <!-- Generic -->
     <string name="ignore">Ignore</string>
     <string name="close">Close</string>
+    <string name="settings_title">Settings</string>
+    <string name="navigate_up">Navigate up</string>
 </resources>
+

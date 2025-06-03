@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 13/01/2025, 01:11
+  ~ Last modified 5/31/25, 3:49 PM
   -->
 
 <resources>
@@ -123,4 +123,7 @@
     <string name="dialog_fragment_start_session_session_start_failed">Rozpoczęcie sesji nie powiodło się</string>
     <string name="dialog_fragment_start_session_session_start_missing_permissions">Rozpoczęcie sesji nie powiodło się z powodu brakujących uprawnień</string>
     <string name="dialog_fragment_start_session_error_empty_name">Proszę podać nazwę sesji</string>
+    <string name="settings_title">Ustawienia</string>
+    <string name="navigate_up">Wróć</string>
 </resources>
+

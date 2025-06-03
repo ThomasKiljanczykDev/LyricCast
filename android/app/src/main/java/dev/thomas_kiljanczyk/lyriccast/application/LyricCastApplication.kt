@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 15/01/2025, 19:32
+ * Last modified 6/1/25, 10:48 AM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.application
@@ -14,11 +14,9 @@ import android.os.Build
 import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
-import androidx.preference.PreferenceManager
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
-import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.datamodel.RepositoryFactory
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastSessionListener
@@ -93,22 +91,23 @@ class LyricCastApplication : Application() {
             RepositoryFactory.initializeMongoDbRealm()
         }
 
-        // Set default values for preferences
+        // Initialize default values in DataStore
         CoroutineScope(Dispatchers.IO).launch {
-            PreferenceManager.setDefaultValues(applicationContext, R.xml.preferences, false)
-            settingsDataStore.updateData { settings ->
-                val settingsBuilder = settings.toBuilder()
-
-                PreferenceManager.getDefaultSharedPreferences(applicationContext).all.forEach { (key, value) ->
-                    settingsBuilder.setValue(
-                        key, value
-                    )
+            settingsDataStore.updateData { currentSettings ->
+                if (currentSettings == AppSettings.getDefaultInstance()) {
+                    AppSettings.newBuilder()
+                        .setAppTheme(-1) // System default
+                        .setControlButtonsHeight(88f)
+                        .setBlankOnStart(false)
+                        .setBackgroundColor("Black")
+                        .setFontColor("White")
+                        .setMaxFontSize(90)
+                        .build()
+                } else {
+                    currentSettings
                 }
-
-                return@updateData settingsBuilder.build()
             }
         }
-
 
         // TODO: nice to have - Add color harmonization
         dataStore.data.onEach {
@@ -118,7 +117,6 @@ class LyricCastApplication : Application() {
                 AppCompatDelegate.setDefaultNightMode(appTheme)
             }
         }.launchIn(CoroutineScope(Dispatchers.Main))
-
 
         val isDebuggable = applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
         if (isDebuggable) {

@@ -16,6 +16,7 @@ plugins {
     alias(libs.plugins.protobuf)
     alias(libs.plugins.google.googleServices)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -42,7 +43,9 @@ android {
         versionName = "$major.$minor.$patch${if (revision > 0) ".$revision" else ""}"
 
         testInstrumentationRunner = "dev.thomas_kiljanczyk.lyriccast.HiltTestRunner"
-        resourceConfigurations += listOf("en", "pl")
+        androidResources {
+            localeFilters.addAll(listOf("en", "pl"))
+        }
     }
 
     buildTypes {
@@ -62,6 +65,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     compileOptions {
@@ -100,7 +104,6 @@ dependencies {
     implementation(libs.androidx.coreKtx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintLayout)
-    implementation(libs.androidx.preferenceKtx)
     implementation(libs.androidx.recyclerView)
     implementation(libs.androidx.recyclerViewSelection)
     implementation(libs.androidx.navigationFragmentKtx)
@@ -137,6 +140,22 @@ dependencies {
 
     // LeakCanary
 //    debugImplementation(libs.squareup.leakCanary)
+
+    // Compose dependencies
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.compose.viewmodel)
+    implementation(libs.androidx.compose.hilt)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    // Other dependencies
+    implementation(libs.apache.commonsLang)
+    implementation(libs.zip4j)
 }
 
 protobuf {

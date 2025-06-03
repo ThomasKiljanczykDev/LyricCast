@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 19/11/2024, 21:25
+  ~ Last modified 5/31/25, 3:41 PM
   -->
 
 <resources>
@@ -12,12 +12,6 @@
     <string name="preference_cast_font_color_key" translatable="false">fontColor</string>
     <string name="preference_cast_max_font_size_key" translatable="false">fontMaxSize</string>
     <string name="preference_blank_key" translatable="false">blankedOnStart</string>
-
-    <!-- Default values -->
-    <string name="preference_theme_default_value" translatable="false">-1</string>
-    <string name="preference_controls_buttons_height_default_value" translatable="false">88</string>
-    <string name="preference_cast_background_color_default_value" translatable="false">Black</string>
-    <string name="preference_cast_font_color_default_value" translatable="false">White</string>
 
     <!-- Titles -->
     <string name="preference_theme_title">Theme</string>
