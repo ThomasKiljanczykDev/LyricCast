@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 7:10 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/7/25, 5:41 PM
+ * Last modified 6/7/25, 6:21 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -22,6 +22,7 @@ import dev.thomas_kiljanczyk.lyriccast.ui.shared.theme.LyricCastTheme
 
 @AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -45,7 +46,6 @@ class SettingsActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     SettingsScreen(
-                        viewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
                         onNavigateUp = { finish() }
                     )
                 }

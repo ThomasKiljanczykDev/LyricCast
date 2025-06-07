@@ -1,10 +1,10 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 7:10 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/3/25, 10:51 PM
+ * Last modified 6/7/25, 7:07 PM
  */
 
-package dev.thomas_kiljanczyk.lyriccast.ui.components
+package dev.thomas_kiljanczyk.lyriccast.ui.settings
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -33,7 +34,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.theme.LyricCastTheme
 
 @Composable
 fun SettingsCategory(
@@ -41,17 +44,66 @@ fun SettingsCategory(
     content: @Composable () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = title,
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(horizontal = 32.dp)
+            modifier = Modifier
+                .padding(horizontal = 32.dp)
         )
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         content()
     }
+}
+
+@Composable
+fun <T> SettingsDialog(
+    title: String,
+    options: List<Pair<T, String>>,
+    selectedValue: T,
+    onOptionSelected: (T) -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(title) },
+        text = {
+            Column {
+                options.forEach { (optionValue, optionLabel) ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                onOptionSelected(optionValue)
+                                onDismiss()
+                            },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = optionValue == selectedValue,
+                            onClick = {
+                                onOptionSelected(optionValue)
+                                onDismiss()
+                            }
+                        )
+                        Text(
+                            text = optionLabel,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Close")
+            }
+        }
+    )
 }
 
 @Composable
@@ -86,41 +138,12 @@ fun <T> SettingsRowWithDialog(
     }
 
     if (showDialog) {
-        AlertDialog(
-            onDismissRequest = { showDialog = false },
-            title = { Text(title) },
-            text = {
-                Column {
-                    options.forEach { (optionValue, optionLabel) ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    onValueChange(optionValue)
-                                    showDialog = false
-                                },
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = optionValue == value,
-                                onClick = {
-                                    onValueChange(optionValue)
-                                    showDialog = false
-                                }
-                            )
-                            Text(
-                                text = optionLabel,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        }
-                    }
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = { showDialog = false }) {
-                    Text("Close")
-                }
-            }
+        SettingsDialog(
+            title = title,
+            options = options,
+            selectedValue = value,
+            onOptionSelected = { onValueChange(it) },
+            onDismiss = { showDialog = false }
         )
     }
 }
@@ -200,6 +223,82 @@ fun SettingsSlider(
                 text = value.toInt().toString(),
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun PreviewSettingsCategory() {
+    LyricCastTheme {
+        Surface {
+            SettingsCategory(title = "General") {
+                Text(
+                    "Sample content inside category",
+                    modifier = Modifier.padding(horizontal = 32.dp)
+                )
+            }
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun PreviewSettingsDialog() {
+    LyricCastTheme {
+        Surface {
+            SettingsDialog(
+                title = "Choose Option",
+                options = listOf(1 to "Option 1", 2 to "Option 2", 3 to "Option 3"),
+                selectedValue = 2,
+                onOptionSelected = {},
+                onDismiss = {}
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun PreviewSettingsRowWithDialog() {
+    LyricCastTheme {
+        Surface {
+            SettingsRowWithDialog(
+                title = "Choose Option",
+                value = 1,
+                options = listOf(1 to "Option 1", 2 to "Option 2", 3 to "Option 3"),
+                onValueChange = { }
+            )
+        }
+    }
+}
+
+
+@PreviewLightDark
+@Composable
+fun PreviewSettingsCheckbox() {
+    LyricCastTheme {
+        Surface {
+            SettingsCheckbox(
+                title = "Enable Feature",
+                checked = true,
+                onCheckedChange = { }
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun PreviewSettingsSlider() {
+    LyricCastTheme {
+        Surface {
+            SettingsSlider(
+                title = "Volume",
+                value = 6f,
+                valueRange = 0f..10f,
+                onValueChange = { }
             )
         }
     }
