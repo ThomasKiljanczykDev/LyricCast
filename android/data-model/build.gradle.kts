@@ -39,8 +39,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":data-transfer"))
     // Submodules
-    implementation(project(":dataTransfer"))
 
     // Library dependencies
     implementation(libs.kotlinx.coroutines)

@@ -27,6 +27,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "LyricCast"
 include(":common")
-include(":dataTransfer")
-include(":dataModel")
+include(":data-transfer")
+include(":data-model")
 include(":app")

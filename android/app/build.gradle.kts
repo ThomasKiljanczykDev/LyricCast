@@ -87,8 +87,8 @@ android {
 dependencies {
     // Submodules
     implementation(project(":common"))
-    implementation(project(":dataTransfer"))
-    implementation(project(":dataModel"))
+    implementation(project(":data-transfer"))
+    implementation(project(":data-model"))
 
     // App dependencies
     implementation(libs.kotlinx.coroutines)

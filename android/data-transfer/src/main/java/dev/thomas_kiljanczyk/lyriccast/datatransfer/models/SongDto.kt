@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:57 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 10/01/2025, 01:46
+ * Last modified 1/25/25, 6:56 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.datatransfer.models
