@@ -4,6 +4,7 @@
  * Last modified 03/01/2022, 23:13
  */
 
+import com.google.protobuf.gradle.id
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -98,6 +99,7 @@ dependencies {
     // Architecture Components
     implementation(libs.androidx.datastore)
     implementation(libs.protobuf.javaLite)
+    implementation(libs.protobuf.kotlinLite)
 
     // AndroidX
     implementation(libs.android.material)
@@ -170,7 +172,10 @@ protobuf {
     generateProtoTasks {
         all().forEach { task ->
             task.builtins {
-                create("java") {
+                id("java") {
+                    option("lite")
+                }
+                id("kotlin") {
                     option("lite")
                 }
             }

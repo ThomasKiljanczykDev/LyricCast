@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/7/25, 7:31 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 25/01/2025, 18:55
+ * Last modified 6/7/25, 7:30 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.misc
@@ -11,12 +11,14 @@ import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbySessionServerC
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.ShowLyricsContent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.json.Json
 
+@OptIn(FlowPreview::class)
 class LyricCastMessagingContext(
     private val castMessagingContext: CastMessagingContext,
     private val gmsNearbySessionServerContext: GmsNearbySessionServerContext

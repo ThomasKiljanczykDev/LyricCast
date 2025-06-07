@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 7:31 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/7/25, 5:48 PM
+ * Last modified 6/7/25, 7:28 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.setlists
@@ -17,6 +17,7 @@ import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.DataTransferRepos
 import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.SetlistsRepository
 import dev.thomas_kiljanczyk.lyriccast.domain.models.SetlistItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -25,6 +26,7 @@ import java.io.OutputStream
 import javax.inject.Inject
 import kotlin.system.measureTimeMillis
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class SetlistsViewModel @Inject constructor(
     private val setlistsRepository: SetlistsRepository,

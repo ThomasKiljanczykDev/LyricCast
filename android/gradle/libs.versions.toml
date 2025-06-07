@@ -23,7 +23,7 @@ compose-hilt = "1.2.0"
 coroutines = "1.10.2"
 kotlinx-serialization-json = "1.8.1"
 datastore = "1.1.7"
-protobuf-javaLite = "4.31.1"
+protobuf-lite = "4.31.1"
 material = "1.12.0"
 androidXCore = "1.16.0"
 appCompat = "1.7.0"
@@ -62,7 +62,8 @@ mongoDbRealm-libraryBase = { module = "io.realm.kotlin:library-base", version.re
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
-protobuf-javaLite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobuf-javaLite" }
+protobuf-javaLite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobuf-lite" }
+protobuf-kotlinLite = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobuf-lite" }
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "androidXCore" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
@@ -84,7 +85,7 @@ androidx-test-extJunitKtx = { module = "androidx.test.ext:junit-ktx", version.re
 androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-test-espressoContrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
 squareup-leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
-protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf-javaLite" }
+protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf-lite" }
 play-services-nearby = { group = "com.google.android.gms", name = "play-services-nearby", version.ref = "playServicesNearby" }
 androidx-rules = { group = "androidx.test", name = "rules", version.ref = "rules" }
 

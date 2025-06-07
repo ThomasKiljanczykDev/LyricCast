@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 7:31 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/7/25, 5:53 PM
+ * Last modified 6/7/25, 7:26 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.songs
@@ -16,6 +16,7 @@ import dev.thomas_kiljanczyk.lyriccast.domain.models.CategoryItem
 import dev.thomas_kiljanczyk.lyriccast.domain.models.SongItem
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.misc.SongItemFilter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -28,6 +29,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.system.measureTimeMillis
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class SetlistEditorSongsViewModel @Inject constructor(
     private val songsRepository: SongsRepository,

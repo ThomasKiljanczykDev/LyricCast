@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 7:31 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 7:26 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.thomas_kiljanczyk.lyriccast.R
 import dev.thomas_kiljanczyk.lyriccast.databinding.DialogFragmentChooseSessionBinding
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -60,6 +61,7 @@ class ChooseSessionDialogFragment(
         return dialog
     }
 
+    @OptIn(FlowPreview::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
