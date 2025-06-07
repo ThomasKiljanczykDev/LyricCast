@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:48 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main.setlists
@@ -36,8 +36,7 @@ class SetlistsViewModel @Inject constructor(
 
     private val _setlists: MutableSharedFlow<List<SetlistItem>> = MutableSharedFlow(replay = 1)
 
-    val setlists: Flow<List<SetlistItem>>
-        get() = _setlists
+    val setlists get() = _setlists.asSharedFlow()
 
 
     private var _filteredSetlists: List<SetlistItem> = listOf()

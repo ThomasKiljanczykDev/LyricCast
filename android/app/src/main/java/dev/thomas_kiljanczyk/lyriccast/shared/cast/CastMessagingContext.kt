@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 13/01/2025, 09:48
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.shared.cast
@@ -12,7 +12,7 @@ import dev.thomas_kiljanczyk.lyriccast.application.CastConfiguration
 import dev.thomas_kiljanczyk.lyriccast.shared.enums.ControlAction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
@@ -26,7 +26,7 @@ class CastMessagingContext(
     }
 
     private val _isBlanked: MutableStateFlow<Boolean> = MutableStateFlow(true)
-    val isBlanked: StateFlow<Boolean> get() = _isBlanked
+    val isBlanked get() = _isBlanked.asStateFlow()
 
     suspend fun sendContentMessage(message: String) {
         val formattedMessage = message.replace("\n", "<br>").replace("\r", "")

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/3/25, 10:51 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -11,7 +11,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.thomas_kiljanczyk.lyriccast.data.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -36,7 +35,7 @@ class SettingsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsUiState())
-    val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
+    val uiState get() = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {

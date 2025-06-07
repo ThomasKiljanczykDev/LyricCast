@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/3/25, 10:51 PM
+ * Last modified 6/7/25, 5:41 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -28,14 +28,14 @@ class SettingsActivity : ComponentActivity() {
 
         setContent {
             LyricCastTheme {
-                val view = LocalView.current
                 val statusBarColor = MaterialTheme.colorScheme.primary.toArgb()
                 val isLightStatusBar = !isSystemInDarkTheme()
+
+                val view = LocalView.current
                 if (!view.isInEditMode) {
                     SideEffect {
-                        val window = (view.context as android.app.Activity).window
                         @Suppress("DEPRECATION")
-                        window.statusBarColor = statusBarColor
+                        this.window.statusBarColor = statusBarColor
                         WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
                             isLightStatusBar
                     }

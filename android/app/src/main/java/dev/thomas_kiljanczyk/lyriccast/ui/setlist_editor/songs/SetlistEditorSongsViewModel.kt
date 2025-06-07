@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_editor.songs
@@ -16,9 +16,10 @@ import dev.thomas_kiljanczyk.lyriccast.domain.models.CategoryItem
 import dev.thomas_kiljanczyk.lyriccast.domain.models.SongItem
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.misc.SongItemFilter
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -37,16 +38,16 @@ class SetlistEditorSongsViewModel @Inject constructor(
         const val TAG = "SetlistEditorSongsModel"
     }
 
-    private val _songs: MutableSharedFlow<List<SongItem>> = MutableSharedFlow(replay = 1)
-    val songs: Flow<List<SongItem>> get() = _songs
+    private val _songs = MutableSharedFlow<List<SongItem>>(replay = 1)
+    val songs get() = _songs.asSharedFlow()
 
     private var filteredSongs: List<SongItem> = listOf()
     private var allSongs: List<SongItem> = listOf()
 
     private var setlistSongIds: List<String> = listOf()
 
-    private val _categories: MutableStateFlow<List<CategoryItem>> = MutableStateFlow(listOf())
-    val categories: Flow<List<CategoryItem>> get() = _categories
+    private val _categories = MutableStateFlow<List<CategoryItem>>(listOf())
+    val categories get() = _categories.asStateFlow()
 
     val searchValues get() = itemFilter.values
 

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client.choose_session
@@ -18,8 +18,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.thomas_kiljanczyk.lyriccast.shared.gms_nearby.GmsNearbyConstants
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,18 +32,15 @@ class ChooseSessionDialogViewModel @Inject constructor(
     }
 
     private val _serverEndpointId = MutableSharedFlow<String>()
-    val serverEndpointId: SharedFlow<String>
-        get() = _serverEndpointId
+    val serverEndpointId get() = _serverEndpointId.asSharedFlow()
 
     private val deviceMap = mutableMapOf<String, GmsNearbySessionItem>()
 
     private val _devices = MutableStateFlow<List<GmsNearbySessionItem>>(emptyList())
-    val devices: StateFlow<List<GmsNearbySessionItem>>
-        get() = _devices
+    val devices get() = _devices.asStateFlow()
 
     private val _sessionStartError = MutableSharedFlow<Boolean>()
-    val sessionStartError: SharedFlow<Boolean>
-        get() = _sessionStartError
+    val sessionStartError get() = _sessionStartError.asSharedFlow()
 
     fun reset() {
         deviceMap.clear()

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_editor
@@ -20,8 +20,8 @@ import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.SongsRepository
 import dev.thomas_kiljanczyk.lyriccast.domain.models.CategoryItem
 import dev.thomas_kiljanczyk.lyriccast.shared.enums.NameValidationState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -49,7 +49,7 @@ class SongEditorViewModel @Inject constructor(
     private var editedSong: Song? = null
 
     private val _categories: MutableSharedFlow<List<CategoryItem>> = MutableSharedFlow(replay = 1)
-    val categories: Flow<List<CategoryItem>> get() = _categories
+    val categories get() = _categories.asSharedFlow()
 
     private var songTitles: Set<String> = setOf()
 

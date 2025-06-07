@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.session_client
@@ -23,10 +23,10 @@ import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionClientCommand
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionClientMessage
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerCommand
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerMessage
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -50,10 +50,10 @@ class SessionClientViewModel @Inject constructor(
         val slideNumber: String
     )
 
-    val currentSlide: Flow<SlideContent> get() = _currentSlide
+    val currentSlide get() = _currentSlide.asStateFlow()
     private val _currentSlide = MutableStateFlow(SlideContent("", "", ""))
 
-    val connectionState: SharedFlow<ConnectionState> get() = _connectionState
+    val connectionState get() = _connectionState.asSharedFlow()
     private val _connectionState = MutableSharedFlow<ConnectionState>()
 
     private var currentEndpointId: String? = null

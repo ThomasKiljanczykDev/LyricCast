@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.setlist_controls
@@ -16,7 +16,6 @@ import dev.thomas_kiljanczyk.lyriccast.application.AppSettings
 import dev.thomas_kiljanczyk.lyriccast.application.CastConfiguration
 import dev.thomas_kiljanczyk.lyriccast.application.getCastConfiguration
 import dev.thomas_kiljanczyk.lyriccast.datamodel.models.Setlist
-import dev.thomas_kiljanczyk.lyriccast.datamodel.models.Song
 import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.SetlistsRepository
 import dev.thomas_kiljanczyk.lyriccast.domain.models.SongItem
 import dev.thomas_kiljanczyk.lyriccast.shared.cast.CastMessagingContext
@@ -28,9 +27,10 @@ import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerCommand
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -56,25 +56,25 @@ class SetlistControlsViewModel @Inject constructor(
     private val _songs: MutableList<SongItem> = mutableListOf()
 
     private val _currentSlideText = MutableSharedFlow<String>(1)
-    val currentSlideText: Flow<String> get() = _currentSlideText
+    val currentSlideText get() = _currentSlideText.asSharedFlow()
 
     private val _currentSlideNumber = MutableStateFlow("")
-    val currentSlideNumber: Flow<String> get() = _currentSlideNumber
+    val currentSlideNumber get() = _currentSlideNumber.asStateFlow()
 
     private val _currentSongTitle = MutableSharedFlow<String>(1)
-    val currentSongTitle: Flow<String> get() = _currentSongTitle
+    val currentSongTitle get() = _currentSongTitle.asSharedFlow()
 
     private val _currentSongPosition = MutableStateFlow(0)
-    val currentSongPosition: Flow<Int> get() = _currentSongPosition
+    val currentSongPosition get() = _currentSongPosition.asStateFlow()
 
-    private val _changedSongItems: MutableStateFlow<List<Int>> = MutableStateFlow(listOf())
-    val changedSongPositions: Flow<List<Int>> get() = _changedSongItems
+    private val _changedSongItems = MutableStateFlow(listOf<Int>())
+    val changedSongPositions get() = _changedSongItems.asStateFlow()
 
 
     private var currentLyricsPosition: Int = 0
     private lateinit var currentSongItem: SongItem
     private lateinit var previousSongItem: SongItem
-    private val currentSong: Song get() = currentSongItem.song
+    private val currentSong get() = currentSongItem.song
 
     private val castSessionListener: CastSessionListener = CastSessionListener(onStarted = {
         viewModelScope.launch {

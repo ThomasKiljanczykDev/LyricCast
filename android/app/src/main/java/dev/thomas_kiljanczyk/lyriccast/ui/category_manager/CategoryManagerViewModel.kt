@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.category_manager
@@ -13,7 +13,7 @@ import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.CategoriesReposit
 import dev.thomas_kiljanczyk.lyriccast.domain.models.CategoryItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -25,7 +25,7 @@ class CategoryManagerViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _categories: MutableStateFlow<List<CategoryItem>> = MutableStateFlow(listOf())
-    val categories: StateFlow<List<CategoryItem>> get() = _categories
+    val categories get() = _categories.asStateFlow()
 
     init {
         categoriesRepository.getAllCategories()

@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/7/25, 5:53 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/7/25, 5:53 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.song_controls
@@ -26,8 +26,8 @@ import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerCommand
 import dev.thomas_kiljanczyk.lyriccast.shared.misc.SessionServerMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -50,10 +50,10 @@ class SongControlsViewModel @Inject constructor(
 
     private var castConfiguration: CastConfiguration? = null
 
-    val currentSlideText: Flow<String> get() = _currentSlideText
+    val currentSlideText get() = _currentSlideText.asStateFlow()
     private val _currentSlideText = MutableStateFlow("")
 
-    val currentSlideNumber: Flow<String> get() = _currentSlideNumber
+    val currentSlideNumber get() = _currentSlideNumber.asStateFlow()
     private val _currentSlideNumber = MutableStateFlow("")
 
     private var currentSlide = 0
