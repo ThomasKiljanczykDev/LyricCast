@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
+  ~ Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 5/31/25, 3:49 PM
+  ~ Last modified 6/8/25, 7:22 PM
   -->
 
 <resources>
@@ -149,5 +149,6 @@
     <string name="close">Close</string>
     <string name="settings_title">Settings</string>
     <string name="navigate_up">Navigate up</string>
+    <string name="category_manager_name_too_long">Category name exceeds the maximum length of %d characters</string>
 </resources>
 

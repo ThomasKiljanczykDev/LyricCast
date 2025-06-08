@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Last modified 6/8/25, 3:05 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.adapters
@@ -69,7 +69,8 @@ class SongItemsAdapter(
     }
 
     private fun createCategoryTextColorMap(context: Context): MutableMap<Int, Int> {
-        val categoryColorValues = context.resources.getIntArray(R.array.category_color_values)
+//        val categoryColorValues = context.resources.getIntArray(R.array.category_color_values)
+        val categoryColorValues = intArrayOf()
         return categoryColorValues.associateWith(::getCategoryTextColor).toMutableMap()
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Tomasz Kiljanczyk on 6/3/25, 10:51 PM
+  ~ Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 5/31/25, 3:49 PM
+  ~ Last modified 6/8/25, 7:22 PM
   -->
 
 <resources>
@@ -68,7 +68,7 @@
     <string name="category_manager_hint_category_color">Kolor</string>
     <string name="category_manager_add_category">Dodawanie kategorii</string>
     <string name="category_manager_edit_category">Edycja kategorii</string>
-    <string name="category_manager_name_already_used">Nazwa kategorii już zajęta</string>
+    <string name="category_manager_name_already_used">Nazwa kategorii jest już zajęta</string>
     <string name="category_manager_enter_name">Proszę podać nazwę kategorii</string>
 
     <!-- Setlist Editor -->
@@ -125,5 +125,6 @@
     <string name="dialog_fragment_start_session_error_empty_name">Proszę podać nazwę sesji</string>
     <string name="settings_title">Ustawienia</string>
     <string name="navigate_up">Wróć</string>
+    <string name="category_manager_name_too_long">Nazwa kategorii przekracza maksymalną długość %d znaków</string>
 </resources>
 

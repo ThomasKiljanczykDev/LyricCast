@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/8/25, 12:43 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/8/25, 1:58 AM
+ * Last modified 6/8/25, 7:45 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -28,6 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -68,33 +69,33 @@ fun SettingsScreen(
     onNavigateUp: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val showLoading = remember { mutableStateOf(false) }
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    var showLoading by remember { mutableStateOf(false) }
 
-    LaunchedEffect(uiState) {
-        if (uiState !is SettingsUiState.Loading) {
-            showLoading.value = false
+    LaunchedEffect(state) {
+        if (state !is SettingsState.Loading) {
+            showLoading = false
             return@LaunchedEffect
         }
 
-        showLoading.value = false
+        showLoading = false
         delay(500)
-        showLoading.value = true
+        showLoading = true
     }
 
     // TODO: replace loading animation with holding on previous view until loaded
-    Crossfade(uiState.loading) {
-        if (it || uiState is SettingsUiState.Loading) {
+    Crossfade(state.loading) {
+        if (it || state is SettingsState.Loading) {
             AnimatedVisibility(
-                visible = showLoading.value,
+                visible = showLoading,
                 enter = fadeIn(animationSpec = tween(durationMillis = 1000)),
                 exit = fadeOut()
             ) {
                 Loading(Modifier.fillMaxSize())
             }
-        } else if (uiState is SettingsUiState.Ready) {
+        } else if (state is SettingsState.Ready) {
             SettingsScreen(
-                uiState = uiState as SettingsUiState.Ready,
+                state = state as SettingsState.Ready,
                 onNavigateUp = onNavigateUp,
                 onThemeChange = { viewModel.updateTheme(it) },
                 onButtonHeightChange = { viewModel.updateButtonHeight(it) },
@@ -111,7 +112,7 @@ fun SettingsScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    uiState: SettingsUiState.Ready,
+    state: SettingsState.Ready,
     onNavigateUp: () -> Unit,
     onThemeChange: (Int) -> Unit,
     onButtonHeightChange: (Int) -> Unit,
@@ -134,15 +135,15 @@ fun SettingsScreen(
             SettingsCategory(title = stringResource(R.string.preference_section_app)) {
                 SettingsRowWithDialog(
                     title = stringResource(R.string.preference_theme_title),
-                    value = uiState.theme,
-                    options = uiState.themeOptions,
+                    value = state.theme,
+                    options = state.themeOptions,
                     onValueChange = onThemeChange
                 )
 
                 SettingsRowWithDialog(
                     title = stringResource(R.string.preference_controls_button_height_title),
-                    value = uiState.buttonHeight,
-                    options = uiState.buttonHeightOptions,
+                    value = state.buttonHeight,
+                    options = state.buttonHeightOptions,
                     onValueChange = onButtonHeightChange
                 )
             }
@@ -153,27 +154,27 @@ fun SettingsScreen(
             SettingsCategory(title = stringResource(R.string.preference_section_chromecast)) {
                 SettingsCheckbox(
                     title = stringResource(R.string.preference_blank_title),
-                    checked = uiState.isBlankEnabled,
+                    checked = state.isBlankEnabled,
                     onCheckedChange = onBlankEnabledChange
                 )
 
                 SettingsRowWithDialog(
                     title = stringResource(R.string.preference_cast_background_title),
-                    value = uiState.backgroundColor,
-                    options = uiState.colorOptions.map { it to it },
+                    value = state.backgroundColor,
+                    options = state.colorOptions.map { it to it },
                     onValueChange = onBackgroundColorChange
                 )
 
                 SettingsRowWithDialog(
                     title = stringResource(R.string.preference_cast_font_color_title),
-                    value = uiState.fontColor,
-                    options = uiState.colorOptions.map { it to it },
+                    value = state.fontColor,
+                    options = state.colorOptions.map { it to it },
                     onValueChange = onFontColorChange
                 )
 
                 SettingsSlider(
                     title = stringResource(R.string.preference_cast_max_font_size_title),
-                    value = uiState.maxFontSize.toFloat(),
+                    value = state.maxFontSize.toFloat(),
                     valueRange = 30f..100f,
                     onValueChange = { onMaxFontSizeChange(it.toInt()) }
                 )
@@ -185,21 +186,19 @@ fun SettingsScreen(
 @PreviewLightDark
 @Composable
 fun PreviewSettingsScreen() {
-    val previewUiState = SettingsUiState.Ready(
-        theme = -1,
-        themeOptions = listOf(-1 to "System default", 1 to "Light", 2 to "Dark"),
-        buttonHeight = 88,
-        buttonHeightOptions = listOf(88 to "Small", 104 to "Medium", 128 to "Large"),
-        isBlankEnabled = true,
-        backgroundColor = "Black",
-        fontColor = "White",
-        colorOptions = listOf("Maroon", "Tomato", "Black", "White", "Gray"),
-        maxFontSize = 90
-    )
-
     LyricCastTheme {
         SettingsScreen(
-            uiState = previewUiState,
+            state = SettingsState.Ready(
+                theme = -1,
+                themeOptions = listOf(-1 to "System default", 1 to "Light", 2 to "Dark"),
+                buttonHeight = 88,
+                buttonHeightOptions = listOf(88 to "Small", 104 to "Medium", 128 to "Large"),
+                isBlankEnabled = true,
+                backgroundColor = "Black",
+                fontColor = "White",
+                colorOptions = listOf("Maroon", "Tomato", "Black", "White", "Gray"),
+                maxFontSize = 90
+            ),
             onNavigateUp = {},
             onThemeChange = {},
             onButtonHeightChange = {},

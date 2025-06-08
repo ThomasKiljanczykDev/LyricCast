@@ -1,7 +1,7 @@
 <!--
-  ~ Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+  ~ Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
   ~ Copyright (c) 2025 . All rights reserved.
-  ~ Last modified 07/05/2024, 23:59
+  ~ Last modified 6/8/25, 3:02 PM
   -->
 
 <resources>
@@ -49,37 +49,5 @@
     <string-array name="import_formats">
         <item>OpenSong</item>
         <item>LyricCast</item>
-    </string-array>
-
-    <!-- Category colors -->
-    <string-array name="category_color_names">
-        <item>@string/category_color_maroon</item>
-        <item>@string/category_color_tomato</item>
-        <item>@string/category_color_golden</item>
-        <item>@string/category_color_olive</item>
-        <item>@string/category_color_cyan</item>
-        <item>@string/category_color_turquoise</item>
-        <item>@string/category_color_royal_blue</item>
-        <item>@string/category_color_violet</item>
-        <item>@string/category_color_pink</item>
-        <item>@string/category_color_navajo_white</item>
-        <item>@string/category_color_slate_gray</item>
-        <item>@string/category_color_gray</item>
-        <item>@string/category_color_steel_blue</item>
-    </string-array>
-    <string-array name="category_color_values">
-        <item>@color/maroon</item>
-        <item>@color/tomato</item>
-        <item>@color/golden_rod</item>
-        <item>@color/olive_drab</item>
-        <item>@color/dark_cyan</item>
-        <item>@color/turquoise</item>
-        <item>@color/royal_blue</item>
-        <item>@color/blue_violet</item>
-        <item>@color/deep_pink</item>
-        <item>@color/navajo_white</item>
-        <item>@color/slate_gray</item>
-        <item>@color/gray</item>
-        <item>@color/light_steel_blue</item>
     </string-array>
 </resources>

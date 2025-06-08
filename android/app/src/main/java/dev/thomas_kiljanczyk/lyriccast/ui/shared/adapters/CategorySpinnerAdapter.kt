@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Last modified 6/8/25, 12:15 AM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.adapters
@@ -44,7 +44,7 @@ class CategorySpinnerAdapter(
             return -1L
         }
 
-        return _items[position].category.idLong
+        return _items[position].category.id.hashCode().toLong()
     }
 
     override fun getCount(): Int = _items.size

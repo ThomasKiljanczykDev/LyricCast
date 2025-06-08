@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/8/25, 12:43 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/8/25, 12:43 PM
+ * Last modified 6/8/25, 7:44 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -16,10 +16,10 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed interface SettingsUiState {
+sealed interface SettingsState {
     val loading: Boolean get() = false
 
-    data object Loading : SettingsUiState {
+    data object Loading : SettingsState {
         override val loading: Boolean = true
     }
 
@@ -33,7 +33,7 @@ sealed interface SettingsUiState {
         val fontColor: String = "",
         val colorOptions: List<String> = emptyList(),
         val maxFontSize: Int = 90
-    ) : SettingsUiState
+    ) : SettingsState
 }
 
 @HiltViewModel
@@ -41,8 +41,8 @@ class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
-    val uiState = settingsRepository.getAllSettings().map { settings ->
-        SettingsUiState.Ready(
+    val state = settingsRepository.getAllSettings().map { settings ->
+        SettingsState.Ready(
             theme = settings.appTheme,
             themeOptions = settingsRepository.getThemeOptions(),
             buttonHeight = settings.controlButtonsHeight.toInt(),
@@ -54,7 +54,7 @@ class SettingsViewModel @Inject constructor(
             maxFontSize = settings.maxFontSize
         )
     }.stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(5_000), SettingsUiState.Loading
+        viewModelScope, SharingStarted.WhileSubscribed(5_000), SettingsState.Loading
     )
 
     fun updateTheme(theme: Int) {

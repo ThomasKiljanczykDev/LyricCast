@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/8/25, 12:43 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/8/25, 1:15 AM
+ * Last modified 6/8/25, 12:46 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -19,6 +19,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.theme.LyricCastTheme
 
@@ -62,7 +63,7 @@ fun <T> SettingsDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Close")
+                Text(stringResource(android.R.string.cancel))
             }
         }
     )

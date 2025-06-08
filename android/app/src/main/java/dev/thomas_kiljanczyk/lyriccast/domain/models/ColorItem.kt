@@ -1,9 +1,11 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Last modified 6/8/25, 8:48 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.domain.models
 
-data class ColorItem(val name: String, val value: Int)
+import androidx.annotation.ColorInt
+
+data class ColorItem(val name: UiText, @ColorInt val value: Int)

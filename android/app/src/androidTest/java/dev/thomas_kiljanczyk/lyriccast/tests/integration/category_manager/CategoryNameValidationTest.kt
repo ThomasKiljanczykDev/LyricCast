@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 25/01/2025, 18:55
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 08/12/2024, 21:35
+ * Last modified 6/7/25, 10:09 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.tests.integration.category_manager
@@ -23,7 +23,7 @@ import dev.thomas_kiljanczyk.lyriccast.datamodel.repositiories.CategoriesReposit
 import dev.thomas_kiljanczyk.lyriccast.modules.FakeAppModule
 import dev.thomas_kiljanczyk.lyriccast.shared.BaseHiltTest
 import dev.thomas_kiljanczyk.lyriccast.shared.retryWithTimeout
-import dev.thomas_kiljanczyk.lyriccast.ui.category_manager.CategoryManagerActivity
+import dev.thomas_kiljanczyk.lyriccast.ui.category_manager.CategoryManagerActivityLegacy
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -42,7 +42,7 @@ class CategoryNameValidationTest : BaseHiltTest() {
     }
 
     @get:Rule(order = 1)
-    var activityRule = ActivityScenarioRule(CategoryManagerActivity::class.java)
+    var activityRule = ActivityScenarioRule(CategoryManagerActivityLegacy::class.java)
 
     @Inject
     lateinit var categoriesRepository: CategoriesRepository

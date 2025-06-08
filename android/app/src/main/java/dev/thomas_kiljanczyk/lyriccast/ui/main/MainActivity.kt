@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 5/31/25, 2:51 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 10:15 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 5/31/25, 2:02 PM
+ * Last modified 6/8/25, 3:05 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.main
@@ -333,7 +333,8 @@ class MainActivity : AppCompatActivity() {
                     R.string.main_activity_loading_file
                 )
 
-            val colors: IntArray = resources.getIntArray(R.array.category_color_values)
+//            val colors: IntArray = resources.getIntArray(R.array.category_color_values)
+            val colors = intArrayOf()
             val importOptions = ImportOptions(
                 deleteAll = importDialogModel.deleteAll,
                 replaceOnConflict = importDialogModel.replaceOnConflict,
