@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/7/25, 7:10 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 12:43 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/7/25, 6:21 PM
+ * Last modified 6/7/25, 10:03 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
@@ -24,8 +24,8 @@ import dev.thomas_kiljanczyk.lyriccast.ui.shared.theme.LyricCastTheme
 class SettingsActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         setContent {
             LyricCastTheme {

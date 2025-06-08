@@ -1,13 +1,14 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/7/25, 7:10 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 12:43 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/7/25, 7:07 PM
+ * Last modified 6/8/25, 1:16 AM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,16 +17,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -60,51 +59,6 @@ fun SettingsCategory(
     }
 }
 
-@Composable
-fun <T> SettingsDialog(
-    title: String,
-    options: List<Pair<T, String>>,
-    selectedValue: T,
-    onOptionSelected: (T) -> Unit,
-    onDismiss: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(title) },
-        text = {
-            Column {
-                options.forEach { (optionValue, optionLabel) ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                onOptionSelected(optionValue)
-                                onDismiss()
-                            },
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        RadioButton(
-                            selected = optionValue == selectedValue,
-                            onClick = {
-                                onOptionSelected(optionValue)
-                                onDismiss()
-                            }
-                        )
-                        Text(
-                            text = optionLabel,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Close")
-            }
-        }
-    )
-}
 
 @Composable
 fun <T> SettingsRowWithDialog(
@@ -154,12 +108,15 @@ fun SettingsCheckbox(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable {
-                onCheckedChange(!checked)
-            }
+            .combinedClickable(
+                onClick = { onCheckedChange(!checked) },
+                interactionSource = interactionSource,
+                indication = ripple(true)
+            )
             .padding(vertical = 12.dp, horizontal = 32.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -170,7 +127,14 @@ fun SettingsCheckbox(
         )
         Checkbox(
             checked = checked,
-            onCheckedChange = null
+            onCheckedChange = null,
+            modifier = Modifier
+                .combinedClickable(
+                    onClick = { onCheckedChange(!checked) },
+                    interactionSource = interactionSource,
+                    indication = ripple(false)
+                )
+                .padding(4.dp)
         )
     }
 }
@@ -239,22 +203,6 @@ fun PreviewSettingsCategory() {
                     modifier = Modifier.padding(horizontal = 32.dp)
                 )
             }
-        }
-    }
-}
-
-@PreviewLightDark
-@Composable
-fun PreviewSettingsDialog() {
-    LyricCastTheme {
-        Surface {
-            SettingsDialog(
-                title = "Choose Option",
-                options = listOf(1 to "Option 1", 2 to "Option 2", 3 to "Option 3"),
-                selectedValue = 2,
-                onOptionSelected = {},
-                onDismiss = {}
-            )
         }
     }
 }

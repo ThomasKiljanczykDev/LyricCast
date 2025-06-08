@@ -1,7 +1,7 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/7/25, 7:10 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 12:43 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/7/25, 6:43 PM
+ * Last modified 6/7/25, 10:30 PM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.shared.theme
@@ -22,6 +22,7 @@ private val darkScheme = darkColorScheme()
 
 private val lightScheme = lightColorScheme()
 
+// TODO: the theme should react to changes in user settings
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun LyricCastTheme(

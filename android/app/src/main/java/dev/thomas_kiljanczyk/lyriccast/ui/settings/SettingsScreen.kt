@@ -1,16 +1,19 @@
 /*
- * Created by Tomasz Kiljanczyk on 6/7/25, 7:10 PM
+ * Created by Tomasz Kiljanczyk on 6/8/25, 12:43 PM
  * Copyright (c) 2025 . All rights reserved.
- * Last modified 6/7/25, 7:10 PM
+ * Last modified 6/8/25, 1:58 AM
  */
 
 package dev.thomas_kiljanczyk.lyriccast.ui.settings
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,38 +24,94 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.thomas_kiljanczyk.lyriccast.R
+import dev.thomas_kiljanczyk.lyriccast.ui.shared.components.Loading
 import dev.thomas_kiljanczyk.lyriccast.ui.shared.theme.LyricCastTheme
+import kotlinx.coroutines.delay
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SettingsTopBar(onNavigateUp: () -> Unit) {
+    TopAppBar(
+        title = { Text(stringResource(R.string.settings_title)) },
+        navigationIcon = {
+            IconButton(onClick = onNavigateUp) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                    contentDescription = stringResource(R.string.navigate_up)
+                )
+            }
+        }
+    )
+}
+
+@PreviewLightDark
+@Composable
+fun PreviewSettingsTopBar() {
+    LyricCastTheme {
+        SettingsTopBar(onNavigateUp = {})
+    }
+}
 
 @Composable
 fun SettingsScreen(
     onNavigateUp: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
-    SettingsScreen(
-        uiState = uiState,
-        onNavigateUp = { onNavigateUp() },
-        onThemeChange = { viewModel.updateTheme(it) },
-        onButtonHeightChange = { viewModel.updateButtonHeight(it) },
-        onBlankEnabledChange = { viewModel.updateBlankEnabled(it) },
-        onBackgroundColorChange = { viewModel.updateBackgroundColor(it) },
-        onFontColorChange = { viewModel.updateFontColor(it) },
-        onMaxFontSizeChange = { viewModel.updateMaxFontSize(it) }
-    )
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val showLoading = remember { mutableStateOf(false) }
+
+    LaunchedEffect(uiState) {
+        if (uiState !is SettingsUiState.Loading) {
+            showLoading.value = false
+            return@LaunchedEffect
+        }
+
+        showLoading.value = false
+        delay(500)
+        showLoading.value = true
+    }
+
+    // TODO: replace loading animation with holding on previous view until loaded
+    Crossfade(uiState.loading) {
+        if (it || uiState is SettingsUiState.Loading) {
+            AnimatedVisibility(
+                visible = showLoading.value,
+                enter = fadeIn(animationSpec = tween(durationMillis = 1000)),
+                exit = fadeOut()
+            ) {
+                Loading(Modifier.fillMaxSize())
+            }
+        } else if (uiState is SettingsUiState.Ready) {
+            SettingsScreen(
+                uiState = uiState as SettingsUiState.Ready,
+                onNavigateUp = onNavigateUp,
+                onThemeChange = { viewModel.updateTheme(it) },
+                onButtonHeightChange = { viewModel.updateButtonHeight(it) },
+                onBlankEnabledChange = { viewModel.updateBlankEnabled(it) },
+                onBackgroundColorChange = { viewModel.updateBackgroundColor(it) },
+                onFontColorChange = { viewModel.updateFontColor(it) },
+                onMaxFontSizeChange = { viewModel.updateMaxFontSize(it) }
+            )
+        }
+    }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    uiState: SettingsUiState,
+    uiState: SettingsUiState.Ready,
     onNavigateUp: () -> Unit,
     onThemeChange: (Int) -> Unit,
     onButtonHeightChange: (Int) -> Unit,
@@ -63,24 +122,13 @@ fun SettingsScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.settings_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateUp) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = stringResource(R.string.navigate_up)
-                        )
-                    }
-                }
-            )
+            SettingsTopBar(onNavigateUp = onNavigateUp)
         }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .verticalScroll(rememberScrollState())
         ) {
             // App Settings Section
             SettingsCategory(title = stringResource(R.string.preference_section_app)) {
@@ -93,7 +141,7 @@ fun SettingsScreen(
 
                 SettingsRowWithDialog(
                     title = stringResource(R.string.preference_controls_button_height_title),
-                    value = uiState.buttonHeight.toInt(),
+                    value = uiState.buttonHeight,
                     options = uiState.buttonHeightOptions,
                     onValueChange = onButtonHeightChange
                 )
@@ -137,7 +185,7 @@ fun SettingsScreen(
 @PreviewLightDark
 @Composable
 fun PreviewSettingsScreen() {
-    val previewUiState = SettingsUiState(
+    val previewUiState = SettingsUiState.Ready(
         theme = -1,
         themeOptions = listOf(-1 to "System default", 1 to "Light", 2 to "Dark"),
         buttonHeight = 88,
